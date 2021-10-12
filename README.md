@@ -1,2 +1,2 @@
-# My Portfolio Website
-This is a Portfolio site for displaying my details including stuuf about me, my skills, my projects, interests and hobbies together with my contact profiles.
+# My Portfolio Website🌐  
+Making a Portfolio website to display details about myself, experience, skills and how to contact me.

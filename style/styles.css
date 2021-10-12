@@ -1,0 +1,133 @@
+body {
+    text-align: center;
+    margin: 0%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #4B6587;
+}
+
+a {
+    text-decoration: none;
+    width: auto;
+    margin: 20px;
+    color: #4B6587;
+    padding: 10px;
+}
+
+a:hover {
+    color: #F0E5CF;
+    background-color: #4B6587;
+    border-radius: 10px;
+    
+}
+
+img {
+    width: 75px;
+    height: 75px;
+}
+
+hr {
+    background-color: black;
+    border: 1px solid;
+    border-radius: 20px;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 80px;
+    font-weight: 200;
+    margin: 0;
+}
+
+h2 {
+    font-family: 'Comfortaa', monospace;
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 100px;
+}
+
+.top-container {
+    background-color: #F0E5CF;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 100px;
+}
+
+.front-end {
+    width: 150px;
+    height: 150px;
+}
+
+.code1 {
+    position: absolute;
+    right: 150px;
+    top: 350px;
+}
+
+.code2 {
+    position: absolute;
+    left: 150px;
+    top: 250px;
+}
+
+.middle-container {
+    background-color: #F7F6F2;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 50px;
+}
+
+.middle-container h2 {
+    padding: 10px;
+}
+
+.profile p {
+    padding: 10px;
+    width: 75%;
+    margin-left: 12.5%;
+}
+
+.profile-icon {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.skill-row {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+.html5 {
+    display: block;
+    float: left;
+    padding-top: 40px;
+    padding-right: 10px;
+}
+
+.panda {
+    display: block;
+    float: right;
+    padding-top: 40px;
+    padding-left: 10px;
+}
+
+.bottom-container {
+    background-color: #C8C6C6;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 50px;
+}
+
+.copyright {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+}
+
