@@ -2,12 +2,16 @@
   "dependencies": {
     "next": "^12.2.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
   }
 }
