@@ -6,7 +6,7 @@ export default function ContactForm() {
         method="post"
         className="flex flex-col flex-wrap w-3/5 text-red"
       >
-        <div className="flex flex-row w-full gap-8">
+        <div className="flex flex-row w-full gap-8 z-20">
           <div className="mb-4">
             <input
               className="placeholder:text-xl placeholder:text-red bg-lgray  shadow appearance-none border rounded w-full py-3 px-3 text-red leading-tight focus:outline-none "
