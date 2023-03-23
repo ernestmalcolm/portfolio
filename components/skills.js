@@ -15,77 +15,77 @@ export default function Skills() {
       <h1 className="py-4 text-5xl flex justify-center pt-10">Skills</h1>
       <hr className="text-red w-1/5 h-2 mx-auto my-1 bg-red rounded" />
       <div className="flex flex-row justify-center gap-12 pt-6">
-        <div className="w-1/2 z-20 flex flex-row gap-8 py-8">
+        <div className="w-1/2 z-20 grid grid-cols-4 gap-8 py-8">
           <Link href="#">
             <Image
               src={HtmlLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className="m-1 flex-grow basis-1/5"
+              className="m-1"
             />
           </Link>
           <Link href="#">
             <Image
               src={CssLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={SassLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={TailwindLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={JsLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={ReactLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={NextLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
           <Link href="#">
             <Image
               src={FigmaLogo}
-              width={1000}
-              height={1000}
+              width={85}
+              height={85}
               alt="NextLogo"
-              className=" flex-grow shrink-0 basis-1/5"
+              className=""
             />
           </Link>
         </div>
