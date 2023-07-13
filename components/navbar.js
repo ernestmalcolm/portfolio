@@ -6,7 +6,7 @@ export default function NavBar() {
     return(
         <nav className="w-full flex flex-row justify-between px-20 py-2 bg-lgray">
             <div>
-                <Image src={Logo} height={100} width={100} className="" />
+                <Image src={Logo} alt="My logo " height={100} width={100} className="" />
             </div>
             <div>
                 <ul className="no-underline list-none flex flex-row justify-between float-right text-2xl">

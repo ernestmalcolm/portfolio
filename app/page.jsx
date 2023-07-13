@@ -4,7 +4,7 @@ import LandingPage from "../components/landingPage";
 import Portfolio from "../components/portfolio";
 import Skills from "../components/skills";
 
-export default function Home() {
+export default function Page() {
   return (
     <div>
       <LandingPage />

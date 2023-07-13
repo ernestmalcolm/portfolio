@@ -45,7 +45,7 @@ export default function LandingPage() {
           </button>
         </div>
         <div className="flex flex-col justify-around py-28 text-blue mr-4">
-          <Image src={MyPhoto} height={400} width={400} />
+          <Image src={MyPhoto} alt="My Photo" height={400} width={400} />
         </div>
       </div>
     </div>

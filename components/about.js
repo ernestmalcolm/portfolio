@@ -9,6 +9,7 @@ export default function About() {
       <div className="flex flex-row justify-center gap-12 pt-6">
         <Image
           src={otherPhoto}
+          alt="My Photo"
           height={"auto"}
           width={"auto"}
           className="rounded-2xl w-1/4 z-10 h-72"
