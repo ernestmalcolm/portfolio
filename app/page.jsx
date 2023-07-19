@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ContactForm from "../components/contactForm";
+import Socials from "../components/socials";
 
 import MyPhoto from "../public/images/myPhoto.png";
 import otherPhoto from "../public/images/round.jpg";
@@ -57,7 +58,7 @@ export default function Page() {
               with two years of experience. I love problem-solving and strive to
               create impactful applications that align with the latest industry
               trends. My goal is to deliver exceptional solutions that leave a
-              lasting mark on the digital landscape.
+              lasting mark on the digital landscape particularly in our Tanzanian society.
             </p>
           </div>
           <h1 className="absolute text-9xl text-lgray font-semibold z-0 opacity-20 left-96">
@@ -73,78 +74,62 @@ export default function Page() {
         <hr className="text-red w-1/5 h-2 mx-auto my-1 bg-red rounded" />
         <div className="flex flex-row justify-center gap-12 pt-6">
           <div className="w-1/2 z-20 grid grid-cols-4 gap-8 py-8">
-            <Link href="#">
-              <Image
-                src={HtmlLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className="m-1"
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={CssLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={SassLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={TailwindLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={JsLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={ReactLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={NextLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
-            <Link href="#">
-              <Image
-                src={FigmaLogo}
-                width={85}
-                height={85}
-                alt="NextLogo"
-                className=""
-              />
-            </Link>
+            <Image
+              src={HtmlLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className="m-1"
+            />
+            <Image
+              src={CssLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={SassLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={TailwindLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={JsLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={ReactLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={NextLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
+            <Image
+              src={FigmaLogo}
+              width={85}
+              height={85}
+              alt="NextLogo"
+              className=""
+            />
           </div>
           <h1 className="absolute text-9xl font-semibold z-0 opacity-20">
             SKILLS
@@ -165,7 +150,7 @@ export default function Page() {
         </p>
         <div className="flex gap-20 justify-center">
           <ContactForm />
-          {/* <Socials /> */}
+          <Socials />
         </div>
       </div>
     </div>

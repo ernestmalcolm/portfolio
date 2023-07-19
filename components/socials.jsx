@@ -7,41 +7,45 @@ import {
   faGithub,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
 
 export default function Socials() {
   return (
-    <div className="flex w-2/5 flex-col z-20">
-      <Link href="mailto:gmem200197@gmail.com" legacyBehavior>
+    <div className="flex flex-col w-1/5 gap-6 z-20">
+      <a href="mailto:gmem200197@gmail.com" className="flex items-center hover:text-red ">
         <FontAwesomeIcon
           icon={faEnvelope}
-          className="py-4 text-4xl hover:text-red"
+          className="py-4 text-4xl hover:text-red mr-4"
         />
-      </Link>
-      <Link href="mailto:gmem200197@gmail.com" legacyBehavior>
+        gmem200197@gmail.com
+      </a>
+      <a href="tel:+255742200105" className="flex items-center hover:text-red">
         <FontAwesomeIcon
           icon={faPhone}
-          className="py-4 text-4xl hover:text-red"
+          className="py-4 text-4xl hover:text-red mr-4"
         />
-      </Link>
-      <Link href="https://twitter.com/lukakucancode" legacyBehavior>
+        +255 742 200 105
+      </a>
+      <a href="https://twitter.com/lukakucancode" className="flex items-center hover:text-red">
         <FontAwesomeIcon
           icon={faTwitter}
-          className="py-4 text-4xl hover:text-red"
+          className="py-4 text-4xl hover:text-red mr-4"
         />
-      </Link>
-      <Link href="https://github.com/ernestmalcolm" legacyBehavior>
+        @lukakucancode
+      </a>
+      <a href="https://github.com/ernestmalcolm" className="flex items-center hover:text-red">
         <FontAwesomeIcon
           icon={faGithub}
-          className="py-4 text-4xl hover:text-red"
+          className="py-4 text-4xl hover:text-red mr-4"
         />
-      </Link>
-      <Link href="https://www.linkedin.com/in/ernestmwinchumu/" legacyBehavior>
+        @ernestmalcolm
+      </a>
+      <a href="https://www.aedin.com/in/ernestmwinchumu/" className="flex items-center hover:text-red">
         <FontAwesomeIcon
           icon={faLinkedin}
-          className="py-4 text-4xl hover:text-red"
+          className="py-4 text-4xl hover:text-red mr-4"
         />
-      </Link>
+        Ernest Mwinchumu
+      </a>
     </div>
   );
 }
