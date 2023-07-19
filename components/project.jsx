@@ -12,20 +12,17 @@ export default function Project() {
           Title of Project
         </div>
         <div className="rounded bg-blue w-full h-36 flex-row"></div>
-        <div className="flex-row text-2xl">
+        {/* <div className="flex-row text-lg">
           <Link href="https://github.com/ernestmalcolm">
             <FontAwesomeIcon
               icon={faGithub}
-              className="py-4 px-4 text-5xl hover:text-red"
+              className="py-4 px-4 hover:text-red"
             />
           </Link>
           <Link href="https://github.com/ernestmalcolm">
-            <FontAwesomeIcon
-              icon={faLink}
-              className="py-4 text-5xl hover:text-red"
-            />
+            <FontAwesomeIcon icon={faLink} className="py-4 hover:text-red" />
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

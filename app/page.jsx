@@ -10,7 +10,7 @@ export default function Page() {
       <LandingPage />
       <About />
       <Skills />
-      <Portfolio />
+      {/* <Portfolio /> */}
       <Contact />
     </div>
   );
