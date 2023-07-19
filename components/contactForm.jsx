@@ -1,26 +1,24 @@
 export default function ContactForm() {
   return (
-    <div className="flex justify-center">
+    <div className="flex w-3/5">
       <form
         action="/send-data-here"
         method="post"
-        className="flex flex-col w-3/5 text-red"
+        className="flex flex-col w-full text-red"
       >
-        <div className="flex flex-col w-full gap-8 z-20 mb-10">
-          <div className="flex flex-row gap-10">
-            <input
-             className="placeholder:text-xl placeholder:text-red bg-lgray shadow appearance-none border rounded w-full py-3 px-3  focus:outline-none"
-             id="name"
-              type="text"
-              placeholder="First name"
-            />
-            <input
-              className="placeholder:text-xl placeholder:text-red bg-lgray shadow appearance-none border rounded w-full py-3 px-3 focus:outline-none"
-              id="secondname"
-              type="text"
-              placeholder="Second name"
-            />
-          </div>
+        <div className="flex flex-col gap-8 z-20 mb-10">
+          <input
+            className="placeholder:text-xl placeholder:text-red bg-lgray shadow appearance-none border rounded w-full py-3 px-3  focus:outline-none"
+            id="name"
+            type="text"
+            placeholder="First name"
+          />
+          <input
+            className="placeholder:text-xl placeholder:text-red bg-lgray shadow appearance-none border rounded w-full py-3 px-3 focus:outline-none"
+            id="secondname"
+            type="text"
+            placeholder="Second name"
+          />
           <input
             className="placeholder:text-xl placeholder:text-red bg-lgray shadow appearance-none border rounded w-full py-3 px-3 focus:outline-none"
             id="email"

@@ -1,5 +1,9 @@
 import "./globals.css";
 
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 

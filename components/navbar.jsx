@@ -17,16 +17,16 @@ export default function Navbar() {
       <div>
         <ul className="no-underline list-none flex flex-row justify-between float-right text-xl">
           <li className="p-6 text-blue hover:text-red">
-            <Link href="#">Home</Link>
+            <a href="#">Home</a>
           </li>
           <li className="p-6 text-blue hover:text-red">
-            <Link href="#">About</Link>
+            <a href="#about">About</a>
           </li>
           <li className="p-6 text-blue hover:text-red">
-            <Link href="#">Portfolio</Link>
+            <a href="#skills">Skills</a>
           </li>
           <li className="p-6 text-blue hover:text-red">
-            <Link href="#">Contacts</Link>
+            <a href="#contact">Contacts</a>
           </li>
         </ul>
       </div>
