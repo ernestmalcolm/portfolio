@@ -25,9 +25,9 @@ jobs:
       - run:
           name: Build the Project
           command: npm run build
-      - run:
-          name: Export Static Files
-          command: npm run export
+#      - run:
+#          name: Export Static Files
+#          command: npm run export
       - persist_to_workspace:
           root: ~/repo/out
           paths:
