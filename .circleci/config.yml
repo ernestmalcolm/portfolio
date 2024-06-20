@@ -40,7 +40,7 @@ jobs:
 #          at: ~/repo/out
       - run:
           name: Install Vercel CLI
-          command: npm install -g vercel
+          command: sudo npm install -g vercel
       - run:
           name: Deploy to Vercel
           command: vercel --prod --token $VERCEL_TOKEN --confirm --scope $VERCEL_ORG_ID
