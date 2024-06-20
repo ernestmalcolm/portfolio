@@ -6,6 +6,8 @@ import Socials from "../components/socials";
 
 import MyPhoto from "../public/images/myPhoto.png";
 import otherPhoto from "../public/images/round.jpg";
+import NewPhoto from "../public/images/new-portfolio-photo.png";
+import otherNewPhoto from "../public/images/new-photo.png";
 
 import NextLogo from "../public/images/next-logo.svg";
 import TailwindLogo from "../public/images/tailwind-logo.svg";
@@ -35,7 +37,7 @@ export default function Page() {
           </button>
         </div>
         <div className="flex flex-col w-2/5 justify-around py-6 text-blue mr-4">
-          <Image src={MyPhoto} alt="My Photo" height={700} width={700} />
+          <Image src={NewPhoto} alt="My Photo" height={700} width={700} />
         </div>
       </div>
 
@@ -46,7 +48,7 @@ export default function Page() {
         <hr className="text-red w-1/5 h-2 mx-auto my-1 bg-red rounded" />
         <div className="flex flex-row justify-center gap-12 pt-6">
           <Image
-            src={otherPhoto}
+            src={otherNewPhoto}
             alt="My Photo"
             height={400}
             width={200}
@@ -58,7 +60,8 @@ export default function Page() {
               with two years of experience. I love problem-solving and strive to
               create impactful applications that align with the latest industry
               trends. My goal is to deliver exceptional solutions that leave a
-              lasting mark on the digital landscape particularly in our Tanzanian society.
+              lasting mark on the digital landscape particularly in our
+              Tanzanian society.
             </p>
           </div>
           <h1 className="absolute text-9xl text-lgray font-semibold z-0 opacity-20 left-96">
