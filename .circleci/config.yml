@@ -28,16 +28,16 @@ jobs:
 #      - run:
 #          name: Export Static Files
 #          command: npm run export
-      - persist_to_workspace:
-          root: ~/repo/out
-          paths:
-            - .
+#      - persist_to_workspace:
+#          root: ~/repo/out
+#          paths:
+#            - .
 
   deploy_vercel:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/repo/out
+#      - attach_workspace:
+#          at: ~/repo/out
       - run:
           name: Install Vercel CLI
           command: npm install -g vercel
