@@ -43,7 +43,7 @@ jobs:
           command: sudo npm install -g vercel
       - run:
           name: Deploy to Vercel
-          command: vercel --prod --token $VERCEL_TOKEN --confirm --scope $VERCEL_ORG_ID
+          command: vercel --prod --token $VERCEL_TOKEN --yes --scope $VERCEL_ORG_ID
 
 workflows:
   version: 2
