@@ -1,11 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
 
 import ContactForm from "../components/contactForm";
 import Socials from "../components/socials";
 
-import MyPhoto from "../public/images/myPhoto.png";
-import otherPhoto from "../public/images/round.jpg";
 import NewPhoto from "../public/images/new-portfolio-photo.png";
 import otherNewPhoto from "../public/images/new-photo.png";
 

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Logo from "../public/images/EM_.png";
 
 export default function Navbar() {

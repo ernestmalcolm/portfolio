@@ -1,8 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-
 export default function Project() {
   return (
     <div className="w-full h-auto flex flex-row justify-center gap-8 mb-16">
@@ -12,17 +7,6 @@ export default function Project() {
           Title of Project
         </div>
         <div className="rounded bg-blue w-full h-36 flex-row"></div>
-        {/* <div className="flex-row text-lg">
-          <Link href="https://github.com/ernestmalcolm">
-            <FontAwesomeIcon
-              icon={faGithub}
-              className="py-4 px-4 hover:text-red"
-            />
-          </Link>
-          <Link href="https://github.com/ernestmalcolm">
-            <FontAwesomeIcon icon={faLink} className="py-4 hover:text-red" />
-          </Link>
-        </div> */}
       </div>
     </div>
   );
