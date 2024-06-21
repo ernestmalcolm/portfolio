@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node-executor:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:18.17.0
     working_directory: ~/repo
 
 jobs:
@@ -25,25 +25,25 @@ jobs:
       - run:
           name: Build the Project
           command: npm run build
-      - run:
-          name: Export Static Files
-          command: npm run export
-      - persist_to_workspace:
-          root: ~/repo/out
-          paths:
-            - .
+#      - run:
+#          name: Export Static Files
+#          command: npm run export
+#      - persist_to_workspace:
+#          root: ~/repo/out
+#          paths:
+#            - .
 
   deploy_vercel:
     executor: node-executor
     steps:
-      - attach_workspace:
-          at: ~/repo/out
+#      - attach_workspace:
+#          at: ~/repo/out
       - run:
           name: Install Vercel CLI
-          command: npm install -g vercel
+          command: sudo npm install -g vercel
       - run:
           name: Deploy to Vercel
-          command: vercel --prod --token $VERCEL_TOKEN --confirm --scope $VERCEL_ORG_ID
+          command: vercel --prod --token $VERCEL_TOKEN --yes --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
 
 workflows:
   version: 2
