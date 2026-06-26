@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-32 text-center">
       <p className="mb-3 text-sm font-medium uppercase tracking-widest text-coral">
         Portfolio rebuild
       </p>
