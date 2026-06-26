@@ -5,16 +5,16 @@ type ConfirmPlaceholderProps = {
   className?: string;
 };
 
-/** Renders a clearly-marked placeholder for [CONFIRM] / [ERNEST TO PROVIDE] items */
+/** Clearly-marked placeholder — muted footnote, not a UI badge */
 export function ConfirmPlaceholder({ label, className }: ConfirmPlaceholderProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md border border-dashed border-coral/50 bg-coral/5 px-2 py-0.5 text-xs font-medium text-coral",
+        "font-mono text-xs text-muted-foreground/80",
         className,
       )}
     >
-      {label}
+      [Confirm: {label}]
     </span>
   );
 }

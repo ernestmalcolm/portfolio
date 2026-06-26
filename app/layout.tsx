@@ -5,10 +5,18 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { siteConfig } from "@/lib/site-config";
 
 import type { Metadata } from "next";
+import { Instrument_Serif } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 
@@ -68,9 +76,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} min-h-screen font-sans antialiased`}
+        className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable} min-h-screen font-sans antialiased`}
         suppressHydrationWarning
       >
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         <PersonJsonLd />
         <ThemeProvider
           attribute="class"
@@ -80,7 +91,7 @@ export default function RootLayout({
         >
           <ConsoleMessage />
           <FloatingNav />
-          {children}
+          <div id="main">{children}</div>
           <SiteFooter />
         </ThemeProvider>
       </body>

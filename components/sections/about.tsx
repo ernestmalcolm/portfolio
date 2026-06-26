@@ -1,22 +1,23 @@
 import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
+import { SectionHeader } from "@/components/section-header";
 import { siteConfig } from "@/lib/site-config";
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-pad border-t border-border/40">
-      <div className="mx-auto grid max-w-5xl gap-10 px-6 lg:grid-cols-[1fr_280px] lg:items-start">
+    <section id="about" className="section-pad border-b border-border/40 scroll-mt-24">
+      <div className="mx-auto grid max-w-5xl gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
         <div>
-          <h2>About</h2>
-          <p className="mt-6 text-lg font-medium text-foreground">
+          <SectionHeader label="Background" title="About" />
+          <p className="mt-8 text-lg leading-relaxed text-foreground">
             {siteConfig.personalityLine}
           </p>
-          <div className="mt-6 space-y-4 text-muted-foreground">
+          <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-muted-foreground">
             <p>
               I build products where structured, unglamorous problems meet modern
               software — audits, financial data, compliance workflows, and the
               operational glue around them. My background in finance and audit
-              gives me domain depth; my product and design work is how I make
-              that depth usable.
+              gives me domain depth; product and design work is how I make that
+              depth usable.
             </p>
             <p>
               Based in {siteConfig.location}, I focus on East African markets —
@@ -31,14 +32,11 @@ export function AboutSection() {
           </div>
         </div>
 
-        <aside className="mx-auto w-full max-w-xs lg:mx-0">
-          {/* TODO: [ERNEST PHOTO] — replace placeholder with professional photo */}
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-dashed border-border bg-muted/30">
-            <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
-              <ConfirmPlaceholder label="Photo — Ernest to provide" />
-              <p className="text-xs text-muted-foreground">
-                Professional headshot placeholder
-              </p>
+        <aside className="lg:pt-12">
+          {/* TODO: [ERNEST PHOTO] */}
+          <div className="aspect-[4/5] border border-border/60 bg-muted/20">
+            <div className="flex h-full flex-col justify-end p-4">
+              <ConfirmPlaceholder label="professional photo" />
             </div>
           </div>
         </aside>

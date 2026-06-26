@@ -7,10 +7,8 @@ import {
   TracingBeam,
 } from "@/components/aceternity/tracing-beam";
 import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
-import { siteConfig } from "@/lib/site-config";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -48,13 +46,13 @@ export default async function CaseStudyPage({ params }: Props) {
           <p className="text-sm text-muted-foreground">
             {project.role} · {project.year}
           </p>
-          <h1 className="mt-2">{project.title}</h1>
-          <p className="mt-4 text-lg text-muted-foreground">{project.oneLiner}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
-          </div>
+          <h1 className="font-display mt-2 text-balance">{project.title}</h1>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            {project.oneLiner}
+          </p>
+          <p className="mt-3 font-mono text-xs text-muted-foreground">
+            {project.tags.join(" · ")}
+          </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {project.link ? (
               <Button asChild>

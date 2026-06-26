@@ -33,7 +33,7 @@
     --input: 214 20% 82%;
     --ring: 5 100% 60%;
 
-    --radius: 0.75rem;
+    --radius: 0.375rem;
 
     --navy: #0B1F3A;
     --navy-light: #12264A;
@@ -81,10 +81,20 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   }
 
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -105,9 +115,22 @@
     @apply outline-2 outline-offset-2 outline-coral;
   }
 
-  h1 { @apply text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl; }
-  h2 { @apply text-3xl font-semibold tracking-tight md:text-4xl; }
-  h3 { @apply text-xl font-semibold md:text-2xl; }
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-coral focus:px-4 focus:py-2 focus:text-navy focus:outline-none;
+  }
+
+  .section-label {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  .font-display {
+    font-family: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+    font-weight: 400;
+  }
+
+  h1 { @apply text-4xl tracking-tight md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl tracking-tight md:text-4xl; }
+  h3 { @apply text-xl md:text-2xl; }
   h4 { @apply text-lg font-medium; }
 }
 

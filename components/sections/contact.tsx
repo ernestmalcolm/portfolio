@@ -1,19 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion, useReducedMotion } from "framer-motion";
-import { Loader2, Mail, Phone } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  XIcon,
-} from "@/components/icons/social-icons";
+import { SectionHeader } from "@/components/section-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,7 +24,6 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 export function ContactSection() {
-  const reduceMotion = useReducedMotion();
   const [status, setStatus] = React.useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -71,95 +65,82 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="section-pad border-t border-border/40">
+    <section id="contact" className="section-pad scroll-mt-24">
       <div className="mx-auto max-w-5xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2>Contact</h2>
-          <p className="mt-4 text-muted-foreground">
-            Product work, consulting, or just saying hi — send a message or use
-            the links below.
-          </p>
-        </div>
+        <SectionHeader
+          label="Reach out"
+          title="Contact"
+          description="Product work, consulting, or just saying hi."
+        />
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-2">
-          <div className="space-y-6">
-            <div className="rounded-2xl border border-border/60 bg-card/40 p-6">
-              <h3 className="font-semibold">Direct</h3>
-              <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-coral" aria-hidden />
+        <div className="mt-12 grid gap-12 lg:grid-cols-2">
+          <div className="space-y-6 text-sm">
+            <dl className="space-y-4">
+              <div>
+                <dt className="section-label">Email</dt>
+                <dd className="mt-1">
                   {siteConfig.email ? (
                     <a
                       href={`mailto:${siteConfig.email}`}
-                      className="hover:text-coral"
+                      className="text-foreground hover:text-coral"
                     >
                       {siteConfig.email}
                     </a>
                   ) : (
-                    <ConfirmPlaceholder label="Email — Ernest to confirm" />
+                    <ConfirmPlaceholder label="public email" />
                   )}
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-coral" aria-hidden />
+                </dd>
+              </div>
+              <div>
+                <dt className="section-label">Phone</dt>
+                <dd className="mt-1">
                   {siteConfig.phone ? (
                     <a
                       href={`tel:${siteConfig.phone}`}
-                      className="hover:text-coral"
+                      className="text-foreground hover:text-coral"
                     >
                       {siteConfig.phone}
                     </a>
                   ) : (
-                    <ConfirmPlaceholder label="Phone — Ernest to confirm" />
+                    <ConfirmPlaceholder label="public phone" />
                   )}
-                </li>
-                <li>
+                </dd>
+              </div>
+            </dl>
+
+            <ul className="space-y-2 border-t border-border/40 pt-6">
+              {[
+                { label: "LinkedIn", href: siteConfig.social.linkedin },
+                { label: "GitHub", href: siteConfig.social.github },
+                { label: "X", href: siteConfig.social.twitter },
+              ].map(({ label, href }) => (
+                <li key={label}>
                   <Link
-                    href={siteConfig.social.linkedin}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-coral"
                   >
-                    LinkedIn →
+                    {label} →
                   </Link>
                 </li>
-              </ul>
-            </div>
-
-            <div className="flex gap-3">
-              {[
-                { label: "GitHub", href: siteConfig.social.github, icon: GitHubIcon },
-                {
-                  label: "LinkedIn",
-                  href: siteConfig.social.linkedin,
-                  icon: LinkedInIcon,
-                },
-                { label: "X", href: siteConfig.social.twitter, icon: XIcon },
-              ].map(({ label, href, icon: Icon }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-coral hover:text-coral"
-                >
-                  <Icon className="h-4 w-4" />
-                </Link>
               ))}
-            </div>
+            </ul>
           </div>
 
-          <motion.form
+          <form
             onSubmit={handleSubmit(onSubmit)}
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-4 rounded-2xl border border-border/60 bg-card/40 p-6 md:p-8"
+            className="space-y-4 border-t border-border/40 pt-8 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0"
             noValidate
           >
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" autoComplete="name" {...register("name")} />
+              <Input
+                id="name"
+                autoComplete="name"
+                spellCheck={false}
+                {...register("name")}
+              />
               {errors.name && (
                 <p className="text-xs text-destructive">{errors.name.message}</p>
               )}
@@ -170,6 +151,7 @@ export function ContactSection() {
                 id="email"
                 type="email"
                 autoComplete="email"
+                spellCheck={false}
                 {...register("email")}
               />
               {errors.email && (
@@ -178,7 +160,12 @@ export function ContactSection() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">Message</Label>
-              <Textarea id="message" rows={5} {...register("message")} />
+              <Textarea
+                id="message"
+                rows={5}
+                placeholder="What you're working on…"
+                {...register("message")}
+              />
               {errors.message && (
                 <p className="text-xs text-destructive">
                   {errors.message.message}
@@ -186,20 +173,16 @@ export function ContactSection() {
               )}
             </div>
 
-            <Button
-              type="submit"
-              className="w-full rounded-full"
-              disabled={status === "loading"}
-            >
+            <Button type="submit" disabled={status === "loading"}>
               {status === "loading" && (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
               )}
-              Send message
+              {status === "loading" ? "Sending…" : "Send message"}
             </Button>
 
             {status === "success" && (
               <p className="text-sm text-coral" role="status">
-                Message sent — I&apos;ll get back to you soon.
+                Message sent. I&apos;ll get back to you soon.
               </p>
             )}
             {status === "error" && (
@@ -207,7 +190,7 @@ export function ContactSection() {
                 {errorMessage}
               </p>
             )}
-          </motion.form>
+          </form>
         </div>
       </div>
     </section>

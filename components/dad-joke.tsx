@@ -2,9 +2,6 @@
 
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
-
-// From content_drafts.md — starter dad-joke set
 const dadJokes = [
   "I told my code a joke. No reaction — just a sense of syntax.",
   "Why did the auditor break up with the spreadsheet? Too many unresolved issues.",
@@ -32,24 +29,23 @@ export function DadJoke() {
   }, []);
 
   return (
-    <aside
+    <blockquote
       aria-live="polite"
-      className="rounded-2xl border border-dashed border-border/70 bg-card/50 p-4 md:p-5"
+      className="border-l-2 border-coral/60 pl-4"
     >
-      <p className="text-xs font-medium uppercase tracking-widest text-coral">
-        Dad joke of the visit
+      <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        Dad joke
       </p>
-      <p className="mt-2 text-sm text-foreground md:text-base">
+      <p className="mt-2 text-base leading-relaxed text-foreground">
         {mounted ? joke : dadJokes[0]}
       </p>
-      <Button
+      <button
         type="button"
-        variant="link"
-        className="mt-2 h-auto p-0 text-coral"
+        className="mt-3 text-sm text-coral underline-offset-4 hover:underline"
         onClick={() => setJoke(pickJoke())}
       >
-        Tell me another
-      </Button>
-    </aside>
+        Another one…
+      </button>
+    </blockquote>
   );
 }
