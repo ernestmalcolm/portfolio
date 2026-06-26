@@ -1,22 +1,31 @@
-import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/sections/hero";
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-32 text-center">
-      <p className="mb-3 text-sm font-medium uppercase tracking-widest text-coral">
-        Portfolio rebuild
-      </p>
-      <h1 className="max-w-3xl text-balance">Ernest Mwinchumu</h1>
-      <p className="mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">
-        Product &amp; business strategist who builds — strategy, product, design,
-        and AI, grounded in real business, shipped in code.
-      </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Button size="lg">Scaffold ready</Button>
-        <Button variant="outline" size="lg">
-          Milestone 1 complete
-        </Button>
-      </div>
+    <main>
+      <HeroSection />
+
+      {/* Placeholder anchors for nav — filled in upcoming milestones */}
+      <section id="work" className="section-pad mx-auto max-w-5xl px-6">
+        <h2 className="text-center">Selected work</h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
+          Case-study grid coming in the next milestone.
+        </p>
+      </section>
+
+      <section id="about" className="section-pad mx-auto max-w-5xl px-6">
+        <h2 className="text-center">About</h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
+          About section coming next.
+        </p>
+      </section>
+
+      <section id="contact" className="section-pad mx-auto max-w-5xl px-6">
+        <h2 className="text-center">Contact</h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-muted-foreground">
+          Contact form coming in a later milestone.
+        </p>
+      </section>
     </main>
   );
 }
