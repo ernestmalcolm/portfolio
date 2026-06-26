@@ -7,7 +7,6 @@ export const siteConfig = {
     "I plan it, design it, and build it — then explain it with a metaphor you didn't ask for.",
   location: "Tanzania · East Africa",
   social: {
-    github: "https://github.com/ernestmalcolm",
     linkedin: "https://www.linkedin.com/in/ernestmwinchumu/",
     twitter: "https://twitter.com/lukakucancode",
   },

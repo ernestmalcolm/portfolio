@@ -56,7 +56,7 @@ export function CaseStudySection({
     <motion.section
       initial={reduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: false, margin: "-60px" }}
       transition={{ duration: 0.45, delay: index * 0.05, ease: "easeOut" }}
       className={cn("mb-12 last:mb-0")}
     >

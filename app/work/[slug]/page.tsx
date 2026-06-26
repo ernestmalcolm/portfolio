@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Mail, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -6,7 +7,6 @@ import {
   CaseStudySection,
   TracingBeam,
 } from "@/components/aceternity/tracing-beam";
-import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
 
@@ -43,25 +43,37 @@ export default async function CaseStudyPage({ params }: Props) {
         </Button>
 
         <header className="max-w-3xl">
-          <p className="text-sm text-muted-foreground">
-            {project.role} · {project.year}
-          </p>
-          <h1 className="font-display mt-2 text-balance">{project.title}</h1>
+          <p className="section-label">{project.role}</p>
+          <h1 className="font-display mt-3 text-balance">{project.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
             {project.oneLiner}
           </p>
-          <p className="mt-3 font-mono text-xs text-muted-foreground">
-            {project.tags.join(" · ")}
-          </p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-3 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border/60 px-3 py-0.5 font-mono text-xs text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Project link or contact CTA */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             {project.link ? (
               <Button asChild>
-                <Link href={project.link} target="_blank" rel="noopener noreferrer">
-                  View project
-                </Link>
+                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                  Visit project <ArrowUpRight className="ml-1.5 h-4 w-4" aria-hidden />
+                </a>
               </Button>
             ) : (
-              <ConfirmPlaceholder label="Project link — confirm" />
+              <Button asChild variant="outline">
+                <Link href="/#contact">
+                  <Mail className="mr-2 h-4 w-4" aria-hidden />
+                  Contact for more information
+                </Link>
+              </Button>
             )}
           </div>
         </header>

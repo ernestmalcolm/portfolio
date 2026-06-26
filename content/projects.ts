@@ -12,7 +12,7 @@ export type Project = {
   oneLiner: string;
   confidential: boolean;
   featured: boolean;
-  /** TODO: [CONFIRM — add URL] when Ernest provides link */
+  /** null = no public link; show "Contact for more information" */
   link: string | null;
   cover?: string;
   screenshots?: string[];
@@ -20,6 +20,40 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "Simplitech",
+    slug: "simplitech",
+    role: "Strategy & product (leadership)",
+    year: "2022 – present",
+    tags: ["Strategy", "Product", "Business"],
+    oneLiner:
+      "My primary engagement — long-term product and strategy leadership for a Tanzanian tech venture (subscription + embedded credit), from early-stage foundations to a growth-ready operating plan.",
+    confidential: true,
+    featured: true,
+    link: null,
+    sections: [
+      {
+        heading: "Context",
+        body: "I joined Simplitech in 2022 and have been central to shaping its product and strategic direction ever since. The company operates in Tanzania's embedded-finance space, combining subscription software with a credit layer — a model that requires tightly-coupled product, commercial, and financial thinking.",
+      },
+      {
+        heading: "Early work (2022 – 2023)",
+        body: "In the first phase, the priority was building the foundations: getting clear on who the customer was, what the product needed to do, and what a credible business model looked like. This meant early product definition, market sizing, and establishing the commercial logic for a subscription + credit offering in the Tanzanian context.",
+      },
+      {
+        heading: "Deepening (2024 – 2025)",
+        body: "As the business matured, the work shifted toward operational rigour. Led the design of a comprehensive operating plan — vision/mission/values, multi-horizon strategic initiatives, impact-aligned metrics, team structure, and an expansion roadmap. Ran a data strategy workstream to ensure product and pricing decisions were grounded in evidence, not assumptions.",
+      },
+      {
+        heading: "Now",
+        body: "Ongoing involvement in product direction, strategy review, and ensuring the roadmap stays coherent with the commercial reality on the ground. The depth of tenure means I carry institutional memory alongside current-state clarity — useful for decisions that need both.",
+      },
+      {
+        heading: "Outcome",
+        body: "A board-ready operating plan, a clearer product/data roadmap, and sustained strategic continuity across multiple growth phases. No internal figures shown.",
+      },
+    ],
+  },
   {
     title: "SimplifyAudit / Cassian Audit Suite",
     slug: "simplifyaudit",
@@ -64,7 +98,7 @@ export const projects: Project[] = [
       "A financial-data intelligence platform — a modern, Bloomberg-style view built for East African markets, starting with Tanzanian banking.",
     confidential: true,
     featured: true,
-    link: null,
+    link: "https://finsightstz.vercel.app/",
     sections: [
       {
         heading: "Context / Problem",
@@ -89,36 +123,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Simplitech",
-    slug: "simplitech",
-    role: "Strategy & product (leadership)",
-    year: "2025–2026",
-    tags: ["Strategy", "Product", "Business"],
-    oneLiner:
-      "Operating strategy and product direction for a Tanzanian tech venture (subscription + embedded credit).",
-    confidential: true,
-    featured: true,
-    link: null,
-    sections: [
-      {
-        heading: "Context / Problem",
-        body: "A growing startup needed a coherent operating plan — vision, segments, metrics, and a path to its first profitable year — plus product direction grounded in real data, not assumptions.",
-      },
-      {
-        heading: "What I did",
-        body: "Led the operating plan & strategy — vision/mission/values, strategic initiatives across multiple horizons, impact-aligned metrics, team and expansion planning, and a data strategy to back product and pricing decisions.",
-      },
-      {
-        heading: "Approach",
-        body: "Tied values to goals, built clear quarter-by-quarter progression, and pushed for the data collection needed to support decisions.",
-      },
-      {
-        heading: "Outcome",
-        body: "A board-ready operating plan and a clearer product/data roadmap.",
-      },
-    ],
-  },
-  {
     title: "Finsol — Verified Business Portal",
     slug: "finsol-verified-portal",
     role: "Product definition",
@@ -128,7 +132,7 @@ export const projects: Project[] = [
       "Product definition and PRD for a verification portal with third-party integration.",
     confidential: true,
     featured: false,
-    link: null,
+    link: "https://www.finsol.africa/",
     sections: [
       {
         heading: "What I did",
@@ -151,24 +155,6 @@ export const projects: Project[] = [
       {
         heading: "What I built",
         body: "Turned written episodes into branded 1080×1080 carousels in the brand's exact colours and logo, plus a Canva handoff system so the owner could produce future episodes herself.",
-      },
-    ],
-  },
-  {
-    title: "This portfolio & open-source builds",
-    slug: "portfolio-and-code",
-    role: "Design & build",
-    year: "2026",
-    tags: ["Design", "Engineering"],
-    oneLiner:
-      "The site you're on — plus selected GitHub repos where I ship in public.",
-    confidential: false,
-    featured: false,
-    link: "https://github.com/ernestmalcolm",
-    sections: [
-      {
-        heading: "What I built",
-        body: "A Next.js portfolio with typed content, case-study pages, and a writing stub — designed to show product thinking in the interface, not just in the copy.",
       },
     ],
   },

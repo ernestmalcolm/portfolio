@@ -111,8 +111,7 @@ export function ContactSection() {
             <ul className="space-y-2 border-t border-border/40 pt-6">
               {[
                 { label: "LinkedIn", href: siteConfig.social.linkedin },
-                { label: "GitHub", href: siteConfig.social.github },
-                { label: "X", href: siteConfig.social.twitter },
+                { label: "X / Twitter", href: siteConfig.social.twitter },
               ].map(({ label, href }) => (
                 <li key={label}>
                   <Link

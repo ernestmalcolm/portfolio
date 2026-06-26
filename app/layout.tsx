@@ -1,4 +1,5 @@
 import { ConsoleMessage } from "@/components/console-message";
+import { CursorBeam } from "@/components/aceternity/cursor-beam";
 import { FloatingNav } from "@/components/floating-nav";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteFooter } from "@/components/sections/site-footer";
@@ -54,7 +55,6 @@ function PersonJsonLd() {
     description: siteConfig.tagline,
     url: siteUrl || undefined,
     sameAs: [
-      siteConfig.social.github,
       siteConfig.social.linkedin,
       siteConfig.social.twitter,
     ],
@@ -90,8 +90,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ConsoleMessage />
+          <CursorBeam />
           <FloatingNav />
-          <div id="main">{children}</div>
+          <div id="main" className="relative z-[2]">
+            {children}
+          </div>
           <SiteFooter />
         </ThemeProvider>
       </body>

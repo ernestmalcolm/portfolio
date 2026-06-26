@@ -39,6 +39,9 @@
     --navy-light: #12264A;
     --cream: #F5F1E8;
     --coral: #FF6B5E;
+    --complement: #4ECDC4;
+    --coral-rgb: 255, 107, 94;
+    --complement-rgb: 78, 205, 196;
   }
 
   /* ── Dark theme (default — .dark on <html>) ─────────── */

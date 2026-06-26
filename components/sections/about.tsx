@@ -4,7 +4,10 @@ import { siteConfig } from "@/lib/site-config";
 
 export function AboutSection() {
   return (
-    <section id="about" className="section-pad border-b border-border/40 scroll-mt-24">
+    <section
+      id="about"
+      className="scroll-mt-24 border-b border-border/40 pb-16 pt-8 md:pb-20 md:pt-10"
+    >
       <div className="mx-auto grid max-w-5xl gap-12 px-6 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
         <div>
           <SectionHeader label="Background" title="About" />
