@@ -1,26 +1,26 @@
 import Link from "next/link";
 
-import { DadJoke } from "@/components/dad-joke";
 import {
   GitHubIcon,
   LinkedInIcon,
   XIcon,
 } from "@/components/icons/social-icons";
+import { siteConfig } from "@/lib/site-config";
 
 const socialLinks = [
   {
     label: "GitHub",
-    href: "https://github.com/ernestmalcolm",
+    href: siteConfig.social.github,
     icon: GitHubIcon,
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/ernestmwinchumu/",
+    href: siteConfig.social.linkedin,
     icon: LinkedInIcon,
   },
   {
     label: "X (Twitter)",
-    href: "https://twitter.com/lukakucancode",
+    href: siteConfig.social.twitter,
     icon: XIcon,
   },
 ] as const;
@@ -30,12 +30,10 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-border/60 bg-navy-dark/40">
-      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12 md:py-16">
-        <DadJoke />
-
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-12 md:py-16">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p className="text-sm text-muted-foreground">
-            © {year} Ernest Mwinchumu. Built with Next.js, shadcn/ui, and
+            © {year} {siteConfig.name}. Built with Next.js, shadcn/ui, and
             Aceternity-inspired motion.
           </p>
 
@@ -57,7 +55,6 @@ export function SiteFooter() {
         </div>
 
         <p className="text-xs text-muted-foreground/80">
-          {/* Easter egg line — brief §8.7 */}
           That&apos;s what she said. (About the footer padding.)
         </p>
       </div>

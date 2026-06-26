@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
-
+import { ConsoleMessage } from "@/components/console-message";
 import { FloatingNav } from "@/components/floating-nav";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteFooter } from "@/components/sections/site-footer";
+import { siteConfig } from "@/lib/site-config";
+
+import type { Metadata } from "next";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
 
@@ -13,12 +15,50 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
-    default: "Ernest Mwinchumu — Product & business strategist who builds",
-    template: "%s | Ernest Mwinchumu",
+    default: `${siteConfig.name} — ${siteConfig.title}`,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Strategy, product, design, and AI — grounded in real business, shipped in code.",
+  description: siteConfig.tagline,
+  openGraph: {
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.tagline,
+    type: "website",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} — ${siteConfig.title}`,
+    description: siteConfig.tagline,
+    creator: "@lukakucancode",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
+
+function PersonJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    jobTitle: siteConfig.title,
+    description: siteConfig.tagline,
+    url: siteUrl || undefined,
+    sameAs: [
+      siteConfig.social.github,
+      siteConfig.social.linkedin,
+      siteConfig.social.twitter,
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
 
 export default function RootLayout({
   children,
@@ -26,17 +66,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} min-h-screen font-sans antialiased`}
+        suppressHydrationWarning
       >
+        <PersonJsonLd />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
-          value={{ dark: "", light: "light" }}
         >
+          <ConsoleMessage />
           <FloatingNav />
           {children}
           <SiteFooter />

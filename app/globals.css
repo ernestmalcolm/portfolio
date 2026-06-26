@@ -3,49 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  /* ── Dark theme (default) ─────────────────────────────── */
+  /* ── Light theme (:root — active when .dark is absent) ── */
   :root {
-    --background: 214 57% 13%;        /* navy #0B1F3A */
-    --foreground: 40 35% 93%;         /* cream #F5F1E8 */
-
-    --card: 214 57% 17%;              /* slightly lighter navy */
-    --card-foreground: 40 35% 93%;
-
-    --popover: 214 57% 13%;
-    --popover-foreground: 40 35% 93%;
-
-    --primary: 5 100% 68%;            /* coral #FF6B5E */
-    --primary-foreground: 214 57% 13%;
-
-    --secondary: 214 57% 20%;
-    --secondary-foreground: 40 35% 93%;
-
-    --muted: 214 40% 22%;
-    --muted-foreground: 40 20% 65%;
-
-    --accent: 5 100% 68%;
-    --accent-foreground: 214 57% 13%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 40 35% 93%;
-
-    --border: 214 40% 25%;
-    --input: 214 40% 25%;
-    --ring: 5 100% 68%;               /* coral focus ring */
-
-    --radius: 0.75rem;
-
-    /* Brand tokens (used directly in components) */
-    --navy: #0B1F3A;
-    --navy-light: #12264A;
-    --cream: #F5F1E8;
-    --coral: #FF6B5E;
-  }
-
-  /* ── Light theme ──────────────────────────────────────── */
-  .light {
-    --background: 40 35% 95%;         /* near cream */
-    --foreground: 214 57% 13%;        /* navy text */
+    --background: 40 35% 95%;
+    --foreground: 214 57% 13%;
 
     --card: 0 0% 100%;
     --card-foreground: 214 57% 13%;
@@ -71,6 +32,44 @@
     --border: 214 20% 82%;
     --input: 214 20% 82%;
     --ring: 5 100% 60%;
+
+    --radius: 0.75rem;
+
+    --navy: #0B1F3A;
+    --navy-light: #12264A;
+    --cream: #F5F1E8;
+    --coral: #FF6B5E;
+  }
+
+  /* ── Dark theme (default — .dark on <html>) ─────────── */
+  .dark {
+    --background: 214 57% 13%;
+    --foreground: 40 35% 93%;
+
+    --card: 214 57% 17%;
+    --card-foreground: 40 35% 93%;
+
+    --popover: 214 57% 13%;
+    --popover-foreground: 40 35% 93%;
+
+    --primary: 5 100% 68%;
+    --primary-foreground: 214 57% 13%;
+
+    --secondary: 214 57% 20%;
+    --secondary-foreground: 40 35% 93%;
+
+    --muted: 214 40% 22%;
+    --muted-foreground: 40 20% 65%;
+
+    --accent: 5 100% 68%;
+    --accent-foreground: 214 57% 13%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 35% 93%;
+
+    --border: 214 40% 25%;
+    --input: 214 40% 25%;
+    --ring: 5 100% 68%;
   }
 }
 
@@ -84,7 +83,6 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  /* Smooth scrolling — disabled when user prefers reduced motion */
   html {
     scroll-behavior: smooth;
   }
@@ -103,12 +101,10 @@
     }
   }
 
-  /* Focus styles — visible, accessible */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-coral;
   }
 
-  /* Headings scale */
   h1 { @apply text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl; }
   h2 { @apply text-3xl font-semibold tracking-tight md:text-4xl; }
   h3 { @apply text-xl font-semibold md:text-2xl; }
@@ -116,19 +112,36 @@
 }
 
 @layer utilities {
-  /* Gradient text helper */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #F5F1E8 0%, #FF6B5E 100%);
   }
 
-  /* Glow on cards */
   .glow-coral {
     box-shadow: 0 0 20px rgba(255, 107, 94, 0.15);
   }
 
-  /* Section spacing */
   .section-pad {
     @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .article-content h2 {
+    @apply mb-3 mt-8 text-2xl font-semibold text-foreground;
+  }
+
+  .article-content h3 {
+    @apply mb-2 mt-6 text-xl font-semibold text-foreground;
+  }
+
+  .article-content p {
+    @apply mb-4 leading-relaxed text-muted-foreground;
+  }
+
+  .article-content ul {
+    @apply mb-4 list-disc space-y-2 pl-6 text-muted-foreground;
+  }
+
+  .article-content a {
+    @apply text-coral underline-offset-4 hover:underline;
   }
 }
