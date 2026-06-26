@@ -109,6 +109,10 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+
+    .motion-safe\:animate-spotlight {
+      animation: none !important;
+    }
   }
 
   :focus-visible {

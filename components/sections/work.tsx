@@ -1,3 +1,6 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 
 import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
@@ -5,18 +8,33 @@ import { SectionHeader } from "@/components/section-header";
 import { projects } from "@/content/projects";
 
 export function WorkSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section id="work" className="section-pad border-b border-border/40 scroll-mt-24">
+    <section id="work" className="section-pad scroll-mt-24 border-b border-border/40">
       <div className="mx-auto max-w-5xl px-6">
-        <SectionHeader
-          label="Portfolio"
-          title="Selected work"
-          description="Named projects, moderate detail, real roles — no client names or internal numbers."
-        />
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+        >
+          <SectionHeader
+            label="Portfolio"
+            title="Selected work"
+            description="Named projects, moderate detail, real roles — no client names or internal numbers."
+          />
+        </motion.div>
 
         <ul className="mt-12 divide-y divide-border/50 border-y border-border/50">
-          {projects.map((project) => (
-            <li key={project.slug}>
+          {projects.map((project, index) => (
+            <motion.li
+              key={project.slug}
+              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.4, delay: index * 0.04, ease: "easeOut" }}
+            >
               <Link
                 href={`/work/${project.slug}`}
                 className="group grid gap-3 py-8 transition-colors md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-8"
@@ -41,7 +59,7 @@ export function WorkSection() {
                   {project.tags.join(" · ")}
                 </p>
               </Link>
-            </li>
+            </motion.li>
           ))}
         </ul>
       </div>

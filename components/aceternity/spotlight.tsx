@@ -9,7 +9,8 @@ export function Spotlight({ className, fill = "white" }: SpotlightProps) {
   return (
     <svg
       className={cn(
-        "pointer-events-none absolute -top-[40%] left-0 z-[1] h-[169%] w-[138%] animate-spotlight opacity-0 lg:-top-[20%] lg:w-[84%]",
+        "pointer-events-none absolute -top-[40%] left-0 z-[1] h-[169%] w-[138%] lg:-top-[20%] lg:w-[84%]",
+        "motion-safe:animate-spotlight motion-safe:opacity-0 motion-reduce:opacity-20",
         className,
       )}
       xmlns="http://www.w3.org/2000/svg"
