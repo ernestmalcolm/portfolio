@@ -1,11 +1,134 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    margin: 0;
-    font-family: "Poppins";
+@layer base {
+  /* ── Dark theme (default) ─────────────────────────────── */
+  :root {
+    --background: 214 57% 13%;        /* navy #0B1F3A */
+    --foreground: 40 35% 93%;         /* cream #F5F1E8 */
+
+    --card: 214 57% 17%;              /* slightly lighter navy */
+    --card-foreground: 40 35% 93%;
+
+    --popover: 214 57% 13%;
+    --popover-foreground: 40 35% 93%;
+
+    --primary: 5 100% 68%;            /* coral #FF6B5E */
+    --primary-foreground: 214 57% 13%;
+
+    --secondary: 214 57% 20%;
+    --secondary-foreground: 40 35% 93%;
+
+    --muted: 214 40% 22%;
+    --muted-foreground: 40 20% 65%;
+
+    --accent: 5 100% 68%;
+    --accent-foreground: 214 57% 13%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 35% 93%;
+
+    --border: 214 40% 25%;
+    --input: 214 40% 25%;
+    --ring: 5 100% 68%;               /* coral focus ring */
+
+    --radius: 0.75rem;
+
+    /* Brand tokens (used directly in components) */
+    --navy: #0B1F3A;
+    --navy-light: #12264A;
+    --cream: #F5F1E8;
+    --coral: #FF6B5E;
   }
 
+  /* ── Light theme ──────────────────────────────────────── */
+  .light {
+    --background: 40 35% 95%;         /* near cream */
+    --foreground: 214 57% 13%;        /* navy text */
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 57% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 57% 13%;
+
+    --primary: 5 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 20% 92%;
+    --secondary-foreground: 214 57% 13%;
+
+    --muted: 214 15% 90%;
+    --muted-foreground: 214 30% 40%;
+
+    --accent: 5 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 82%;
+    --input: 214 20% 82%;
+    --ring: 5 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling — disabled when user prefers reduced motion */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus styles — visible, accessible */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-coral;
+  }
+
+  /* Headings scale */
+  h1 { @apply text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl font-semibold tracking-tight md:text-4xl; }
+  h3 { @apply text-xl font-semibold md:text-2xl; }
+  h4 { @apply text-lg font-medium; }
+}
+
+@layer utilities {
+  /* Gradient text helper */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #F5F1E8 0%, #FF6B5E 100%);
+  }
+
+  /* Glow on cards */
+  .glow-coral {
+    box-shadow: 0 0 20px rgba(255, 107, 94, 0.15);
+  }
+
+  /* Section spacing */
+  .section-pad {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+}
