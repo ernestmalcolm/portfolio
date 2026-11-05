@@ -1,11 +1,128 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    margin: 0;
-    font-family: "Poppins";
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
   }
 
+  body {
+    @apply bg-navy font-sans text-base text-cream antialiased;
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline outline-2 outline-offset-2 outline-coral;
+  }
+
+  ::selection {
+    @apply bg-cream text-navy;
+  }
+
+  h1,
+  h2 {
+    @apply font-condensed font-bold tracking-[-0.01em] text-cream;
+    text-wrap: balance;
+  }
+
+  h1 {
+    @apply text-[2.5rem] leading-[1.02] md:text-[4rem];
+  }
+
+  h2 {
+    @apply text-[1.875rem] leading-tight md:text-[2.5rem];
+  }
+
+  h3 {
+    @apply text-xl font-semibold leading-snug text-cream;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .reveal,
+    .receipt-print {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-5xl px-5 sm:px-6;
+  }
+
+  .section {
+    @apply border-t border-line py-16 md:py-24;
+  }
+
+  .link {
+    @apply text-coral underline decoration-1 underline-offset-[3px] hover:text-coral-light hover:decoration-2;
+  }
+
+  .link-quiet {
+    @apply text-cream underline decoration-line decoration-1 underline-offset-[3px] hover:decoration-cream;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-cream focus:px-4 focus:py-2 focus:text-navy;
+  }
+
+  /* Hero name: cream into coral */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #F5F1E8 20%, #FF8A80 70%, #FF6B5E 100%);
+  }
+
+  /* Aceternity style dot grid across the whole site, fading at the edges */
+  .site-dots {
+    background-image: radial-gradient(circle at 1px 1px, rgba(197, 206, 219, 0.14) 1px, transparent 0);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .glow-drift {
+      animation: glow-drift 28s ease-in-out infinite alternate;
+    }
+
+    .glow-drift-reverse {
+      animation: glow-drift 34s ease-in-out infinite alternate-reverse;
+    }
+  }
+
+  @keyframes glow-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(18vw, 12vh, 0) scale(1.15);
+    }
+  }
+
+  /* Bottom edge of the receipt: a torn zigzag */
+  .receipt-tear {
+    --tear: 10px;
+    -webkit-mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tear) * 2) 100%;
+    mask:
+      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tear) * 2) 100%;
+  }
+}
