@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class"],
   content: [
     "./app/**/*.{ts,tsx,js,jsx,mdx}",
     "./components/**/*.{ts,tsx,js,jsx}",
@@ -9,94 +8,76 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: "#0B1F3A",
-          light: "#12264A",
-          dark: "#07152A",
+        navy: { DEFAULT: "#0B1F3A", light: "#12264A", dark: "#07152A" },
+        cream: "#F5F1E8",
+        coral: { DEFAULT: "#FF6B5E", light: "#FF8A80" },
+        mist: "#C5CEDB",
+        muted: "#98A4B8",
+        line: "#2E4670",
+        field: "#5B7096",
+        // The receipt is a white slip of paper, so it keeps its own palette
+        receipt: {
+          DEFAULT: "#FFFFFF",
+          ink: "#222831",
+          slate: "#30475E",
+          muted: "#5F6873",
+          red: "#C8333F",
         },
-        cream: {
-          DEFAULT: "#F5F1E8",
-          dark: "#EDE8DC",
-        },
-        coral: {
-          DEFAULT: "#FF6B5E",
-          dark: "#E55547",
-          light: "#FF8A80",
-        },
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        stamp: "#E5484D",
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
-        display: ["var(--font-instrument-serif)", "Georgia", "serif"],
+        sans: ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        condensed: ["var(--font-plex-condensed)", "var(--font-plex-sans)", "sans-serif"],
+        mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+      },
+      fontSize: {
+        sm: ["0.9375rem", { lineHeight: "1.5" }],
+        base: ["1.0625rem", { lineHeight: "1.6" }],
+        lg: ["1.125rem", { lineHeight: "1.6" }],
+      },
+      borderRadius: {
+        DEFAULT: "4px",
+        img: "8px",
+      },
+      maxWidth: {
+        prose: "65ch",
       },
       animation: {
-        "fade-in": "fadeIn 0.5s ease-in-out",
-        "slide-up": "slideUp 0.5s ease-out",
-        spotlight: "spotlight 2s ease .75s 1 forwards",
-        shimmer: "shimmer 2s linear infinite",
-        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
-        "spin-slow": "spin 8s linear infinite",
+        spotlight: "spotlight 2s ease 0.4s 1 forwards",
       },
       keyframes: {
-        fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        slideUp: {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
         spotlight: {
           "0%": { opacity: "0", transform: "translate(-72%, -62%) scale(0.5)" },
-          "100%": { opacity: "1", transform: "translate(-50%,-40%) scale(1)" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
-        "border-beam": {
-          "100%": { "offset-distance": "100%" },
+          "100%": { opacity: "1", transform: "translate(-50%, -40%) scale(1)" },
         },
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": theme("colors.mist"),
+            "--tw-prose-headings": theme("colors.cream"),
+            "--tw-prose-links": theme("colors.coral.DEFAULT"),
+            "--tw-prose-bold": theme("colors.cream"),
+            "--tw-prose-counters": theme("colors.muted"),
+            "--tw-prose-bullets": theme("colors.coral.DEFAULT"),
+            "--tw-prose-quotes": theme("colors.mist"),
+            "--tw-prose-quote-borders": theme("colors.coral.DEFAULT"),
+            "--tw-prose-hr": theme("colors.line"),
+            maxWidth: "65ch",
+            fontSize: "1.125rem",
+            lineHeight: "1.65",
+            a: { textUnderlineOffset: "3px" },
+            h2: {
+              fontFamily: theme("fontFamily.condensed").join(","),
+              fontWeight: "700",
+              fontSize: "1.875rem",
+              letterSpacing: "-0.01em",
+              marginTop: "2.5em",
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("@tailwindcss/typography")],
 };

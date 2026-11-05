@@ -1,20 +1,21 @@
-import Link from "next/link";
-
+import { EmLogo } from "@/components/em-logo";
+import { ContactSection } from "@/components/sections/contact";
 import { siteConfig } from "@/lib/site-config";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border/40">
-      <div className="mx-auto flex max-w-5xl flex-col gap-3 px-6 py-10 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-        <p>© {year} {siteConfig.name}</p>
-        <p className="font-mono text-xs">
-          Built with Next.js ·{" "}
-          <span className="text-muted-foreground/70">
-            That&apos;s what she said. (About the padding.)
+    <footer className="border-t border-line bg-navy-dark/80 backdrop-blur-sm">
+      <ContactSection />
+      <div className="container-page flex flex-col gap-2 border-t border-line py-8 text-sm text-muted sm:flex-row sm:justify-between">
+        <p className="flex items-center gap-3">
+          <EmLogo className="text-base" />
+          <span>
+            © {year} {siteConfig.name}
           </span>
         </p>
+        <p>Built in Dar es Salaam. Fully tax compliant.</p>
       </div>
     </footer>
   );

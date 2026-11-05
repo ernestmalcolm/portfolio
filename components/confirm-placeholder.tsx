@@ -5,12 +5,12 @@ type ConfirmPlaceholderProps = {
   className?: string;
 };
 
-/** Clearly-marked placeholder — muted footnote, not a UI badge */
+/** Visible placeholder for copy Ernest still has to confirm */
 export function ConfirmPlaceholder({ label, className }: ConfirmPlaceholderProps) {
   return (
     <span
       className={cn(
-        "font-mono text-xs text-muted-foreground/80",
+        "text-sm text-muted",
         className,
       )}
     >

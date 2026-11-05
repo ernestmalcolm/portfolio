@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getPublishedPosts, getWritingPost } from "@/content/writing/index";
+import { PageBackdrop } from "@/components/page-backdrop";
 import { getMdxContent } from "@/lib/mdx";
+import { formatDate } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -34,29 +36,24 @@ export default async function WritingPostPage({ params }: Props) {
   if (!mdx) notFound();
 
   return (
-    <main className="pb-24 pt-28 md:pt-32">
-      <article className="mx-auto max-w-3xl px-6">
-        <Link
-          href="/writing"
-          className="text-sm text-muted-foreground hover:text-coral"
-        >
-          ← Back to writing
+    <main className="container-page relative isolate pb-24 pt-12 md:pt-16">
+      <PageBackdrop />
+      <p>
+        <Link href="/writing" className="link text-sm">
+          All writing
         </Link>
-        <header className="mt-6">
-          <time
-            dateTime={post.date}
-            className="text-sm text-muted-foreground"
-          >
-            {new Date(post.date).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
+      </p>
+      <article className="mt-8">
+        <header className="max-w-3xl">
+          <time dateTime={post.date} className="text-sm text-muted">
+            {formatDate(post.date)}
           </time>
           <h1 className="mt-2">{post.title}</h1>
-          <p className="mt-3 text-muted-foreground">{post.excerpt}</p>
+          <p className="mt-6 max-w-prose text-xl leading-snug text-mist">
+            {post.excerpt}
+          </p>
         </header>
-        <div className="article-content mt-10">{mdx.content}</div>
+        <div className="prose mt-12">{mdx.content}</div>
       </article>
     </main>
   );

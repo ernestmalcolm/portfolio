@@ -1,53 +1,62 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { PageBackdrop } from "@/components/page-backdrop";
+import { Reveal } from "@/components/reveal";
 import { getPublishedPosts } from "@/content/writing/index";
-import { siteConfig } from "@/lib/site-config";
+import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Writing",
-  description: "Notes, analysis, and product thinking from Ernest Mwinchumu.",
+  description:
+    "Ernest Mwinchumu on product, digital in Tanzania and East Africa, and the work in between.",
 };
 
 export default function WritingPage() {
   const posts = getPublishedPosts();
 
   return (
-    <main className="pb-24 pt-28 md:pt-32">
-      <div className="mx-auto max-w-3xl px-6">
+    <main className="container-page relative isolate pb-24 pt-16 md:pt-24">
+      <PageBackdrop />
+      <Reveal>
         <h1>Writing</h1>
-        <p className="mt-4 text-muted-foreground">
-          Product breakdowns, domain explainers, and notes — {siteConfig.name}
-          &apos;s thinking in long form.
+        <p className="mt-6 max-w-prose text-xl leading-snug">
+          Longer thoughts on product, on digital in Tanzania and East Africa,
+          and on the work in between.
         </p>
+      </Reveal>
 
-        <ul className="mt-12 space-y-6">
+      {posts.length === 0 ? (
+        <p className="mt-12 text-muted">
+          Nothing published yet. The first post is on its way.
+        </p>
+      ) : (
+        <ul className="mt-12 border-b border-line">
           {posts.map((post) => (
-            <li key={post.slug}>
-              <article className="rounded-xl border border-border/60 bg-card/40 p-6 transition-colors hover:border-coral/40">
-                <time
-                  dateTime={post.date}
-                  className="text-xs text-muted-foreground"
-                >
-                  {new Date(post.date).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
-                <h2 className="mt-2 text-xl font-semibold">
-                  <Link href={`/writing/${post.slug}`} className="hover:text-coral">
-                    {post.title}
-                  </Link>
-                </h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {post.excerpt}
-                </p>
-              </article>
+            <li
+              key={post.slug}
+              className="grid gap-1 border-t border-line py-8 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-8"
+            >
+              <time dateTime={post.date} className="text-sm text-muted">
+                {formatDate(post.date)}
+              </time>
+              <Reveal>
+                <article>
+                  <h2 className="font-sans text-xl font-semibold tracking-normal">
+                    <Link
+                      href={`/writing/${post.slug}`}
+                      className="hover:text-coral hover:underline hover:underline-offset-[3px]"
+                    >
+                      {post.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-2 max-w-prose text-muted">{post.excerpt}</p>
+                </article>
+              </Reveal>
             </li>
           ))}
         </ul>
-      </div>
+      )}
     </main>
   );
 }

@@ -8,11 +8,11 @@ export type WritingPost = {
 
 export const writingPosts: WritingPost[] = [
   {
-    slug: "notes-from-the-build",
-    title: "Notes from the build",
-    date: "2026-06-01",
+    slug: "intern-to-tech-lead-and-whats-next",
+    title: "From intern to Tech Lead, and what comes next",
+    date: "2026-11-05",
     excerpt:
-      "Why this portfolio exists, what it is trying to prove, and how the stack supports that story.",
+      "How I got here, what I believe about digital in Tanzania, and what I hope you take away from this site.",
     published: true,
   },
 ];
@@ -22,5 +22,7 @@ export function getWritingPost(slug: string) {
 }
 
 export function getPublishedPosts() {
-  return writingPosts.filter((post) => post.published);
+  return writingPosts
+    .filter((post) => post.published)
+    .sort((a, b) => b.date.localeCompare(a.date));
 }

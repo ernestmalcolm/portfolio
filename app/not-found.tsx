@@ -1,23 +1,31 @@
 import Link from "next/link";
 
-import { ConfirmPlaceholder } from "@/components/confirm-placeholder";
-import { Button } from "@/components/ui/button";
+import { PageBackdrop } from "@/components/page-backdrop";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-[70vh] flex-col items-center justify-center px-6 pb-24 pt-32 text-center">
-      <p className="text-6xl font-bold text-coral">404</p>
-      <h1 className="mt-4 max-w-lg text-balance">Page not found</h1>
-      <p className="mt-4 max-w-md text-muted-foreground">
-        {/* TODO: [CONFIRM] — pick favourite Office quote for 404 */}
-        <ConfirmPlaceholder label="Office 404 quote — confirm" />
-        <span className="mt-3 block italic">
-          &ldquo;I&apos;m not superstitious, but I am a little stitious.&rdquo;
-        </span>
+    <main className="container-page relative isolate pb-24 pt-16 md:pt-28">
+      <PageBackdrop />
+      <p className="font-mono text-sm text-coral">Error 404</p>
+      <h1 className="mt-2 max-w-2xl">
+        This page didn&apos;t get its fiscal receipt.
+      </h1>
+      <p className="mt-6 max-w-prose text-xl leading-snug">
+        TRA is looking into it. In the meantime, the page you wanted
+        doesn&apos;t exist or has moved.
       </p>
-      <Button asChild className="mt-8 rounded-full" size="lg">
-        <Link href="/">Take me home</Link>
-      </Button>
+      <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+        <li>
+          <Link href="/" className="link">
+            Go to the home page
+          </Link>
+        </li>
+        <li>
+          <Link href="/work" className="link">
+            See my work
+          </Link>
+        </li>
+      </ul>
     </main>
   );
 }

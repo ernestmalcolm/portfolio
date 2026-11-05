@@ -6,14 +6,17 @@ import { siteConfig } from "@/lib/site-config";
 
 export function ConsoleMessage() {
   useEffect(() => {
-    // TODO: [CONFIRM] — pick console easter egg line from content_drafts.md
     console.log(
-      `%cBears. Beets. Battlestar Galactica.`,
-      "color: #FF6B5E; font-size: 14px; font-weight: bold;",
+      "%cBears. Beets. Battlestar Galactica.",
+      "color: #C8333F; font-size: 16px; font-weight: bold; font-family: monospace;",
     );
     console.log(
-      `%cYou found the console. Let's talk → ${siteConfig.social.linkedin}`,
-      "color: #F5F1E8; font-size: 12px;",
+      "%cYou found the console. That makes you my kind of person.",
+      "font-size: 12px; font-family: monospace;",
+    );
+    console.log(
+      `%cSay hi on LinkedIn: ${siteConfig.social.linkedin}`,
+      "font-size: 12px; font-family: monospace;",
     );
   }, []);
 

@@ -1,44 +1,55 @@
 import { ConsoleMessage } from "@/components/console-message";
-import { CursorBeam } from "@/components/aceternity/cursor-beam";
-import { FloatingNav } from "@/components/floating-nav";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { SiteFooter } from "@/components/sections/site-footer";
-import { siteConfig } from "@/lib/site-config";
+import { SiteBackdrop } from "@/components/site-backdrop";
+import { SiteHeader } from "@/components/site-header";
+import { siteConfig, siteUrl } from "@/lib/site-config";
 
 import type { Metadata } from "next";
-import { Instrument_Serif } from "next/font/google";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
 
 import "./globals.css";
 
-const instrumentSerif = Instrument_Serif({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-instrument-serif",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-plex-sans",
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+const plexCondensed = IBM_Plex_Sans_Condensed({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-plex-condensed",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
+const defaultTitle = `${siteConfig.name}, ${siteConfig.title}`;
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.title}`,
+    default: defaultTitle,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.tagline,
   openGraph: {
-    title: `${siteConfig.name} — ${siteConfig.title}`,
+    title: defaultTitle,
     description: siteConfig.tagline,
     type: "website",
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.title}`,
+    title: defaultTitle,
     description: siteConfig.tagline,
-    creator: "@lukakucancode",
   },
   robots: {
     index: true,
@@ -53,11 +64,16 @@ function PersonJsonLd() {
     name: siteConfig.name,
     jobTitle: siteConfig.title,
     description: siteConfig.tagline,
-    url: siteUrl || undefined,
-    sameAs: [
-      siteConfig.social.linkedin,
-      siteConfig.social.twitter,
-    ],
+    url: siteUrl,
+    email: `mailto:${siteConfig.email}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Dar es Salaam",
+      addressCountry: "TZ",
+    },
+    alumniOf: "University of Dar es Salaam",
+    worksFor: { "@type": "Organization", name: "Simplitech Limited" },
+    sameAs: [siteConfig.social.linkedin],
   };
 
   return (
@@ -74,29 +90,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <body
-        className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable} min-h-screen font-sans antialiased`}
-        suppressHydrationWarning
-      >
+    <html
+      lang="en"
+      className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable}`}
+    >
+      {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
+      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
+        <noscript>
+          <style>{".reveal,.receipt-print{opacity:1!important;transform:none!important;clip-path:none!important}"}</style>
+        </noscript>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
         <PersonJsonLd />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <ConsoleMessage />
-          <CursorBeam />
-          <FloatingNav />
-          <div id="main" className="relative z-[2]">
-            {children}
-          </div>
-          <SiteFooter />
-        </ThemeProvider>
+        <SiteBackdrop />
+        <ConsoleMessage />
+        <SiteHeader />
+        <div id="main" className="relative isolate flex-1 overflow-x-clip">
+          {children}
+        </div>
+        <SiteFooter />
       </body>
     </html>
   );

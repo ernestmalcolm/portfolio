@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Mail, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import {
-  CaseStudySection,
-  TracingBeam,
-} from "@/components/aceternity/tracing-beam";
+import { PageBackdrop } from "@/components/page-backdrop";
+import { ProjectCover } from "@/components/project-cover";
+import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
 
@@ -15,7 +13,9 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects.flatMap((project) =>
+    project.slug ? [{ slug: project.slug }] : [],
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -35,61 +35,101 @@ export default async function CaseStudyPage({ params }: Props) {
 
   if (!project) notFound();
 
+  const meta = [
+    { label: "Organisation", value: project.organisation },
+    { label: "Role", value: project.role },
+    { label: "Years", value: project.years },
+    { label: "Status", value: project.status },
+  ].filter((item): item is { label: string; value: string } =>
+    Boolean(item.value),
+  );
+
   return (
-    <main className="pb-24 pt-28 md:pt-32">
-      <article className="mx-auto max-w-5xl px-6">
-        <Button asChild variant="ghost" className="mb-8 -ml-2">
-          <Link href="/#work">← Back to work</Link>
-        </Button>
+    <main className="container-page relative isolate pb-24 pt-12 md:pt-16">
+      <PageBackdrop />
+      <p>
+        <Link href="/work" className="link text-sm">
+          All work
+        </Link>
+      </p>
 
-        <header className="max-w-3xl">
-          <p className="section-label">{project.role}</p>
-          <h1 className="font-display mt-3 text-balance">{project.title}</h1>
-          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            {project.oneLiner}
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-border/60 px-3 py-0.5 font-mono text-xs text-muted-foreground"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+      <article className="mt-8">
+        <Reveal>
+          <header>
+            <h1>{project.title}</h1>
+            <p className="mt-6 max-w-prose text-xl leading-snug">
+              {project.oneLiner}
+            </p>
 
-          {/* Project link or contact CTA */}
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {project.link ? (
-              <Button asChild>
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  Visit project <ArrowUpRight className="ml-1.5 h-4 w-4" aria-hidden />
-                </a>
-              </Button>
-            ) : (
-              <Button asChild variant="outline">
-                <Link href="/#contact">
-                  <Mail className="mr-2 h-4 w-4" aria-hidden />
-                  Contact for more information
-                </Link>
-              </Button>
-            )}
-          </div>
-        </header>
+            <dl className="mt-8 grid max-w-3xl gap-x-8 gap-y-4 border-y border-line py-6 text-sm sm:grid-cols-2 lg:grid-cols-4">
+              {meta.map((item) => (
+                <div key={item.label}>
+                  <dt className="text-muted">{item.label}</dt>
+                  <dd className="mt-1 text-cream">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
 
-        <div className="mt-16">
-          <TracingBeam>
-            {project.sections?.map((section, index) => (
-              <CaseStudySection
-                key={section.heading}
-                heading={section.heading}
-                body={section.body}
-                index={index}
-              />
-            ))}
-          </TracingBeam>
+            <div className="mt-8">
+              {project.link ? (
+                <Button asChild>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.linkLabel ?? `Open ${project.title}`}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </Button>
+              ) : (
+                <p className="max-w-prose text-muted">
+                  There&apos;s no public link for this one.{" "}
+                  <a href="#contact" className="link">
+                    Ask me about it
+                  </a>
+                  .
+                </p>
+              )}
+            </div>
+          </header>
+        </Reveal>
+
+        <ProjectCover
+          cover={project.cover}
+          title={project.title}
+          size="hero"
+          priority
+          className="mt-12"
+        />
+
+        <div className="mt-16 max-w-prose space-y-12">
+          {project.sections?.map((section) => (
+            <Reveal key={section.heading}>
+              <section>
+                <h2 className="text-[1.5rem] md:text-[1.875rem]">
+                  {section.heading}
+                </h2>
+                {section.body && <p className="mt-4 text-lg">{section.body}</p>}
+                {section.items && (
+                  <ul className="mt-4 list-disc space-y-2 pl-5 text-lg marker:text-mist">
+                    {section.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            </Reveal>
+          ))}
         </div>
+
+        {project.slug === "simplify" && (
+          <p className="mt-12">
+            <Link href="/work/simplifyaudit" className="link">
+              Read the SimplifyAudit case study
+            </Link>
+          </p>
+        )}
       </article>
     </main>
   );
