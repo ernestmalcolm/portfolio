@@ -7,11 +7,11 @@ import { siteConfig } from "@/lib/site-config";
 export function ConsoleMessage() {
   useEffect(() => {
     console.log(
-      "%cBears. Beets. Battlestar Galactica.",
-      "color: #C8333F; font-size: 16px; font-weight: bold; font-family: monospace;",
+      "%c● REC  Director's commentary unlocked.",
+      "color: #E0393B; font-size: 16px; font-weight: bold; font-family: monospace;",
     );
     console.log(
-      "%cYou found the console. That makes you my kind of person.",
+      "%cYou found the console. That makes you my kind of person. The camera saw that.",
       "font-size: 12px; font-family: monospace;",
     );
     console.log(

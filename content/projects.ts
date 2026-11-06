@@ -54,14 +54,14 @@ export const projects: Project[] = [
     years: "2022 to present",
     selected: 1,
     oneLiner:
-      "Fiscal receipts and invoicing platform used by about 4,000 businesses, with millions of receipts issued. I lead product, design and tech across web, mobile, API and WhatsApp, and took over the mobile app after leading its first build.",
+      "Fiscal receipts and invoicing platform used by businesses across Tanzania. I lead product, design and tech across web, mobile, API and WhatsApp, and took over the mobile app after leading its first build.",
     link: "https://www.simplify.co.tz",
     linkLabel: "Open Simplify",
     cover: "/images/work/simplify.png",
     sections: [
       {
         heading: "Context",
-        body: "Simplify is a TRA approved Virtual Fiscal Device (VFD) platform. Businesses use it to issue tax compliant receipts and invoices. About 4,000 businesses use it, and it has issued millions of receipts.",
+        body: "Simplify is a TRA approved Virtual Fiscal Device (VFD) platform. Businesses use it to issue tax compliant receipts and invoices. It is used by businesses across Tanzania.",
       },
       {
         heading: "What I own",

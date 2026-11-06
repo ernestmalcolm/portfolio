@@ -1,11 +1,9 @@
 import Link from "next/link";
 
-import { PageBackdrop } from "@/components/page-backdrop";
 
 export default function NotFound() {
   return (
     <main className="container-page relative isolate pb-24 pt-16 md:pt-28">
-      <PageBackdrop />
       <p className="font-mono text-sm text-coral">Error 404</p>
       <h1 className="mt-2 max-w-2xl">
         This page didn&apos;t get its fiscal receipt.

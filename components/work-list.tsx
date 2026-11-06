@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { ProjectCover } from "@/components/project-cover";
-import { Reveal } from "@/components/reveal";
 import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
@@ -26,8 +25,7 @@ function ProjectRow({
 
   return (
     <li className="border-t border-line">
-      <Reveal
-        delay={Math.min(index, 3) * 0.06}
+      <div
         className={cn(
           "-mx-4 grid gap-2 rounded-lg px-4 py-8 transition-colors duration-300 hover:bg-navy-light/60 md:gap-8",
           withCover
@@ -92,7 +90,7 @@ function ProjectRow({
             className="order-first mb-4 md:order-none md:mb-0"
           />
         )}
-      </Reveal>
+      </div>
     </li>
   );
 }

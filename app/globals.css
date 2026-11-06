@@ -4,54 +4,44 @@
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-navy font-sans text-base text-cream antialiased;
+    @apply bg-wall font-sans text-base text-ink antialiased;
   }
 
   [id] {
-    scroll-margin-top: 5rem;
+    scroll-margin-top: 1rem;
+  }
+
+  a {
+    @apply text-pen hover:text-pen-dark;
   }
 
   :focus-visible {
-    @apply rounded-sm outline outline-2 outline-offset-2 outline-coral;
+    @apply outline outline-2 outline-offset-2 outline-pen;
+  }
+
+  /* On dark panels a blue ring disappears, so it goes yellow */
+  .on-dark :focus-visible {
+    @apply outline-marker;
   }
 
   ::selection {
-    @apply bg-cream text-navy;
+    @apply bg-marker text-ink;
   }
 
   h1,
   h2 {
-    @apply font-condensed font-bold tracking-[-0.01em] text-cream;
+    @apply font-condensed font-bold;
     text-wrap: balance;
-  }
-
-  h1 {
-    @apply text-[2.5rem] leading-[1.02] md:text-[4rem];
-  }
-
-  h2 {
-    @apply text-[1.875rem] leading-tight md:text-[2.5rem];
-  }
-
-  h3 {
-    @apply text-xl font-semibold leading-snug text-cream;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
-    }
-
-    .reveal,
-    .receipt-print {
-      opacity: 1 !important;
-      transform: none !important;
-      clip-path: none !important;
     }
 
     *,
@@ -65,56 +55,26 @@
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-5xl px-5 sm:px-6;
-  }
-
-  .section {
-    @apply border-t border-line py-16 md:py-24;
-  }
-
-  .link {
-    @apply text-coral underline decoration-1 underline-offset-[3px] hover:text-coral-light hover:decoration-2;
-  }
-
-  .link-quiet {
-    @apply text-cream underline decoration-line decoration-1 underline-offset-[3px] hover:decoration-cream;
+    @apply mx-auto w-full max-w-page px-8;
   }
 
   .skip-link {
-    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-cream focus:px-4 focus:py-2 focus:text-navy;
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-marker focus:px-4 focus:py-2 focus:text-ink;
   }
 
-  /* Hero name: cream into coral */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(120deg, #F5F1E8 20%, #FF8A80 70%, #FF6B5E 100%);
+  /* Ceiling tiles behind the viewfinder */
+  .ceiling-tiles {
+    background-color: theme("colors.panel.DEFAULT");
+    background-image:
+      linear-gradient(theme("colors.tile") 1px, transparent 1px),
+      linear-gradient(90deg, theme("colors.tile") 1px, transparent 1px);
+    background-size: 124px 124px;
+    background-position: -1px -1px;
   }
 
-  /* Aceternity style dot grid across the whole site, fading at the edges */
-  .site-dots {
-    background-image: radial-gradient(circle at 1px 1px, rgba(197, 206, 219, 0.14) 1px, transparent 0);
-    background-size: 28px 28px;
-    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
-    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 40%, transparent 100%);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .glow-drift {
-      animation: glow-drift 28s ease-in-out infinite alternate;
-    }
-
-    .glow-drift-reverse {
-      animation: glow-drift 34s ease-in-out infinite alternate-reverse;
-    }
-  }
-
-  @keyframes glow-drift {
-    from {
-      transform: translate3d(0, 0, 0) scale(1);
-    }
-    to {
-      transform: translate3d(18vw, 12vh, 0) scale(1.15);
-    }
+  /* Ruled lines inside the visitor sign-in sheet */
+  .ruled {
+    background: repeating-linear-gradient(transparent 0 31px, #E1E4E0 31px 32px);
   }
 
   /* Bottom edge of the receipt: a torn zigzag */

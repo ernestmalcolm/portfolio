@@ -1,5 +1,5 @@
 export const bio = [
-  "I lead product, design, engineering and partner integrations for Simplify at Simplitech, a business platform used by about 4,000 Tanzanian businesses.",
+  "I lead product, design, engineering and partner integrations for Simplify at Simplitech, a fiscal receipts platform used by businesses across Tanzania.",
   "The title covers a lot. I decide what we build and why, talk to customers, design features before they're built, direct developers, manage partner integrations and report to stakeholders every week. I also lead our research into where the company goes next, including AI for audit and compliance.",
   "My work isn't one discipline. It's the overlap: understanding the market, turning it into a product, getting the tech right and making sure the organisation and the business case hold together. Lately I direct more of the code than I write, often through AI agents, so my time goes into decisions, design and quality.",
   "Outside Simplitech I consult for businesses on product, digital presence and tech, and I build my own products on the side.",
@@ -140,8 +140,8 @@ export const beyondWork: { title: string; body: string }[] = [
     body: "Paper only, because on a screen the phone always wins. I read very slowly and journal the takeaways, so my reading list is basically a long term investment. Podcasts at 1.5x, books at 0.5x. It averages out.",
   },
   {
-    title: "The Office",
-    body: "I quote it more than is strictly professional.",
+    title: "Sitcoms",
+    body: "I quote them more than is strictly professional.",
   },
   {
     title: "lukakuCanCode",
@@ -165,5 +165,4 @@ export const receiptJokes: { item: string; price: string }[] = [
   { item: "UDP joke", price: "You might not get it" },
   { item: "Book on anti gravity", price: "Can't put it down" },
   { item: "Startup therapy session", price: "Unresolved dependencies" },
-  { item: "Bears. Beets. Battlestar Galactica.", price: "Fact" },
 ];

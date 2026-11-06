@@ -1,7 +1,7 @@
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { previouslyOn } from "@/content/show";
 import type { Metadata } from "next";
 
-import { PageBackdrop } from "@/components/page-backdrop";
-import { Reveal } from "@/components/reveal";
 import { WorkList } from "@/components/work-list";
 import {
   consulting,
@@ -18,15 +18,16 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
+    <>
+      <PreviouslyOn>{previouslyOn.work}</PreviouslyOn>
     <main className="container-page relative isolate pb-24 pt-16 md:pt-24">
-      <PageBackdrop />
-      <Reveal>
+      <div>
         <h1>Work</h1>
         <p className="mt-6 max-w-prose text-xl leading-snug">
           What I lead at Simplitech, what I build on my own, and how I help
           other businesses.
         </p>
-      </Reveal>
+      </div>
 
       {projectGroups.map((group) => (
         <section
@@ -34,10 +35,10 @@ export default function WorkPage() {
           aria-labelledby={`${group.id}-heading`}
           className="mt-20"
         >
-          <Reveal>
+          <div>
             <h2 id={`${group.id}-heading`}>{group.title}</h2>
             <p className="mt-4 max-w-prose text-muted">{group.intro}</p>
-          </Reveal>
+          </div>
           <div className="mt-8">
             <WorkList
               projects={getProjectsByGroup(group.id)}
@@ -48,7 +49,7 @@ export default function WorkPage() {
       ))}
 
       <section aria-labelledby="consulting-heading" className="mt-20">
-        <Reveal>
+        <div>
           <h2 id="consulting-heading">{consulting.title}</h2>
           <p className="mt-6 max-w-prose text-lg">{consulting.body}</p>
           <ul className="mt-6 max-w-prose list-disc space-y-2 pl-5 marker:text-mist">
@@ -66,8 +67,9 @@ export default function WorkPage() {
               Email me about a project
             </a>
           </p>
-        </Reveal>
+        </div>
       </section>
     </main>
+    </>
   );
 }

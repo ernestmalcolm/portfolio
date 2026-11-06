@@ -1,9 +1,10 @@
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { previouslyOn } from "@/content/show";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { getPublishedPosts, getWritingPost } from "@/content/writing/index";
-import { PageBackdrop } from "@/components/page-backdrop";
 import { getMdxContent } from "@/lib/mdx";
 import { formatDate } from "@/lib/utils";
 
@@ -36,8 +37,9 @@ export default async function WritingPostPage({ params }: Props) {
   if (!mdx) notFound();
 
   return (
+    <>
+      <PreviouslyOn>{previouslyOn.post}</PreviouslyOn>
     <main className="container-page relative isolate pb-24 pt-12 md:pt-16">
-      <PageBackdrop />
       <p>
         <Link href="/writing" className="link text-sm">
           All writing
@@ -56,5 +58,6 @@ export default async function WritingPostPage({ params }: Props) {
         <div className="prose mt-12">{mdx.content}</div>
       </article>
     </main>
+    </>
   );
 }

@@ -8,27 +8,42 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: { DEFAULT: "#0B1F3A", light: "#12264A", dark: "#07152A" },
-        cream: "#F5F1E8",
-        coral: { DEFAULT: "#FF6B5E", light: "#FF8A80" },
-        mist: "#C5CEDB",
-        muted: "#98A4B8",
-        line: "#2E4670",
-        field: "#5B7096",
-        // The receipt is a white slip of paper, so it keeps its own palette
+        ink: "#1E2329",
+        // Dark surfaces: header and episode cards, then the end credits
+        camera: { DEFAULT: "#121417", muted: "#9AA1A9", text: "#E8E9EA" },
+        credits: { DEFAULT: "#0B0C0E", text: "#C9CED4", muted: "#8E959D" },
+        strip: "#2B2F35",
+        wall: "#D9D6CB",
+        panel: { DEFAULT: "#E4E1D6", dark: "#CFCBBE" },
+        tile: "#D5D1C3",
+        cubicle: "#4F5B66",
+        muted: { DEFAULT: "#4A4F55", deep: "#3B434C" },
+        rule: "#9AA2AA",
+        marker: "#FFD84D",
+        sticky: { DEFAULT: "#FFE98A", ink: "#5C5222" },
+        pen: { DEFAULT: "#2244B8", dark: "#1A3490" },
+        stamp: "#B8323A",
+        rec: "#E0393B",
+        manila: { DEFAULT: "#E3C88A", tab: "#D9BC78", edge: "#C9A962" },
+        cork: { DEFAULT: "#B98E5E", frame: "#7A5A38" },
+        // Kept until the receipt is rebuilt in the home milestone
         receipt: {
           DEFAULT: "#FFFFFF",
           ink: "#222831",
           slate: "#30475E",
           muted: "#5F6873",
-          red: "#C8333F",
+          red: "#B8323A",
         },
-        stamp: "#E5484D",
       },
       fontFamily: {
         sans: ["var(--font-plex-sans)", "system-ui", "sans-serif"],
         condensed: ["var(--font-plex-condensed)", "var(--font-plex-sans)", "sans-serif"],
         mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+        hand: ["var(--font-reenie)", "cursive"],
+      },
+      maxWidth: {
+        page: "1240px",
+        prose: "65ch",
       },
       fontSize: {
         sm: ["0.9375rem", { lineHeight: "1.5" }],
@@ -37,32 +52,21 @@ module.exports = {
       },
       borderRadius: {
         DEFAULT: "4px",
-        img: "8px",
-      },
-      maxWidth: {
-        prose: "65ch",
-      },
-      animation: {
-        spotlight: "spotlight 2s ease 0.4s 1 forwards",
-      },
-      keyframes: {
-        spotlight: {
-          "0%": { opacity: "0", transform: "translate(-72%, -62%) scale(0.5)" },
-          "100%": { opacity: "1", transform: "translate(-50%, -40%) scale(1)" },
-        },
+        folder: "4px",
+        board: "6px",
       },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            "--tw-prose-body": theme("colors.mist"),
-            "--tw-prose-headings": theme("colors.cream"),
-            "--tw-prose-links": theme("colors.coral.DEFAULT"),
-            "--tw-prose-bold": theme("colors.cream"),
-            "--tw-prose-counters": theme("colors.muted"),
-            "--tw-prose-bullets": theme("colors.coral.DEFAULT"),
-            "--tw-prose-quotes": theme("colors.mist"),
-            "--tw-prose-quote-borders": theme("colors.coral.DEFAULT"),
-            "--tw-prose-hr": theme("colors.line"),
+            "--tw-prose-body": theme("colors.muted.deep"),
+            "--tw-prose-headings": theme("colors.ink"),
+            "--tw-prose-links": theme("colors.pen.DEFAULT"),
+            "--tw-prose-bold": theme("colors.ink"),
+            "--tw-prose-counters": theme("colors.muted.DEFAULT"),
+            "--tw-prose-bullets": theme("colors.muted.DEFAULT"),
+            "--tw-prose-quotes": theme("colors.muted.deep"),
+            "--tw-prose-quote-borders": theme("colors.pen.DEFAULT"),
+            "--tw-prose-hr": theme("colors.rule"),
             maxWidth: "65ch",
             fontSize: "1.125rem",
             lineHeight: "1.65",

@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/reveal";
 import type { TimelineEntry } from "@/content/about";
 
 export function Timeline({ entries }: { entries: TimelineEntry[] }) {
@@ -9,8 +8,7 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
           key={`${entry.role}-${entry.period}`}
           className="border-t border-line"
         >
-          <Reveal
-            delay={Math.min(index, 3) * 0.05}
+          <div
             className="grid gap-1 py-6 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-8"
           >
             <p className="font-mono text-sm text-coral">{entry.period}</p>
@@ -19,7 +17,7 @@ export function Timeline({ entries }: { entries: TimelineEntry[] }) {
               <p className="text-mist">{entry.organisation}</p>
               <p className="mt-2 max-w-prose text-muted">{entry.summary}</p>
             </div>
-          </Reveal>
+          </div>
         </li>
       ))}
     </ol>

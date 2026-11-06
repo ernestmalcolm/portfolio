@@ -13,7 +13,7 @@ const roles = ["Tech Lead", "Research and Product Lead", "Tech Consultancy"];
 // Fixed jokes, itemised (full version only)
 const extras = [
   { label: "Metaphors you didn't ask for", value: "Free" },
-  { label: "The Office quotes", value: "Unlimited" },
+  { label: "Sitcom quotes", value: "Unlimited" },
 ];
 
 function Row({
@@ -83,7 +83,7 @@ export function Receipt({
     setPrintCount((count) => count + 1);
   };
 
-  const animated = print === "view" ? true : printCount > 0;
+  const animated = print === "click" && printCount > 0;
   const current = joke === null ? null : receiptJokes[joke];
 
   return (
@@ -103,7 +103,7 @@ export function Receipt({
               : false
           }
           animate={
-            print === "click" || inView
+            print === "click" || inView || !animated
               ? {
                   clipPath: "inset(0 0 0% 0)",
                   transition: reduceMotion ? { duration: 0 } : PRINT,
@@ -201,9 +201,7 @@ export function Receipt({
             <Divider />
 
             <p className="text-center text-xs text-receipt-muted">
-              Powered by Dunder Mifflin
-              <br />
-              Limitless paper in a paperless world
+              Printed on 100% recycled meeting notes.
             </p>
           </div>
         </motion.div>

@@ -1,10 +1,10 @@
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { previouslyOn } from "@/content/show";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { PageBackdrop } from "@/components/page-backdrop";
 import { ProjectCover } from "@/components/project-cover";
-import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
 
@@ -45,8 +45,9 @@ export default async function CaseStudyPage({ params }: Props) {
   );
 
   return (
+    <>
+      <PreviouslyOn>{previouslyOn.caseStudy}</PreviouslyOn>
     <main className="container-page relative isolate pb-24 pt-12 md:pt-16">
-      <PageBackdrop />
       <p>
         <Link href="/work" className="link text-sm">
           All work
@@ -54,7 +55,7 @@ export default async function CaseStudyPage({ params }: Props) {
       </p>
 
       <article className="mt-8">
-        <Reveal>
+        <div>
           <header>
             <h1>{project.title}</h1>
             <p className="mt-6 max-w-prose text-xl leading-snug">
@@ -85,7 +86,7 @@ export default async function CaseStudyPage({ params }: Props) {
               ) : (
                 <p className="max-w-prose text-muted">
                   There&apos;s no public link for this one.{" "}
-                  <a href="#contact" className="link">
+                  <a href="#reception" className="link">
                     Ask me about it
                   </a>
                   .
@@ -93,7 +94,7 @@ export default async function CaseStudyPage({ params }: Props) {
               )}
             </div>
           </header>
-        </Reveal>
+        </div>
 
         <ProjectCover
           cover={project.cover}
@@ -105,7 +106,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
         <div className="mt-16 max-w-prose space-y-12">
           {project.sections?.map((section) => (
-            <Reveal key={section.heading}>
+            <div key={section.heading}>
               <section>
                 <h2 className="text-[1.5rem] md:text-[1.875rem]">
                   {section.heading}
@@ -119,7 +120,7 @@ export default async function CaseStudyPage({ params }: Props) {
                   </ul>
                 )}
               </section>
-            </Reveal>
+            </div>
           ))}
         </div>
 
@@ -132,5 +133,6 @@ export default async function CaseStudyPage({ params }: Props) {
         )}
       </article>
     </main>
+    </>
   );
 }

@@ -1,8 +1,8 @@
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { previouslyOn } from "@/content/show";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { PageBackdrop } from "@/components/page-backdrop";
-import { Reveal } from "@/components/reveal";
 import { getPublishedPosts } from "@/content/writing/index";
 import { formatDate } from "@/lib/utils";
 
@@ -16,15 +16,16 @@ export default function WritingPage() {
   const posts = getPublishedPosts();
 
   return (
+    <>
+      <PreviouslyOn>{previouslyOn.writing}</PreviouslyOn>
     <main className="container-page relative isolate pb-24 pt-16 md:pt-24">
-      <PageBackdrop />
-      <Reveal>
+      <div>
         <h1>Writing</h1>
         <p className="mt-6 max-w-prose text-xl leading-snug">
           Longer thoughts on product, on digital in Tanzania and East Africa,
           and on the work in between.
         </p>
-      </Reveal>
+      </div>
 
       {posts.length === 0 ? (
         <p className="mt-12 text-muted">
@@ -40,7 +41,7 @@ export default function WritingPage() {
               <time dateTime={post.date} className="text-sm text-muted">
                 {formatDate(post.date)}
               </time>
-              <Reveal>
+              <div>
                 <article>
                   <h2 className="font-sans text-xl font-semibold tracking-normal">
                     <Link
@@ -52,11 +53,12 @@ export default function WritingPage() {
                   </h2>
                   <p className="mt-2 max-w-prose text-muted">{post.excerpt}</p>
                 </article>
-              </Reveal>
+              </div>
             </li>
           ))}
         </ul>
       )}
     </main>
+    </>
   );
 }

@@ -1,11 +1,11 @@
 import { ConsoleMessage } from "@/components/console-message";
-import { SiteFooter } from "@/components/sections/site-footer";
-import { SiteBackdrop } from "@/components/site-backdrop";
-import { SiteHeader } from "@/components/site-header";
+import { CameraHeader } from "@/components/doc/camera-header";
+import { EndCredits } from "@/components/doc/end-credits";
+import { Reception } from "@/components/doc/reception";
 import { siteConfig, siteUrl } from "@/lib/site-config";
 
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed, Reenie_Beanie } from "next/font/google";
 
 import "./globals.css";
 
@@ -28,6 +28,13 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-plex-mono",
+  display: "swap",
+});
+
+const reenie = Reenie_Beanie({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-reenie",
   display: "swap",
 });
 
@@ -92,24 +99,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable}`}
+      className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable} ${reenie.variable}`}
     >
       {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
       <body className="flex min-h-screen flex-col" suppressHydrationWarning>
-        <noscript>
-          <style>{".reveal,.receipt-print{opacity:1!important;transform:none!important;clip-path:none!important}"}</style>
-        </noscript>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
         <PersonJsonLd />
-        <SiteBackdrop />
         <ConsoleMessage />
-        <SiteHeader />
-        <div id="main" className="relative isolate flex-1 overflow-x-clip">
+        <CameraHeader />
+        <div id="main" className="flex-1 overflow-x-clip">
           {children}
         </div>
-        <SiteFooter />
+        <Reception />
+        <EndCredits />
       </body>
     </html>
   );
