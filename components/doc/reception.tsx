@@ -7,6 +7,8 @@ import { z } from "zod";
 
 import { EpisodeCard } from "@/components/doc/episode-card";
 import { StickyNote } from "@/components/doc/sticky-note";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import { reception } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
 
@@ -88,7 +90,7 @@ export function Reception() {
         className="py-10"
       />
       <div className="container-page flex flex-col gap-14 pb-[88px] pt-[72px] min-[900px]:flex-row">
-        <div className="min-w-0 min-[900px]:flex-[1_1_340px]">
+        <Reveal className="min-w-0 min-[900px]:flex-[1_1_340px]">
           <p className="text-muted-deep">{reception.intro}</p>
           <dl className="mt-7 grid grid-cols-[90px_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-base">
             <dt className="pt-[3px] font-mono text-[13px] text-muted">Email</dt>
@@ -112,56 +114,77 @@ export function Reception() {
             </dd>
           </dl>
           <StickyNote className="mt-7 w-[210px]">{reception.stickyNote}</StickyNote>
-        </div>
+        </Reveal>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-          aria-labelledby="reception-form-title"
-          className="min-w-0 rounded bg-white px-6 pb-9 pt-8 shadow-[0_10px_26px_rgba(18,20,23,0.1)] sm:px-8 min-[900px]:flex-[1_1_480px]"
-        >
-          <p id="reception-form-title" className="font-condensed text-[22px] font-bold">
-            {reception.formTitle}
-          </p>
-          <div className="mt-5 flex flex-col gap-[18px]">
-            {field(
-              "name",
-              "Name",
-              <input type="text" autoComplete="name" spellCheck={false} className={`${fieldClass} py-2`} {...aria("name")} {...register("name")} />,
-            )}
-            {field(
-              "email",
-              "Email",
-              <input type="email" autoComplete="email" spellCheck={false} className={`${fieldClass} py-2`} {...aria("email")} {...register("email")} />,
-            )}
-            {field(
-              "message",
-              "Reason for visit",
-              <textarea rows={4} className={`${fieldClass} ruled resize-y py-1.5 leading-8`} {...aria("message")} {...register("message")} />,
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="mt-[26px] min-h-[48px] rounded bg-pen px-[26px] font-semibold text-white hover:bg-pen-dark disabled:opacity-60"
+        <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_480px]">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+            aria-labelledby="reception-form-title"
+            className="rounded bg-white px-6 pb-9 pt-8 shadow-[0_10px_26px_rgba(18,20,23,0.1)] sm:px-8"
           >
-            {status === "loading" ? reception.sending : reception.submit}
-          </button>
+            <p id="reception-form-title" className="font-condensed text-[22px] font-bold">
+              {reception.formTitle}
+            </p>
+            <div className="mt-5 flex flex-col gap-[18px]">
+              {field(
+                "name",
+                "Name",
+                <input
+                  type="text"
+                  autoComplete="name"
+                  spellCheck={false}
+                  className={`${fieldClass} py-2`}
+                  {...aria("name")}
+                  {...register("name")}
+                />,
+              )}
+              {field(
+                "email",
+                "Email",
+                <input
+                  type="email"
+                  autoComplete="email"
+                  spellCheck={false}
+                  className={`${fieldClass} py-2`}
+                  {...aria("email")}
+                  {...register("email")}
+                />,
+              )}
+              {field(
+                "message",
+                "Reason for visit",
+                <textarea
+                  rows={4}
+                  className={`${fieldClass} ruled resize-y py-1.5 leading-8`}
+                  {...aria("message")}
+                  {...register("message")}
+                />,
+              )}
+            </div>
 
-          <div aria-live="polite" className="mt-4">
-            {status === "success" && <p className="text-muted-deep">{reception.success}</p>}
-            {status === "error" && (
-              <p className="text-stamp">
-                {errorMessage} You can email{" "}
-                <a href={`mailto:${siteConfig.email}`} className="underline">
-                  {siteConfig.email}
-                </a>{" "}
-                directly instead.
-              </p>
-            )}
-          </div>
-        </form>
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="mt-[26px] min-h-[48px] rounded bg-pen px-[26px] font-semibold text-white hover:bg-pen-dark disabled:opacity-60"
+            >
+              {status === "loading" ? reception.sending : reception.submit}
+            </button>
+
+            <div aria-live="polite" className="mt-4">
+              {status === "success" && <p className="text-muted-deep">{reception.success}</p>}
+              {status === "error" && (
+                <p className="text-stamp">
+                  {errorMessage} You can email{" "}
+                  <a href={`mailto:${siteConfig.email}`} className="underline">
+                    {siteConfig.email}
+                  </a>{" "}
+                  directly instead.
+                </p>
+              )}
+            </div>
+          </form>
+        </Reveal>
       </div>
     </section>
   );

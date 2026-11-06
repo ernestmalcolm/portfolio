@@ -1,9 +1,11 @@
 "use client";
 
+import { motion } from "motion/react";
 import Image from "next/image";
 import * as React from "react";
 
 import { HandNote } from "@/components/doc/hand-note";
+import { Mark } from "@/components/motion/mark";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -24,8 +26,10 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
     <figure className={cn("m-0 w-full", home ? "max-w-[300px]" : "max-w-[260px]", className)}>
       {note &&
         (home ? (
-          <HandNote decorative arrow="down" size={34} rotate={-3} as="div" className="mb-1.5 ml-3.5 leading-none">
-            {note}
+          <HandNote decorative arrow="down" size={32} rotate={-3} as="div" className="mb-1.5 ml-3.5 leading-[1.3]">
+            <Mark type="underline" color="#2244B8" padding={1} strokeWidth={1.5} multiline delay={300}>
+              {note}
+            </Mark>
           </HandNote>
         ) : (
           <HandNote decorative size={32} rotate={-3} className="mb-1.5 ml-2.5 leading-none">
@@ -33,18 +37,22 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
           </HandNote>
         ))}
       <div className={cn("relative overflow-hidden bg-[#3A3F45]", home ? "aspect-[300/340]" : "aspect-[260/300]")}>
-        <Image
-          src={siteConfig.photo}
-          alt="Ernest Mwinchumu, seated, in a navy blazer"
-          fill
-          priority={priority}
-          sizes={home ? "300px" : "260px"}
-          className={cn(
-            "object-cover object-[50%_14%]",
-            home && "origin-[48%_22%] transition-transform duration-[140ms] ease-[cubic-bezier(.2,.9,.2,1)] motion-reduce:transition-none",
-            zoomed && "scale-[1.55]",
-          )}
-        />
+        {/* Snap zoom: a spring punch-in on the face, with a tiny camera shake going in */}
+        <motion.div
+          initial={false}
+          animate={zoomed ? { scale: 1.55, x: [0, -2, 2, 0] } : { scale: 1, x: 0 }}
+          transition={{ scale: { type: "spring", stiffness: 420, damping: 30 }, x: { duration: 0.12 } }}
+          className="absolute inset-0 origin-[48%_22%]"
+        >
+          <Image
+            src={siteConfig.photo}
+            alt="Ernest Mwinchumu, seated, in a navy blazer"
+            fill
+            priority={priority}
+            sizes={home ? "300px" : "260px"}
+            className="object-cover object-[50%_14%]"
+          />
+        </motion.div>
         <figcaption
           className={cn(
             "absolute left-0 border-l-[5px] border-marker bg-camera/[0.88] py-2 pl-3.5 pr-3 text-white",

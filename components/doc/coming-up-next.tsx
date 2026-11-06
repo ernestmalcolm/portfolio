@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
+import { Reveal } from "@/components/motion/reveal";
 import type { ComingUp } from "@/content/show";
 
 /** Dark full width card pointing to the next episode */
@@ -17,7 +18,7 @@ export function ComingUpNext({ next }: { next: ComingUp }) {
     "on-dark flex flex-wrap items-center justify-between gap-x-7 gap-y-2 rounded bg-camera px-8 py-[26px] text-white no-underline hover:bg-strip hover:text-white";
 
   return (
-    <section aria-label="Coming up next" className="container-page pb-[88px] pt-[88px]">
+    <Reveal as="section" aria-label="Coming up next" className="container-page pb-[88px] pt-[88px]">
       {next.href.startsWith("#") ? (
         <a href={next.href} className={className}>
           {inner}
@@ -27,6 +28,6 @@ export function ComingUpNext({ next }: { next: ComingUp }) {
           {inner}
         </Link>
       )}
-    </section>
+    </Reveal>
   );
 }

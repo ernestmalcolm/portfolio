@@ -73,13 +73,24 @@ Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (
 
 ## Motion
 
-Small and on purpose:
+One library per job:
 
-- Snap zoom on the home talking head, on click.
-- "Play another outtake", on click.
-- Hover states change colour only, with no lifts or glows.
-- No scroll reveals, cursor effects or animated backgrounds.
-- With reduced motion, transitions are cut to nothing.
+| Library | Job |
+|---|---|
+| `motion` (`motion/react`) | All component animation |
+| `react-rough-notation` | Four hand-drawn marks: the yellow highlight on the home whiteboard, the underline on the first folder's "Outcome", the box around the About receipt's VERIFIED stamp, and the underline under "Let me explain myself." |
+| `next-view-transitions` | A 120ms cut through black between pages, from the episode guide and Coming up next cards. The camera header stays put |
+| `qrcode.react` | The LinkedIn QR on every receipt, next to a visible "LinkedIn" link |
+
+How things move:
+
+- `Reveal` (`components/motion/reveal.tsx`) wraps section blocks and cards. They rise 16px in when entering from below, drop in from -16px when scrolling back up (`useScrollDirection`), and dim to 0.4 with an 8px drift while leaving. This replays on every pass. Long reading blocks (case study text, the memo) use a single soft fade.
+- Inside a `Reveal`, handwritten explainers write in left to right (`WriteIn`), and stage directions land 0.4s after their line.
+- Set pieces replay only after fully leaving the screen: episode title cards fade up from black, the receipt prints and its stamp lands, the clapper on Currently filming snaps shut, scene bridge arrows draw, and the rough-notation marks redraw.
+- Snap zoom springs to 1.55x with a tiny shake. Work folder sheets slide up 10px on hover or focus, sticky notes lift 3px, and outtakes cut rather than slide.
+- Limits: 16px max distance, 0.35 to 0.6s, ease out `[0.22, 1, 0.36, 1]`, 0.06s stagger capped at four items. Only opacity, transform and clip-path animate.
+- The server HTML always shows everything; elements only park off screen after hydration.
+- `MotionConfig reducedMotion="user"`: with reduced motion everything is simply shown, marks appear without drawing, and the REC dot stops blinking.
 
 ## Responsive
 

@@ -1,3 +1,12 @@
+"use client";
+
+import { motion, type Variants } from "motion/react";
+import { QRCodeSVG } from "qrcode.react";
+import * as React from "react";
+
+import { Mark } from "@/components/motion/mark";
+import { useRevealPhase } from "@/components/motion/reveal";
+import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 type ReceiptItem = {
@@ -15,21 +24,63 @@ type ReceiptProps = {
   /** Adds the "Paid with Patience" line */
   paidWith?: string;
   rotate?: number;
+  /** Draws a red box around the VERIFIED stamp (the About receipt) */
+  boxStamp?: boolean;
   className?: string;
 };
 
 const dashed = "border-dashed border-[#A9B0B6]";
 
+// Prints from the top down in small jumps, like a till roll. The clip box reaches
+// past the edges so the paper's shadow isn't cut off.
+const print: Variants = {
+  in: {
+    clipPath: "inset(0px -40px -60px -40px)",
+    transition: { duration: 0.9, ease: (t: number) => Math.ceil(t * 12) / 12 },
+  },
+  below: { clipPath: "inset(0px -40px 100% -40px)", transition: { duration: 0 } },
+  above: { clipPath: "inset(0px -40px 100% -40px)", transition: { duration: 0 } },
+};
+
+// Then the stamp lands, with a little overshoot
+const stamp: Variants = {
+  in: {
+    opacity: 1,
+    scale: 1,
+    rotate: -8,
+    transition: { delay: 0.95, type: "spring", stiffness: 520, damping: 17, opacity: { delay: 0.95, duration: 0.05 } },
+  },
+  below: { opacity: 0, scale: 1.4, rotate: -14, transition: { duration: 0 } },
+  above: { opacity: 0, scale: 1.4, rotate: -14, transition: { duration: 0 } },
+};
+
 /** The career receipt: a white mono slip, verified */
-export function Receipt({ items, subtitle, paidWith, rotate = 1, className }: ReceiptProps) {
+export function Receipt({ items, subtitle, paidWith, rotate = 1, boxStamp = false, className }: ReceiptProps) {
+  const ref = React.useRef<HTMLElement>(null);
+  const phase = useRevealPhase(ref, { piece: true });
+
+  const verified = (
+    <motion.span
+      variants={stamp}
+      style={{ rotate: -8 }}
+      className="inline-block border-[3px] border-double border-stamp px-4 py-1 text-lg font-semibold tracking-[0.16em] text-stamp"
+    >
+      VERIFIED
+    </motion.span>
+  );
+
   return (
-    <figure
+    <motion.figure
+      ref={ref}
+      initial={false}
+      animate={phase}
+      variants={print}
       aria-label="Career receipt"
       className={cn(
         "m-0 min-w-0 bg-white px-[26px] pb-8 pt-[26px] font-mono text-sm leading-[1.7] text-ink shadow-[0_12px_30px_rgba(18,20,23,0.15)]",
         className,
       )}
-      style={{ transform: `rotate(${rotate}deg)` }}
+      style={{ rotate }}
     >
       <p className="text-center font-semibold">ERNEST MWINCHUMU</p>
       <p className="text-center text-muted">{subtitle ?? "Dar es Salaam, Tanzania"}</p>
@@ -68,15 +119,43 @@ export function Receipt({ items, subtitle, paidWith, rotate = 1, className }: Re
         )}
       </dl>
 
-      <p
-        className="mx-auto mt-5 w-fit -rotate-[8deg] border-[3px] border-double border-stamp px-4 py-1 text-lg font-semibold tracking-[0.16em] text-stamp"
-      >
-        VERIFIED
+      <div className="mt-5 flex items-center justify-center gap-4">
+        <QRCodeSVG
+          aria-hidden
+          value={siteConfig.social.linkedin}
+          size={72}
+          fgColor="#1E2329"
+          bgColor="#FFFFFF"
+          level="M"
+          className="shrink-0"
+        />
+        <p className="text-[13px] leading-snug">
+          <span className="block text-muted">Scan to call back</span>
+          <a
+            href={siteConfig.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold underline"
+          >
+            LinkedIn
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </p>
+      </div>
+
+      <p className="mt-5 text-center">
+        {boxStamp ? (
+          <Mark type="box" color="#B8323A" padding={8} delay={1500}>
+            {verified}
+          </Mark>
+        ) : (
+          verified
+        )}
       </p>
       <p className="mt-[18px] text-center text-muted">Keep this receipt for your records.</p>
       <p className={cn("mt-3 border-t pt-2.5 text-center text-xs text-muted", dashed)}>
         Printed on 100% recycled meeting notes.
       </p>
-    </figure>
+    </motion.figure>
   );
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ComingUpNext } from "@/components/doc/coming-up-next";
 import { EpisodeCard } from "@/components/doc/episode-card";
 import { StageDirection } from "@/components/doc/talking-head";
+import { Reveal } from "@/components/motion/reveal";
 import { comingUpNext, notFound } from "@/content/show";
 
 export default function NotFound() {
@@ -10,7 +11,7 @@ export default function NotFound() {
     <main>
       <EpisodeCard label={notFound.label} title={notFound.title} explainer={notFound.explainer} />
       <section aria-label="Page not found" className="bg-panel">
-        <div className="container-page py-[88px]">
+        <Reveal className="container-page py-[88px]">
           <p className="max-w-[36rem] text-lg text-muted-deep">{notFound.body}</p>
           <StageDirection className="mt-2.5 block">{notFound.direction}</StageDirection>
           <Link
@@ -19,7 +20,7 @@ export default function NotFound() {
           >
             {notFound.link.label}
           </Link>
-        </div>
+        </Reveal>
       </section>
       <ComingUpNext next={comingUpNext.notFound} />
     </main>

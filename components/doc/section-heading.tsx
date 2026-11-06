@@ -1,5 +1,6 @@
 import { HandNote } from "@/components/doc/hand-note";
 import { Timecode } from "@/components/doc/timecode";
+import { Reveal, WriteIn } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
@@ -35,7 +36,7 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <div className={className}>
+    <Reveal className={className}>
       {timecode && (
         <Timecode code={timecode} label={timecodeLabel} className={dark ? "text-cubicle-muted" : undefined} />
       )}
@@ -51,9 +52,11 @@ export function SectionHeading({
       >
         {title}
       </Tag>
-      <HandNote color={dark ? "text-marker" : "text-pen"} size={size === "sm" ? 26 : 28} className="mt-1">
-        {explainer}
-      </HandNote>
-    </div>
+      <WriteIn>
+        <HandNote color={dark ? "text-marker" : "text-pen"} size={size === "sm" ? 26 : 28} className="mt-1">
+          {explainer}
+        </HandNote>
+      </WriteIn>
+    </Reveal>
   );
 }

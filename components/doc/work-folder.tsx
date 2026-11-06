@@ -1,27 +1,67 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
+import * as React from "react";
 
 import { TalkingHead } from "@/components/doc/talking-head";
+import { Mark } from "@/components/motion/mark";
+import { ease } from "@/lib/motion";
 import { type Project, workPage } from "@/content/projects";
 
 /** Manila folder holding a project's sheet: cover, title, meta, blurb and outcome */
-export function WorkFolder({ project, headingLevel = "h3" }: { project: Project; headingLevel?: "h2" | "h3" }) {
+type WorkFolderProps = {
+  project: Project;
+  headingLevel?: "h2" | "h3";
+  /** Underlines the "Outcome" label in pen (the first folder on home) */
+  markOutcome?: boolean;
+};
+
+const sheetShadow = {
+  rest: "0 1px 3px rgba(18,20,23,0.18)",
+  lifted: "0 10px 22px rgba(18,20,23,0.24)",
+};
+
+export function WorkFolder({ project, headingLevel = "h3", markOutcome = false }: WorkFolderProps) {
   const Heading = headingLevel;
+  const [hovered, setHovered] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
+  const lifted = hovered || focused;
+  const outcomeLabel = <span className="font-mono text-xs text-muted">Outcome</span>;
 
   return (
-    <article>
+    <article
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
       <div className="relative pt-[30px]">
         <div className="absolute left-7 top-0 h-[34px] rounded-t-[6px] bg-manila-tab px-[18px] pt-1.5 font-mono text-[13px] text-[#3E3420]">
           {project.tab}
         </div>
         <div className="relative rounded-folder bg-manila p-4 shadow-[0_2px_0_theme(colors.manila.edge)] sm:px-[22px] sm:pb-[26px] sm:pt-[22px]">
-          <div className="bg-white px-[18px] pb-6 pt-5 shadow-[0_1px_3px_rgba(18,20,23,0.18)] sm:px-[22px]">
+          {/* Hover or focus slides the sheet up out of the folder */}
+          <motion.div
+            initial={false}
+            animate={lifted ? { y: -10, boxShadow: sheetShadow.lifted } : { y: 0, boxShadow: sheetShadow.rest }}
+            transition={{ duration: 0.3, ease }}
+            style={{ boxShadow: sheetShadow.rest }}
+            className="bg-white px-[18px] pb-6 pt-5 sm:px-[22px]"
+          >
             <Cover project={project} />
             <Heading className="mt-[18px] font-condensed text-[28px] font-bold leading-[1.1]">{project.title}</Heading>
             <p className="mt-1 font-mono text-[13px] text-muted">{project.meta}</p>
             <p className="mt-3 text-muted-deep">{project.blurb}</p>
             <p className="mt-3 border-t border-dashed border-[#C9CDC6] pt-2.5 text-[15px] text-ink">
-              <span className="font-mono text-xs text-muted">Outcome </span>
+              {markOutcome ? (
+                <Mark type="underline" color="#2244B8" padding={1} strokeWidth={1.5}>
+                  {outcomeLabel}
+                </Mark>
+              ) : (
+                outcomeLabel
+              )}{" "}
               {project.outcome}
             </p>
             <p className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2">
@@ -36,7 +76,7 @@ export function WorkFolder({ project, headingLevel = "h3" }: { project: Project;
                 </a>
               )}
             </p>
-          </div>
+          </motion.div>
           {project.onHold && (
             <p className="absolute right-[26px] top-10 rotate-[-12deg] border-[3px] border-double border-stamp bg-white/80 px-3.5 py-1 font-mono text-lg font-semibold tracking-[0.12em] text-stamp">
               ON HOLD
@@ -49,7 +89,15 @@ export function WorkFolder({ project, headingLevel = "h3" }: { project: Project;
   );
 }
 
-export function Cover({ project, wide = false, priority = false }: { project: Project; wide?: boolean; priority?: boolean }) {
+export function Cover({
+  project,
+  wide = false,
+  priority = false,
+}: {
+  project: Project;
+  wide?: boolean;
+  priority?: boolean;
+}) {
   const frame = wide ? "aspect-[16/7]" : "aspect-video";
 
   if (!project.cover) {

@@ -6,6 +6,8 @@ import { PreviouslyOn } from "@/components/doc/previously-on";
 import { SectionHeading } from "@/components/doc/section-heading";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { WorkFolder } from "@/components/doc/work-folder";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import { consulting, getProjectsByGroup, type ProjectGroup, workPage } from "@/content/projects";
 import { comingUpNext, episodeCards, previouslyOn } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
@@ -13,8 +15,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Work",
-  description:
-    "Simplify and SimplifyAudit at Simplitech, my own products, and consulting for other businesses.",
+  description: "Simplify and SimplifyAudit at Simplitech, my own products, and consulting for other businesses.",
 };
 
 const groups: ProjectGroup[] = ["simplitech", "personal"];
@@ -38,7 +39,9 @@ export default function WorkPage() {
                 title={copy.title}
                 explainer={copy.explainer}
               />
-              <p className="mt-2.5 max-w-[40rem] text-muted-deep">{copy.intro}</p>
+              <Reveal as="p" className="mt-2.5 max-w-[40rem] text-muted-deep">
+                {copy.intro}
+              </Reveal>
               <div
                 className={cn(
                   "mt-10 grid",
@@ -47,8 +50,10 @@ export default function WorkPage() {
                     : "grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-x-9 gap-y-14",
                 )}
               >
-                {getProjectsByGroup(group).map((project) => (
-                  <WorkFolder key={project.slug} project={project} />
+                {getProjectsByGroup(group).map((project, projectIndex) => (
+                  <Reveal key={project.slug} delay={stagger(projectIndex)}>
+                    <WorkFolder project={project} />
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -66,20 +71,25 @@ export default function WorkPage() {
               title={consulting.title}
               explainer={consulting.explainer}
             />
-            <p className="mt-2.5 max-w-[40rem] text-muted-deep">{consulting.body}</p>
-            <TalkingHead quip={consulting.quip} className="mt-[22px]" />
-            <a href={`mailto:${siteConfig.email}`} className="mt-[22px] inline-block font-semibold underline">
-              {consulting.cta}
-            </a>
+            <Reveal>
+              <p className="mt-2.5 max-w-[40rem] text-muted-deep">{consulting.body}</p>
+              <TalkingHead quip={consulting.quip} className="mt-[22px]" />
+              <a href={`mailto:${siteConfig.email}`} className="mt-[22px] inline-block font-semibold underline">
+                {consulting.cta}
+              </a>
+            </Reveal>
           </div>
-          <div className="min-w-0 border-t-[10px] border-cubicle bg-white px-6 pb-[34px] pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-[34px] min-[900px]:flex-[1_1_400px]">
+          <Reveal
+            delay={stagger(1)}
+            className="min-w-0 border-t-[10px] border-cubicle bg-white px-6 pb-[34px] pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-[34px] min-[900px]:flex-[1_1_400px]"
+          >
             <h3 className="font-condensed text-2xl font-bold">{consulting.pointsTitle}</h3>
             <ul className="mt-3.5 list-disc space-y-2 pl-[22px] text-muted-deep">
               {consulting.points.map((point) => (
                 <li key={point}>{point}</li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </section>
 

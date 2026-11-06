@@ -15,6 +15,8 @@ import { StageDirection } from "@/components/doc/talking-head";
 import { Viewfinder } from "@/components/doc/viewfinder";
 import { WhiteboardAgenda } from "@/components/doc/whiteboard-agenda";
 import { WorkFolder } from "@/components/doc/work-folder";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import { branchRules, homeInterview, receiptRoles } from "@/content/about";
 import { getSelectedProjects } from "@/content/projects";
 import {
@@ -93,15 +95,17 @@ export default function HomePage() {
               title={shortVersion.title}
               explainer={shortVersion.explainer}
             />
-            {shortVersion.paragraphs.map((paragraph, index) => (
-              <p key={paragraph} className={`${index === 0 ? "mt-5" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
-                {paragraph}
-              </p>
-            ))}
-            <StageDirection className="mt-2.5 block">{shortVersion.direction}</StageDirection>
-            <Link href={shortVersion.link.href} className="mt-[18px] inline-block font-semibold underline">
-              {shortVersion.link.label}
-            </Link>
+            <Reveal>
+              {shortVersion.paragraphs.map((paragraph, index) => (
+                <p key={paragraph} className={`${index === 0 ? "mt-5" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
+                  {paragraph}
+                </p>
+              ))}
+              <StageDirection className="mt-2.5 block">{shortVersion.direction}</StageDirection>
+              <Link href={shortVersion.link.href} className="mt-[18px] inline-block font-semibold underline">
+                {shortVersion.link.label}
+              </Link>
+            </Reveal>
           </div>
           <div
             aria-hidden
@@ -132,8 +136,10 @@ export default function HomePage() {
         <EpisodeCard as="h2" id="work-title" {...episodeCards.homeWork} className="py-10" />
         <div className="container-page pb-[88px] pt-[72px]">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,500px),1fr))] gap-x-11 gap-y-16">
-            {selected.map((project) => (
-              <WorkFolder key={project.slug} project={project} />
+            {selected.map((project, index) => (
+              <Reveal key={project.slug} delay={stagger(index % 2)}>
+                <WorkFolder project={project} markOutcome={index === 0} />
+              </Reveal>
             ))}
           </div>
           <p className="mt-12">
@@ -150,7 +156,7 @@ export default function HomePage() {
         <EpisodeCard as="h2" id="pers-title" {...episodeCards.homePersonnel} className="py-10" />
         <div className="container-page pb-[88px] pt-[72px]">
           <div className="flex flex-col gap-14 min-[900px]:flex-row min-[900px]:items-start">
-            <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
+            <Reveal className="min-w-0 min-[900px]:flex-[1_1_520px]">
               <InterviewQA answers={homeInterview} />
               <p className="mt-[18px] flex flex-wrap gap-x-[22px] gap-y-2">
                 {pilot.personnelLinks.map((link) => (
@@ -159,13 +165,10 @@ export default function HomePage() {
                   </Link>
                 ))}
               </p>
-            </div>
-            <BranchRules
-              title={branchRules.homeTitle}
-              rules={branchRules.home}
-              footer={branchRules.homeFooter}
-              className="min-[900px]:flex-[1_1_460px]"
-            />
+            </Reveal>
+            <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_460px]">
+              <BranchRules title={branchRules.homeTitle} rules={branchRules.home} footer={branchRules.homeFooter} />
+            </Reveal>
           </div>
           <SceneBridge>{homeBridges.personnel}</SceneBridge>
         </div>
@@ -176,18 +179,18 @@ export default function HomePage() {
         <EpisodeCard as="h2" id="meeting-title" {...episodeCards.meeting} className="py-10" />
         <div className="container-page pb-24 pt-20">
           <div className="flex flex-col gap-12 min-[900px]:flex-row min-[900px]:items-start">
-            <div className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
+            <Reveal className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
               <p className="font-mono text-[13px] text-cubicle-muted">{theMeeting.setting}</p>
               <p className="mt-3.5 max-w-[26rem] text-xl leading-normal">{theMeeting.homeLine}</p>
-            </div>
-            <div className="min-w-0 min-[900px]:flex-[1_1_620px]">
-              <WhiteboardAgenda>
+            </Reveal>
+            <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_620px]">
+              <WhiteboardAgenda highlight>
                 {theMeeting.homeClosing}{" "}
                 <Link href={theMeeting.homeClosingLink.href} className="font-semibold underline">
                   {theMeeting.homeClosingLink.label}
                 </Link>
               </WhiteboardAgenda>
-            </div>
+            </Reveal>
           </div>
           <SceneBridge dark>{homeBridges.meeting}</SceneBridge>
         </div>
@@ -206,9 +209,9 @@ export default function HomePage() {
             />
             <p className="mt-3.5 font-mono text-[13px] text-muted">{currentlyFilming.updated}</p>
           </div>
-          <div className="min-w-0 min-[900px]:flex-[1_1_640px]">
+          <Reveal className="min-w-0 min-[900px]:flex-[1_1_640px]">
             <CurrentlyFilming />
-          </div>
+          </Reveal>
         </div>
         <div className="container-page pb-[88px]">
           <SceneBridge className="mt-8">{homeBridges.currentlyFilming}</SceneBridge>
@@ -229,7 +232,7 @@ export default function HomePage() {
             size="sm"
           />
           {latestPost && (
-            <article className="mt-4 bg-white px-6 py-[22px] shadow-[0_8px_20px_rgba(18,20,23,0.08)]">
+            <Reveal as="article" className="mt-4 bg-white px-6 py-[22px] shadow-[0_8px_20px_rgba(18,20,23,0.08)]">
               <p className="font-mono text-[13px] text-muted">
                 <time dateTime={latestPost.date}>{formatDate(latestPost.date)}</time>
               </p>
@@ -239,7 +242,7 @@ export default function HomePage() {
                 </Link>
               </h3>
               <p className="mt-2 text-muted-deep">{latestPost.excerpt}</p>
-            </article>
+            </Reveal>
           )}
         </div>
         <div className="min-w-0 min-[900px]:flex-[1_1_620px]">

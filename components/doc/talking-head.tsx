@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import type { Quip } from "@/content/projects";
 import { siteConfig } from "@/lib/site-config";
+import { StageDirection } from "@/components/doc/stage-direction";
 import { cn } from "@/lib/utils";
 
 /** 48px crop of the portrait with a quoted line and an optional stage direction */
@@ -23,6 +24,4 @@ export function TalkingHead({ quip, className }: { quip: Quip; className?: strin
   );
 }
 
-export function StageDirection({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <span className={cn("font-mono text-[13px] italic text-muted", className)}>{children}</span>;
-}
+export { StageDirection } from "@/components/doc/stage-direction";

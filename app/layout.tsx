@@ -2,10 +2,12 @@ import { ConsoleMessage } from "@/components/console-message";
 import { CameraHeader } from "@/components/doc/camera-header";
 import { EndCredits } from "@/components/doc/end-credits";
 import { Reception } from "@/components/doc/reception";
+import { MotionProvider } from "@/components/motion/providers";
 import { siteConfig, siteUrl } from "@/lib/site-config";
 
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed, Reenie_Beanie } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 
 import "./globals.css";
 
@@ -83,12 +85,7 @@ function PersonJsonLd() {
     sameAs: [siteConfig.social.linkedin],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }
 
 export default function RootLayout({
@@ -97,24 +94,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable} ${reenie.variable}`}
-    >
-      {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
-      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <PersonJsonLd />
-        <ConsoleMessage />
-        <CameraHeader />
-        <div id="main" className="flex-1 overflow-x-clip">
-          {children}
-        </div>
-        <Reception />
-        <EndCredits />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable} ${reenie.variable}`}
+      >
+        {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
+        <body className="flex min-h-screen flex-col" suppressHydrationWarning>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <PersonJsonLd />
+          <ConsoleMessage />
+          <MotionProvider>
+            <CameraHeader />
+            <div id="main" className="flex-1 overflow-x-clip">
+              {children}
+            </div>
+            <Reception />
+            <EndCredits />
+          </MotionProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

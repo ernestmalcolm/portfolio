@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { useEffect, useRef } from "react";
 
 import { RecClock } from "@/components/doc/rec-clock";
@@ -27,7 +27,7 @@ export function CameraHeader() {
     href === "/" ? pathname === "/" : href.startsWith("/") && (pathname === href || pathname.startsWith(`${href}/`));
 
   return (
-    <header className="on-dark sticky top-0 z-40 bg-camera text-camera-text">
+    <header className="on-dark sticky top-0 z-40 [view-transition-name:camera-header] bg-camera text-camera-text">
       <div className="container-page flex flex-wrap items-center justify-between gap-x-3.5 gap-y-1 pt-3 min-[900px]:py-3.5">
         <div className="flex items-center gap-[18px] font-mono text-[13px]">
           <Link
@@ -47,9 +47,11 @@ export function CameraHeader() {
           >
             {episodes.map((episode) => {
               const current = isCurrent(episode.href);
+              // Reception is on this page, so it scrolls instead of cutting
+              const EpisodeLink = episode.href.startsWith("#") ? "a" : Link;
               return (
                 <li key={episode.number}>
-                  <Link
+                  <EpisodeLink
                     href={episode.href}
                     aria-current={current ? "page" : undefined}
                     className={cn(
@@ -58,7 +60,7 @@ export function CameraHeader() {
                     )}
                   >
                     <span className="font-mono text-camera-muted">Ep {episode.number}</span> {episode.title}
-                  </Link>
+                  </EpisodeLink>
                 </li>
               );
             })}

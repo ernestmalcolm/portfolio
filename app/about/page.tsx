@@ -12,6 +12,8 @@ import { Receipt } from "@/components/doc/receipt";
 import { SectionHeading } from "@/components/doc/section-heading";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { WhiteboardAgenda } from "@/components/doc/whiteboard-agenda";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import {
   branchRules,
   breakRoom,
@@ -60,11 +62,13 @@ export default function AboutPage() {
               title={interview.title}
               explainer={interview.explainer}
             />
-            <div className="mt-4">
+            <Reveal className="mt-4">
               <InterviewQA answers={interview.answers} />
-            </div>
+            </Reveal>
           </div>
-          <InterviewFrame size="about" note="Let me explain myself." className="min-[900px]:w-[260px] min-[900px]:shrink-0" />
+          <Reveal delay={stagger(1)} className="min-[900px]:w-[260px] min-[900px]:shrink-0">
+            <InterviewFrame size="about" note="Let me explain myself." />
+          </Reveal>
         </div>
       </section>
 
@@ -79,17 +83,20 @@ export default function AboutPage() {
               title={growth.title}
               explainer={growth.explainer}
             />
-            {growth.paragraphs.map((paragraph, index) => (
-              <p key={paragraph} className={`${index === 0 ? "mt-[18px]" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
-                {paragraph}
-              </p>
-            ))}
-            <TalkingHead quip={growth.quip} className="mt-[22px]" />
+            <Reveal>
+              {growth.paragraphs.map((paragraph, index) => (
+                <p key={paragraph} className={`${index === 0 ? "mt-[18px]" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
+                  {paragraph}
+                </p>
+              ))}
+              <TalkingHead quip={growth.quip} className="mt-[22px]" />
+            </Reveal>
           </div>
           <Receipt
             subtitle="Promotion history"
             items={growth.promotions}
             paidWith="Patience"
+            boxStamp
             rotate={-1}
             className="w-full max-w-[370px] min-[900px]:flex-[0_1_370px]"
           />
@@ -108,15 +115,18 @@ export default function AboutPage() {
               title={branchRules.title}
               explainer={branchRules.explainer}
             />
-            <p className="mt-3 max-w-[26rem] text-cubicle-text">{branchRules.intro}</p>
+            <Reveal as="p" className="mt-3 max-w-[26rem] text-cubicle-text">
+              {branchRules.intro}
+            </Reveal>
           </div>
-          <BranchRules
-            variant="about"
-            title={branchRules.sheetTitle}
-            rules={branchRules.about}
-            footer={branchRules.aboutFooter}
-            className="min-[900px]:flex-[1_1_560px]"
-          />
+          <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_560px]">
+            <BranchRules
+              variant="about"
+              title={branchRules.sheetTitle}
+              rules={branchRules.about}
+              footer={branchRules.aboutFooter}
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -130,12 +140,14 @@ export default function AboutPage() {
               title={leadership.title}
               explainer={leadership.explainer}
             />
-            <ul className="mt-[18px] max-w-[40rem] list-disc space-y-2.5 pl-[22px] text-muted-deep">
-              {leadership.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <TalkingHead quip={leadership.quip} className="mt-[22px]" />
+            <Reveal>
+              <ul className="mt-[18px] max-w-[40rem] list-disc space-y-2.5 pl-[22px] text-muted-deep">
+                {leadership.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <TalkingHead quip={leadership.quip} className="mt-[22px]" />
+            </Reveal>
           </div>
           <div id="strategy" className="min-w-0 min-[900px]:flex-[1_1_520px]">
             <SectionHeading
@@ -144,7 +156,10 @@ export default function AboutPage() {
               title={strategy.title}
               explainer={strategy.explainer}
             />
-            <div className="mt-[18px] bg-white px-6 pb-8 pt-[30px] shadow-[0_12px_30px_rgba(18,20,23,0.1)] sm:px-[34px]">
+            <Reveal
+              delay={stagger(1)}
+              className="mt-[18px] bg-white px-6 pb-8 pt-[30px] shadow-[0_12px_30px_rgba(18,20,23,0.1)] sm:px-[34px]"
+            >
               <h3 className="font-condensed text-[22px] font-bold">{strategy.memoTitle}</h3>
               <ol className="mt-3.5 list-decimal space-y-2 pl-[22px] text-muted-deep">
                 {strategy.items.map((item) => (
@@ -155,7 +170,7 @@ export default function AboutPage() {
                 <span className="font-mono text-xs text-muted">On my desk now </span>
                 {strategy.onMyDesk}
               </p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -170,7 +185,7 @@ export default function AboutPage() {
             title={employmentRecord.title}
             explainer={employmentRecord.explainer}
           />
-          <ol className="mt-7">
+          <Reveal as="ol" className="mt-7">
             {employmentRecord.entries.map((entry) => (
               <li
                 key={`${entry.period}-${entry.role}`}
@@ -184,10 +199,10 @@ export default function AboutPage() {
                 </div>
               </li>
             ))}
-          </ol>
+          </Reveal>
 
           <div className="mt-14 flex flex-col gap-12 min-[900px]:flex-row">
-            <div className="min-w-0 min-[900px]:flex-[1_1_420px]">
+            <Reveal className="min-w-0 min-[900px]:flex-[1_1_420px]">
               <h3 className="font-condensed text-[28px] font-bold">{trainingRecords.title}</h3>
               {trainingRecords.entries.map((entry, index) => (
                 <p key={entry} className={`${index === 0 ? "mt-3" : "mt-2.5"} text-muted-deep`}>
@@ -195,8 +210,8 @@ export default function AboutPage() {
                 </p>
               ))}
               <p className="mt-2.5 font-mono text-sm text-muted">{trainingRecords.languages}</p>
-            </div>
-            <div className="min-w-0 min-[900px]:flex-[1_1_420px]">
+            </Reveal>
+            <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_420px]">
               <h3 className="font-condensed text-[28px] font-bold">{skills.title}</h3>
               <dl className="mt-3 grid grid-cols-[100px_minmax(0,1fr)] gap-x-4 gap-y-2 text-[15px] sm:grid-cols-[120px_minmax(0,1fr)]">
                 {skills.rows.map((row) => (
@@ -206,7 +221,7 @@ export default function AboutPage() {
                   </div>
                 ))}
               </dl>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -215,7 +230,7 @@ export default function AboutPage() {
       <section id="meeting" aria-labelledby="about-meeting-title" className="bg-cubicle">
         <EpisodeCard as="h2" id="about-meeting-title" {...episodeCards.meeting} className="py-10" />
         <div className="container-page flex flex-col gap-12 pb-24 pt-20 min-[900px]:flex-row min-[900px]:items-start">
-          <div className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
+          <Reveal className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
             <p className="font-mono text-[13px] text-cubicle-muted">{theMeeting.setting}</p>
             {theMeeting.aboutParagraphs.map((paragraph) => (
               <p key={paragraph} className="mt-3.5 max-w-[28rem] text-lg leading-[1.6]">
@@ -225,10 +240,10 @@ export default function AboutPage() {
             <HandNote color="text-marker" size={38} className="mt-[22px] leading-none">
               {theMeeting.signature}
             </HandNote>
-          </div>
-          <div className="min-w-0 min-[900px]:flex-[1_1_620px]">
+          </Reveal>
+          <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_620px]">
             <WhiteboardAgenda>{theMeeting.aboutClosing}</WhiteboardAgenda>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -242,7 +257,9 @@ export default function AboutPage() {
             title={breakRoom.title}
             explainer={breakRoom.explainer}
           />
-          <p className="mt-2.5 text-muted-deep">{breakRoom.intro}</p>
+          <Reveal as="p" className="mt-2.5 text-muted-deep">
+            {breakRoom.intro}
+          </Reveal>
           <Corkboard cards={breakRoom.cards} />
         </div>
       </section>

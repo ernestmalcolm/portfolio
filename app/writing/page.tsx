@@ -6,14 +6,15 @@ import { EpisodeCard } from "@/components/doc/episode-card";
 import { PreviouslyOn } from "@/components/doc/previously-on";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { Timecode } from "@/components/doc/timecode";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import { comingUpNext, episodeCards, previouslyOn } from "@/content/show";
 import { getPublishedPosts, memoPage } from "@/content/writing/index";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Memos",
-  description:
-    "Ernest Mwinchumu on product, digital in Tanzania and East Africa, and the work in between.",
+  description: "Ernest Mwinchumu on product, digital in Tanzania and East Africa, and the work in between.",
 };
 
 export default function WritingPage() {
@@ -28,8 +29,8 @@ export default function WritingPage() {
         <div className="container-page py-[88px]">
           <Timecode code={memoPage.pileTimecode} label={memoPage.pileLabel} />
           <ul className="mt-[18px] flex max-w-[860px] flex-col gap-[22px]">
-            {posts.map((post) => (
-              <li key={post.slug}>
+            {posts.map((post, index) => (
+              <Reveal as="li" key={post.slug} delay={stagger(index)}>
                 <Link
                   href={`/writing/${post.slug}`}
                   className="group block bg-white px-6 py-[30px] text-ink no-underline shadow-[0_10px_26px_rgba(18,20,23,0.1)] hover:text-ink sm:px-[34px]"
@@ -50,14 +51,20 @@ export default function WritingPage() {
                     {memoPage.readLink}
                   </span>
                 </Link>
-              </li>
+              </Reveal>
             ))}
-            <li className="border-2 border-dashed border-[#A9A592] px-[26px] py-[22px] text-muted">
+            <Reveal
+              as="li"
+              delay={stagger(posts.length)}
+              className="border-2 border-dashed border-[#A9A592] px-[26px] py-[22px] text-muted"
+            >
               <p className="font-mono text-[13px]">{memoPage.outbox.label}</p>
               <p className="mt-1.5">{memoPage.outbox.body}</p>
-            </li>
+            </Reveal>
           </ul>
-          <TalkingHead quip={memoPage.quip} className="mt-7 max-w-[620px]" />
+          <Reveal className="mt-7 max-w-[620px]">
+            <TalkingHead quip={memoPage.quip} />
+          </Reveal>
         </div>
       </section>
 

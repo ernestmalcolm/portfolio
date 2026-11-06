@@ -8,6 +8,8 @@ import { PreviouslyOn } from "@/components/doc/previously-on";
 import { SectionHeading } from "@/components/doc/section-heading";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { Cover } from "@/components/doc/work-folder";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
 import { getProject, type ProjectSection, projects, workPage } from "@/content/projects";
 import { comingUpNext, previouslyOn } from "@/content/show";
 
@@ -95,14 +97,17 @@ export default async function CaseStudyPage({ params }: Props) {
             {workPage.backLink}
           </Link>
 
-          <dl className="on-dark mt-7 grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-4 border-l-[6px] border-marker bg-camera px-[26px] py-[22px] text-white">
+          <Reveal
+            as="dl"
+            className="on-dark mt-7 grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-4 border-l-[6px] border-marker bg-camera px-[26px] py-[22px] text-white"
+          >
             {facts.map((fact) => (
               <div key={fact.label}>
                 <dt className="font-mono text-xs text-camera-muted">{fact.label}</dt>
                 <dd className="mt-0.5">{fact.value}</dd>
               </div>
             ))}
-          </dl>
+          </Reveal>
 
           <p className="mt-5">
             {project.link ? (
@@ -115,9 +120,9 @@ export default async function CaseStudyPage({ params }: Props) {
             )}
           </p>
 
-          <div className="mt-6">
+          <Reveal fade className="mt-6">
             <Cover project={project} wide priority />
-          </div>
+          </Reveal>
 
           <div className="mt-14 flex flex-col gap-14 min-[900px]:flex-row min-[900px]:items-start">
             <div className="min-w-0 min-[900px]:flex-[1_1_620px]">
@@ -130,13 +135,17 @@ export default async function CaseStudyPage({ params }: Props) {
                     title={section.heading}
                     explainer={section.explainer}
                   />
-                  <SectionBody section={section} />
+                  <Reveal fade>
+                    <SectionBody section={section} />
+                  </Reveal>
                 </div>
               ))}
             </div>
             <aside className="flex min-w-0 flex-col gap-[22px] min-[900px]:flex-[1_1_300px]">
-              {project.asides.map((quip) => (
-                <TalkingHead key={quip.line} quip={quip} />
+              {project.asides.map((quip, asideIndex) => (
+                <Reveal key={quip.line} delay={stagger(asideIndex)}>
+                  <TalkingHead quip={quip} />
+                </Reveal>
               ))}
             </aside>
           </div>

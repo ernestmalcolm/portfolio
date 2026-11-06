@@ -5,9 +5,12 @@
     "motion": "^14.10.0",
     "next": "^15.5.19",
     "next-mdx-remote": "^6.0.0",
+    "next-view-transitions": "^0.3.5",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.80.0",
+    "react-rough-notation": "^1.0.8",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },

@@ -66,8 +66,7 @@
   /* Ceiling tiles behind the viewfinder */
   .ceiling-tiles {
     background-color: theme("colors.panel.DEFAULT");
-    background-image:
-      linear-gradient(theme("colors.tile") 1px, transparent 1px),
+    background-image: linear-gradient(theme("colors.tile") 1px, transparent 1px),
       linear-gradient(90deg, theme("colors.tile") 1px, transparent 1px);
     background-size: 124px 124px;
     background-position: -1px -1px;
@@ -75,7 +74,36 @@
 
   /* Ruled lines inside the visitor sign-in sheet */
   .ruled {
-    background: repeating-linear-gradient(transparent 0 31px, #E1E4E0 31px 32px);
+    background: repeating-linear-gradient(transparent 0 31px, #e1e4e0 31px 32px);
   }
+}
 
+/* Page changes: a 120ms cut through black. The camera header stays put. */
+::view-transition {
+  background: #121417;
+}
+
+::view-transition-old(root) {
+  animation: cut-out 60ms linear both;
+}
+
+::view-transition-new(root) {
+  animation: cut-in 60ms linear 60ms both;
+}
+
+::view-transition-old(camera-header),
+::view-transition-new(camera-header) {
+  animation: none;
+}
+
+@keyframes cut-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes cut-in {
+  from {
+    opacity: 0;
+  }
 }
