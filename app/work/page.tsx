@@ -1,75 +1,89 @@
-import { PreviouslyOn } from "@/components/doc/previously-on";
-import { previouslyOn } from "@/content/show";
 import type { Metadata } from "next";
 
-import { WorkList } from "@/components/work-list";
-import {
-  consulting,
-  getProjectsByGroup,
-  projectGroups,
-} from "@/content/projects";
+import { ComingUpNext } from "@/components/doc/coming-up-next";
+import { EpisodeCard } from "@/components/doc/episode-card";
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { SectionHeading } from "@/components/doc/section-heading";
+import { TalkingHead } from "@/components/doc/talking-head";
+import { WorkFolder } from "@/components/doc/work-folder";
+import { consulting, getProjectsByGroup, type ProjectGroup, workPage } from "@/content/projects";
+import { comingUpNext, episodeCards, previouslyOn } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Products Ernest Mwinchumu leads at Simplitech, his own products, and his consulting work.",
+    "Simplify and SimplifyAudit at Simplitech, my own products, and consulting for other businesses.",
 };
+
+const groups: ProjectGroup[] = ["simplitech", "personal"];
 
 export default function WorkPage() {
   return (
-    <>
+    <main>
       <PreviouslyOn>{previouslyOn.work}</PreviouslyOn>
-    <main className="container-page relative isolate pb-24 pt-16 md:pt-24">
-      <div>
-        <h1>Work</h1>
-        <p className="mt-6 max-w-prose text-xl leading-snug">
-          What I lead at Simplitech, what I build on my own, and how I help
-          other businesses.
-        </p>
-      </div>
+      <EpisodeCard {...episodeCards.work} />
 
-      {projectGroups.map((group) => (
-        <section
-          key={group.id}
-          aria-labelledby={`${group.id}-heading`}
-          className="mt-20"
-        >
-          <div>
-            <h2 id={`${group.id}-heading`}>{group.title}</h2>
-            <p className="mt-4 max-w-prose text-muted">{group.intro}</p>
-          </div>
-          <div className="mt-8">
-            <WorkList
-              projects={getProjectsByGroup(group.id)}
-              hideOrganisation={group.id === "simplitech"}
+      {groups.map((group, index) => {
+        const copy = workPage.groups[group];
+        const headingId = `group-${group}`;
+        return (
+          <section key={group} aria-labelledby={headingId} className={cn(index % 2 === 0 && "bg-panel")}>
+            <div className="container-page py-[88px]">
+              <SectionHeading
+                id={headingId}
+                timecode={copy.timecode}
+                timecodeLabel={copy.title}
+                title={copy.title}
+                explainer={copy.explainer}
+              />
+              <p className="mt-2.5 max-w-[40rem] text-muted-deep">{copy.intro}</p>
+              <div
+                className={cn(
+                  "mt-10 grid",
+                  group === "simplitech"
+                    ? "grid-cols-[repeat(auto-fit,minmax(min(100%,500px),1fr))] gap-x-11 gap-y-16"
+                    : "grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-x-9 gap-y-14",
+                )}
+              >
+                {getProjectsByGroup(group).map((project) => (
+                  <WorkFolder key={project.slug} project={project} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
+
+      <section aria-labelledby="consulting-title" className="bg-panel">
+        <div className="container-page flex flex-col gap-12 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+          <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
+            <SectionHeading
+              id="consulting-title"
+              timecode={consulting.timecode}
+              timecodeLabel={consulting.title}
+              title={consulting.title}
+              explainer={consulting.explainer}
             />
-          </div>
-        </section>
-      ))}
-
-      <section aria-labelledby="consulting-heading" className="mt-20">
-        <div>
-          <h2 id="consulting-heading">{consulting.title}</h2>
-          <p className="mt-6 max-w-prose text-lg">{consulting.body}</p>
-          <ul className="mt-6 max-w-prose list-disc space-y-2 pl-5 marker:text-mist">
-            {consulting.points.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
-          <p className="mt-8">
-            <a
-              href={`mailto:${siteConfig.email}?subject=${encodeURIComponent(
-                "A project",
-              )}`}
-              className="link"
-            >
-              Email me about a project
+            <p className="mt-2.5 max-w-[40rem] text-muted-deep">{consulting.body}</p>
+            <TalkingHead quip={consulting.quip} className="mt-[22px]" />
+            <a href={`mailto:${siteConfig.email}`} className="mt-[22px] inline-block font-semibold underline">
+              {consulting.cta}
             </a>
-          </p>
+          </div>
+          <div className="min-w-0 border-t-[10px] border-cubicle bg-white px-6 pb-[34px] pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-[34px] min-[900px]:flex-[1_1_400px]">
+            <h3 className="font-condensed text-2xl font-bold">{consulting.pointsTitle}</h3>
+            <ul className="mt-3.5 list-disc space-y-2 pl-[22px] text-muted-deep">
+              {consulting.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
+
+      <ComingUpNext next={comingUpNext.work} />
     </main>
-    </>
   );
 }

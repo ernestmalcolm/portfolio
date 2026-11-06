@@ -153,11 +153,11 @@ export function Reception() {
             {status === "success" && <p className="text-muted-deep">{reception.success}</p>}
             {status === "error" && (
               <p className="text-stamp">
-                {errorMessage} Try again in a minute, or email{" "}
+                {errorMessage} You can email{" "}
                 <a href={`mailto:${siteConfig.email}`} className="underline">
                   {siteConfig.email}
                 </a>{" "}
-                directly.
+                directly instead.
               </p>
             )}
           </div>

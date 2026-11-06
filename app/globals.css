@@ -77,12 +77,4 @@
     background: repeating-linear-gradient(transparent 0 31px, #E1E4E0 31px 32px);
   }
 
-  /* Bottom edge of the receipt: a torn zigzag */
-  .receipt-tear {
-    --tear: 10px;
-    -webkit-mask:
-      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tear) * 2) 100%;
-    mask:
-      conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tear) * 2) 100%;
-  }
 }

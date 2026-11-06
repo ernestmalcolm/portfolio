@@ -22,8 +22,9 @@ export function EpisodeCard({ label, title, id, tagline, explainer, as: Tag = "h
       <Tag
         id={id}
         className={cn(
-          "mt-1.5 font-condensed font-bold leading-[1.02]",
+          "mt-1.5 font-condensed font-bold",
           Tag === "h1" ? "text-[2.75rem] sm:text-[56px]" : "text-[2.5rem] sm:text-5xl",
+          "leading-[1.05]",
         )}
       >
         {title}

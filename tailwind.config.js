@@ -4,6 +4,7 @@ module.exports = {
     "./app/**/*.{ts,tsx,js,jsx,mdx}",
     "./components/**/*.{ts,tsx,js,jsx}",
     "./content/**/*.{ts,tsx,mdx}",
+    "./lib/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
@@ -16,7 +17,7 @@ module.exports = {
         wall: "#D9D6CB",
         panel: { DEFAULT: "#E4E1D6", dark: "#CFCBBE" },
         tile: "#D5D1C3",
-        cubicle: "#4F5B66",
+        cubicle: { DEFAULT: "#4F5B66", text: "#E3E6EA", muted: "#D5DAE0" },
         muted: { DEFAULT: "#4A4F55", deep: "#3B434C" },
         rule: "#9AA2AA",
         marker: "#FFD84D",
@@ -26,14 +27,6 @@ module.exports = {
         rec: "#E0393B",
         manila: { DEFAULT: "#E3C88A", tab: "#D9BC78", edge: "#C9A962" },
         cork: { DEFAULT: "#B98E5E", frame: "#7A5A38" },
-        // Kept until the receipt is rebuilt in the home milestone
-        receipt: {
-          DEFAULT: "#FFFFFF",
-          ink: "#222831",
-          slate: "#30475E",
-          muted: "#5F6873",
-          red: "#B8323A",
-        },
       },
       fontFamily: {
         sans: ["var(--font-plex-sans)", "system-ui", "sans-serif"],
@@ -58,7 +51,7 @@ module.exports = {
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            "--tw-prose-body": theme("colors.muted.deep"),
+            "--tw-prose-body": "#2E353D",
             "--tw-prose-headings": theme("colors.ink"),
             "--tw-prose-links": theme("colors.pen.DEFAULT"),
             "--tw-prose-bold": theme("colors.ink"),
@@ -75,8 +68,9 @@ module.exports = {
               fontFamily: theme("fontFamily.condensed").join(","),
               fontWeight: "700",
               fontSize: "1.875rem",
-              letterSpacing: "-0.01em",
-              marginTop: "2.5em",
+              lineHeight: "1.15",
+              marginTop: "1.6em",
+              marginBottom: "0.6em",
             },
           },
         },

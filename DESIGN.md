@@ -56,19 +56,20 @@ Paper and the receipt have no radius. Buttons are 4px. Folders are 4px with a 6p
 
 ## Components
 
-Shared pieces live in `components/doc/`, and their copy lives in `content/*.ts`.
+Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (the show frame), `content/projects.ts` (work files), `content/about.ts` (the personnel file) and `content/writing/` (memos).
 
 - `CameraHeader`: black bar with `<EM/>`, a red REC dot with a per-page timecode, "CAM B" and the episode guide. The current episode gets `aria-current="page"` and a yellow underline. Wraps on mobile.
 - `EpisodeCard`: black title card with a mono label, a condensed title, an optional white tagline and an optional handwritten yellow explainer.
 - `PreviouslyOn`: thin strip under the header on every page except home.
-- `Timecode`: mono label above a section heading.
-- `SectionHeading`: condensed H2 with a handwritten explainer underneath. Every section has one, so visitors always know where they are.
-- `HandNote`: Reenie Beanie text with optional rotation and a hand-drawn arrow. Decorative notes are hidden from screen readers.
-- `StickyNote`: yellow note, slightly rotated, with an optional mono label.
+- `Timecode` and `SectionHeading`: mono label, condensed heading and a handwritten explainer. Every section has one, so visitors always know where they are.
+- `HandNote` and `StickyNote`: Reenie Beanie notes, slightly rotated. Decorative notes are hidden from screen readers.
+- `Viewfinder` and `InterviewFrame`: the home hero frame with corner brackets and ceiling tiles, and the portrait with its lower third caption. On home, Snap zoom punches in 1.55x on the face.
+- `TalkingHead`: 48px portrait crop, a quoted line and an optional stage direction.
+- `Receipt`: the career receipt. Roles with outlines on home, promotion history on About.
+- `WorkFolder`: manila folder holding a white sheet with the real cover, meta, blurb, outcome and an ON HOLD stamp where needed.
+- `CurrentlyFilming`, `InterviewQA`, `BranchRules`, `WhiteboardAgenda`, `DeletedScenes`, `Corkboard` and `ComingUpNext`: the home, About and closing sections.
 - `Reception`: contact details, a sticky note and the visitor sign-in sheet, which posts to `/api/contact`.
 - `EndCredits`: the credits list, the one inspiration line and the copyright line.
-
-Still to come, page by page: `TalkingHead`, `Viewfinder`, `InterviewFrame`, `Receipt`, `WorkFolder`, `CurrentlyFilming`, `InterviewQA`, `BranchRules`, `WhiteboardAgenda`, `DeletedScenes`, `Corkboard` and `ComingUpNext`.
 
 ## Motion
 
