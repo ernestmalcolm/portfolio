@@ -44,7 +44,7 @@ Body text is capped at `65ch`.
 
 ## Backgrounds
 
-- `SiteBackdrop` (`components/site-backdrop.tsx`): one fixed layer behind every page, so the texture carries all the way down. A dot grid fading at the edges (`.site-dots`), a coral glow on the left and a blue glow on the right, both drifting slowly (`.glow-drift`, off with reduced motion).
+- `SiteBackdrop` (`components/site-backdrop.tsx`): one fixed layer behind every page, so the texture carries all the way down. A dot grid fading at the edges (`.site-dots`), a coral glow that trails the cursor on a spring (drifting on its own on touch screens), and a blue glow on the right drifting slowly (`.glow-drift`). With reduced motion both stay still.
 - `PageBackdrop` (`components/page-backdrop.tsx`): the Aceternity coral `Spotlight` (`components/aceternity/spotlight.tsx`) over each page's opening, with a second, blue spotlight on the home hero.
 - The hero name and the About headline use `.text-gradient` (cream to coral).
 - The header (navy at 80%) and footer (navy-dark at 80%) blur what's behind them.
@@ -53,7 +53,8 @@ Body text is capped at `65ch`.
 
 - `Reveal` (`components/reveal.tsx`): content fades and lifts 28px the first time it enters the viewport, then stays. Rows stagger by about 50ms.
 - The receipt has two modes. On the home hero it prints top to bottom once, when it first comes into view. On `/about` it starts printed, and **Print another** reprints it with a random joke line item (`receiptJokes` in `content/about.ts`). The print animation there runs only on click.
-- The spotlight fades in once on page load. The site background glows drift slowly.
+- The spotlight fades in once on page load. The coral glow follows the cursor, the blue one drifts.
+- Mobile menu: slides open with the links staggered in, and the menu icon rotates into the close icon. With reduced motion it only fades.
 - Hover: rows get a faint `navy-light` tint, and the primary button's glow brightens.
 - With `prefers-reduced-motion` or no JavaScript, everything is simply shown, and Print another swaps the line without animating.
 

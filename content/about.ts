@@ -114,10 +114,10 @@ export const skills: { group: string; items: string }[] = [
 
 export const heading = {
   teaser:
-    "I want to help raise the bar for digital in Tanzania and East Africa. Not more apps for the sake of apps, but products that understand the businesses and people they're built for, and reach them at scale.",
+    "Most people here meet technology at a bank counter, a mobile money menu or a government office. I want those moments to just work: products built for Tanzania and East Africa by people who understand the business behind them and the person in front of them. Get it right and millions feel it. Get it wrong and millions queue.",
   paragraphs: [
-    "I want to help raise the bar for digital in Tanzania and East Africa. Not more apps for the sake of apps, but products that understand the businesses and people they're built for, and reach them at scale.",
-    "That's why I'm drawn to product strategy and digital leadership in places with real reach: financial services, telecoms, payments and the public systems everyone relies on. Over time I want to lead digital work at that scale, advise organisations on getting their product and digital strategy right, and bring that thinking to boards, especially ones focused on youth and innovation.",
+    "Most people here meet technology at a bank counter, a mobile money menu or a government office. I want those moments to just work: products built for Tanzania and East Africa by people who understand the business behind them and the person in front of them. Get it right and millions feel it. Get it wrong and millions queue.",
+    "That's why I'm drawn to product strategy and digital leadership where the reach is real: banks, telecoms, payments and the public systems everyone relies on. Over time I want to lead digital work at that scale, advise organisations on getting their product and digital strategy right, and bring that thinking to boards, especially ones focused on youth and innovation.",
     "Everything I've done so far, from intern to Tech Lead, from code to customers to strategy, is practice for that.",
   ],
 };
