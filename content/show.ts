@@ -1,6 +1,6 @@
 /**
- * The documentary frame around every page: the episode guide, the REC
- * timecode per page, the "Previously on" lines, Reception and the credits.
+ * The documentary frame around every page: the episode guide, the
+ * "Previously on" lines, Reception and the credits.
  */
 
 export const episodes = [
@@ -10,19 +10,6 @@ export const episodes = [
   { number: 4, title: "Memos", href: "/writing" },
   { number: 5, title: "Reception", href: "#reception" },
 ] as const;
-
-/** The REC timecode in the camera header, by route. First match wins. */
-export const timecodes: { match: (pathname: string) => boolean; code: string }[] = [
-  { match: (p) => p === "/", code: "00:00:41:12" },
-  { match: (p) => p === "/work", code: "00:04:12:03" },
-  { match: (p) => p.startsWith("/work/"), code: "00:05:48:19" },
-  { match: (p) => p === "/about", code: "00:11:20:44" },
-  { match: (p) => p === "/writing", code: "00:23:05:31" },
-  { match: (p) => p.startsWith("/writing/"), code: "00:24:40:08" },
-];
-
-/** Shown when no route matches, for example on the 404 page */
-export const fallbackTimecode = "00:00:00:00";
 
 export const previouslyOn = {
   work: "Ernest connected the business, the market and the team. Then someone pressed record.",
@@ -36,7 +23,8 @@ export const reception = {
   episode: "Episode 5",
   title: "Reception",
   explainer: "Get in touch: email, phone, or sign the visitor sheet.",
-  intro: "If this is your kind of story, sign in. Product work, consulting, or a conversation worth having. Email is fastest.",
+  intro:
+    "If this is your kind of story, sign in. Product work, consulting, or a conversation worth having. Email is fastest.",
   stickyNote: "While you were out: someone wants to build something. Call back.",
   formTitle: "Visitor sign-in sheet",
   submit: "Sign in and send",
@@ -203,9 +191,21 @@ export const deletedScenes = {
   title: "Deleted scenes",
   explainer: "Just for fun. Outtakes that didn't make the cut.",
   scenes: [
-    { runtime: "Runtime 47:00", scene: "Ernest explains VAT at a family dinner.", reason: "Cut for length. And morale." },
-    { runtime: "Runtime 0:04", scene: "Ernest names a variable temp2_final. Ships it.", reason: "Cut on the advice of the code reviewer." },
-    { runtime: "Runtime 1:30", scene: "Man United lose. Ernest says [bleep]. Reviews the backlog in silence.", reason: "Cut at the request of the backlog." },
+    {
+      runtime: "Runtime 47:00",
+      scene: "Ernest explains VAT at a family dinner.",
+      reason: "Cut for length. And morale.",
+    },
+    {
+      runtime: "Runtime 0:04",
+      scene: "Ernest names a variable temp2_final. Ships it.",
+      reason: "Cut on the advice of the code reviewer.",
+    },
+    {
+      runtime: "Runtime 1:30",
+      scene: "Man United lose. Ernest says [bleep]. Reviews the backlog in silence.",
+      reason: "Cut at the request of the backlog.",
+    },
     { runtime: "Runtime 6 weeks", scene: "Ernest reads a book. Page 4.", reason: "Still filming." },
   ],
   button: "Play another outtake",
@@ -214,7 +214,7 @@ export const deletedScenes = {
     "Outtake: 1x Bug fix. Price: 3 new bugs.",
     "Outtake: I told my code a joke. No reaction, just a sense of syntax.",
     "Outtake: Podcasts at 1.5x, books at 0.5x. It averages out.",
-    "Outtake: Reviewing a 40 page spec. \"Can we make it shorter?\" That's what she said.",
+    'Outtake: Reviewing a 40 page spec. "Can we make it shorter?" That\'s what she said.',
     "Outtake: Man United and tax law. Rules that make sense to nobody but you.",
   ],
 };

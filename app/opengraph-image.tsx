@@ -24,7 +24,7 @@ export default async function OpenGraphImage() {
   const name = siteConfig.name;
   const line = `${siteConfig.title}, Dar es Salaam`;
   const label = "Season 1, Episode 1: Pilot";
-  const timecode = "REC 00:00:41:12";
+  const timecode = "REC 14:26:05 EAT";
   // Every string on the image, so no glyph falls back to a different font
   const condensed = await loadCondensed(`${name}${line}${label}${timecode}<EM/>CAM B`);
   const heading = condensed ? "Plex Condensed" : "sans-serif";

@@ -2,22 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
-import { episodes, fallbackTimecode, timecodes } from "@/content/show";
+import { RecClock } from "@/components/doc/rec-clock";
+import { RuntimeBar } from "@/components/doc/runtime-bar";
+import { episodes } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
-/** Black camera bar: logo, REC timecode for this page, and the episode guide */
+/** Sticky black camera bar: logo, live REC clock, the episode guide and the runtime bar */
 export function CameraHeader() {
   const pathname = usePathname();
-  const timecode = timecodes.find((t) => t.match(pathname))?.code ?? fallbackTimecode;
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // On mobile the guide scrolls sideways, so bring the current episode into view
+  useEffect(() => {
+    const list = listRef.current;
+    const current = list?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!list || !current || list.scrollWidth <= list.clientWidth) return;
+    list.scrollLeft = current.parentElement!.offsetLeft - 32;
+  }, [pathname]);
 
   const isCurrent = (href: string) =>
     href === "/" ? pathname === "/" : href.startsWith("/") && (pathname === href || pathname.startsWith(`${href}/`));
 
   return (
-    <header className="on-dark bg-camera text-camera-text">
-      <div className="container-page flex flex-wrap items-center justify-between gap-3.5 py-3.5">
+    <header className="on-dark sticky top-0 z-40 bg-camera text-camera-text">
+      <div className="container-page flex flex-wrap items-center justify-between gap-x-3.5 gap-y-1 pt-3 min-[900px]:py-3.5">
         <div className="flex items-center gap-[18px] font-mono text-[13px]">
           <Link
             href="/"
@@ -26,16 +37,14 @@ export function CameraHeader() {
           >
             &lt;EM/&gt;
           </Link>
-          <span className="inline-flex items-center gap-2">
-            <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-full bg-rec" />
-            <span>
-              <span className="sr-only">Recording, timecode </span>REC {timecode}
-            </span>
-          </span>
-          <span className="text-camera-muted">CAM B</span>
+          <RecClock />
+          <span className="hidden text-camera-muted min-[380px]:inline">CAM B</span>
         </div>
-        <nav aria-label="Episode guide">
-          <ul className="flex flex-wrap gap-x-[22px] gap-y-1.5 text-sm">
+        <nav aria-label="Episode guide" className="-mx-8 w-[calc(100%+4rem)] min-[900px]:mx-0 min-[900px]:w-auto">
+          <ul
+            ref={listRef}
+            className="relative flex gap-x-[22px] gap-y-1.5 overflow-x-auto whitespace-nowrap px-8 pb-2.5 pt-1.5 text-sm [scrollbar-width:none] min-[900px]:flex-wrap min-[900px]:overflow-visible min-[900px]:p-0"
+          >
             {episodes.map((episode) => {
               const current = isCurrent(episode.href);
               return (
@@ -56,6 +65,7 @@ export function CameraHeader() {
           </ul>
         </nav>
       </div>
+      <RuntimeBar />
     </header>
   );
 }

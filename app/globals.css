@@ -12,8 +12,9 @@
     @apply bg-wall font-sans text-base text-ink antialiased;
   }
 
+  /* Clears the sticky camera header */
   [id] {
-    scroll-margin-top: 1rem;
+    scroll-margin-top: 6.5rem;
   }
 
   a {

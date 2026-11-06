@@ -8,6 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        rec: { "0%, 100%": { opacity: "1" }, "50%": { opacity: "0.15" } },
+      },
+      animation: {
+        rec: "rec 1s steps(1, end) infinite",
+      },
       colors: {
         ink: "#1E2329",
         // Dark surfaces: header and episode cards, then the end credits

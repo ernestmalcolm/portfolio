@@ -2,7 +2,7 @@
 
 ## Direction: the documentary
 
-The whole site is a mockumentary about Ernest's work, and every page is an episode. The look borrows documentary camera language: a REC header with a timecode, a viewfinder, talking heads, stage directions like `[looks at camera]`, episode title cards, "Previously on", "Coming up next" and end credits. It also borrows office objects: manila folders, a receipt, a whiteboard, a cork board, sticky notes and a visitor sign-in sheet.
+The whole site is a mockumentary about Ernest's work, and every page is an episode. The look borrows documentary camera language: a REC header with a live clock, a viewfinder, talking heads, stage directions like `[looks at camera]`, episode title cards, "Previously on", "Coming up next" and end credits. It also borrows office objects: manila folders, a receipt, a whiteboard, a cork board, sticky notes and a visitor sign-in sheet.
 
 The content stays professional. The jokes live in captions, stage directions and extras. The inspiration is credited once, in the end credits, and nothing else from the show is used: no name in the branding, no logo, characters, building, music or famous props, and only one quote on the whole site.
 
@@ -33,7 +33,7 @@ The content stays professional. The jokes live in captions, stage directions and
 | `sticky` | `#FFE98A` | Sticky notes |
 | `pen` | `#2244B8` | Links, handwritten notes, buttons, focus rings |
 | `stamp` | `#B8323A` | VERIFIED and ON HOLD stamps, form errors |
-| `rec` | `#E0393B` | The REC dot only |
+| `rec` | `#E0393B` | The REC dot only (blinks; solid with reduced motion) |
 | `manila` | `#E3C88A` (tab `#D9BC78`, edge `#C9A962`) | Work folders |
 | `cork` | `#B98E5E` (frame `#7A5A38`) | Break room |
 
@@ -58,7 +58,7 @@ Paper and the receipt have no radius. Buttons are 4px. Folders are 4px with a 6p
 
 Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (the show frame), `content/projects.ts` (work files), `content/about.ts` (the personnel file) and `content/writing/` (memos).
 
-- `CameraHeader`: black bar with `<EM/>`, a red REC dot with a per-page timecode, "CAM B" and the episode guide. The current episode gets `aria-current="page"` and a yellow underline. Wraps on mobile.
+- `CameraHeader`: sticky black bar with `<EM/>`, the live REC clock (`RecClock`: Dar es Salaam time, ticking every second, with a hard-blinking red dot), "CAM B" and the episode guide. The current episode gets `aria-current="page"` and a yellow underline. On mobile the guide is one row that scrolls sideways. A 2px yellow `RuntimeBar` along the bottom shows how far down the page you are.
 - `EpisodeCard`: black title card with a mono label, a condensed title, an optional white tagline and an optional handwritten yellow explainer.
 - `PreviouslyOn`: thin strip under the header on every page except home.
 - `Timecode` and `SectionHeading`: mono label, condensed heading and a handwritten explainer. Every section has one, so visitors always know where they are.
