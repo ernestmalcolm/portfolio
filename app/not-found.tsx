@@ -1,8 +1,9 @@
 import Link from "next/link";
 
+import { ComingUpNext } from "@/components/doc/coming-up-next";
 import { EpisodeCard } from "@/components/doc/episode-card";
 import { StageDirection } from "@/components/doc/talking-head";
-import { notFound } from "@/content/show";
+import { comingUpNext, notFound } from "@/content/show";
 
 export default function NotFound() {
   return (
@@ -20,6 +21,7 @@ export default function NotFound() {
           </Link>
         </div>
       </section>
+      <ComingUpNext next={comingUpNext.notFound} />
     </main>
   );
 }

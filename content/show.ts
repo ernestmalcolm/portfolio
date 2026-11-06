@@ -36,7 +36,7 @@ export const reception = {
   episode: "Episode 5",
   title: "Reception",
   explainer: "Get in touch: email, phone, or sign the visitor sheet.",
-  intro: "Product work, consulting, or a conversation worth having. Email is fastest.",
+  intro: "If this is your kind of story, sign in. Product work, consulting, or a conversation worth having. Email is fastest.",
   stickyNote: "While you were out: someone wants to build something. Call back.",
   formTitle: "Visitor sign-in sheet",
   submit: "Sign in and send",
@@ -64,6 +64,18 @@ export type ComingUp = { label: string; title: string; href: string; blurb: stri
 
 /** "Coming up next" cards at the foot of each page */
 export const comingUpNext = {
+  home: {
+    label: "Coming up next: Episode 2",
+    title: "The Work Files",
+    href: "/work",
+    blurb: "Every file, including consulting. Some of them are even finished.",
+  },
+  notFound: {
+    label: "Coming up next: Episode 1",
+    title: "Pilot",
+    href: "/",
+    blurb: "Start from the beginning. It makes more sense that way.",
+  },
   work: {
     label: "Coming up next: Episode 3",
     title: "Personnel File",
@@ -89,6 +101,15 @@ export const comingUpNext = {
     blurb: "You read a whole memo. The least you can do is sign the visitor sheet.",
   },
 } satisfies Record<string, ComingUp>;
+
+/** One line at the end of each home section, handing over to the next */
+export const homeBridges = {
+  shortVersion: "That's the summary. Here are the files.",
+  work: "So how does one person cover all that?",
+  personnel: "Which leaves the real question: what's it all for?",
+  meeting: "And right now?",
+  currentlyFilming: "Before the credits roll.",
+};
 
 /** Episode title cards for each page and for the home page's sections */
 export const episodeCards = {
@@ -162,7 +183,7 @@ export const pilot = {
 };
 
 export const currentlyFilming = {
-  timecode: "00:02:15",
+  timecode: "00:20:05",
   timecodeLabel: "Now",
   title: "Currently filming",
   explainer: "What I'm working on this season.",
