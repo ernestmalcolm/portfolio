@@ -2,20 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { PageBackdrop } from "@/components/page-backdrop";
-import { ProjectCover } from "@/components/project-cover";
-import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
-import { getProject, projects } from "@/content/projects";
+import { ComingUpNext } from "@/components/doc/coming-up-next";
+import { EpisodeCard } from "@/components/doc/episode-card";
+import { PreviouslyOn } from "@/components/doc/previously-on";
+import { SectionHeading } from "@/components/doc/section-heading";
+import { TalkingHead } from "@/components/doc/talking-head";
+import { Cover } from "@/components/doc/work-folder";
+import { Reveal } from "@/components/motion/reveal";
+import { stagger } from "@/lib/motion";
+import { getProject, type ProjectSection, projects, workPage } from "@/content/projects";
+import { comingUpNext, previouslyOn } from "@/content/show";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return projects.flatMap((project) =>
-    project.slug ? [{ slug: project.slug }] : [],
-  );
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -25,8 +28,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: project.title,
-    description: project.oneLiner,
+    description: project.blurb,
   };
+}
+
+/** "00:06:10" style timecode, counted on from where this part starts */
+function timecodeAt(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const rest = seconds % 60;
+  return `00:${String(minutes).padStart(2, "0")}:${String(rest).padStart(2, "0")}`;
+}
+
+function SectionBody({ section }: { section: ProjectSection }) {
+  return (
+    <>
+      {section.body && <p className="mt-2.5 max-w-[40rem] text-muted-deep">{section.body}</p>}
+      {section.items && (
+        <ul className="mt-3.5 max-w-[46rem] list-disc space-y-2 pl-[22px] text-muted-deep">
+          {section.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+      {section.rows && (
+        <dl className="mt-3.5 grid max-w-[46rem] gap-x-6 gap-y-3 sm:grid-cols-[170px_minmax(0,1fr)]">
+          {section.rows.map((row) => (
+            <div key={row.term} className="contents">
+              <dt className="pt-[3px] font-mono text-sm text-muted">{row.term}</dt>
+              <dd className="mb-2 text-muted-deep sm:mb-0">{row.detail}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </>
+  );
 }
 
 export default async function CaseStudyPage({ params }: Props) {
@@ -35,102 +70,100 @@ export default async function CaseStudyPage({ params }: Props) {
 
   if (!project) notFound();
 
-  const meta = [
+  const index = projects.indexOf(project);
+  const next = projects[index + 1];
+  const start = 6 * 60 + 10 + index * 6 * 60;
+
+  const facts = [
     { label: "Organisation", value: project.organisation },
     { label: "Role", value: project.role },
     { label: "Years", value: project.years },
-    { label: "Status", value: project.status },
-  ].filter((item): item is { label: string; value: string } =>
-    Boolean(item.value),
-  );
+    project.extraFact,
+  ];
+
+  const sections = [
+    ...project.sections,
+    { heading: "Outcome", explainer: "Where it landed.", body: project.outcomeDetail },
+  ];
 
   return (
-    <main className="container-page relative isolate pb-24 pt-12 md:pt-16">
-      <PageBackdrop />
-      <p>
-        <Link href="/work" className="link text-sm">
-          All work
-        </Link>
-      </p>
+    <main>
+      <PreviouslyOn>{previouslyOn.caseStudy}</PreviouslyOn>
+      <EpisodeCard label={`Episode 2, Part ${index + 1}`} title={project.title} explainer={project.tagline} />
 
-      <article className="mt-8">
-        <Reveal>
-          <header>
-            <h1>{project.title}</h1>
-            <p className="mt-6 max-w-prose text-xl leading-snug">
-              {project.oneLiner}
-            </p>
+      <section aria-label={`${project.title} case study`} className="bg-panel">
+        <div className="container-page py-14 sm:py-[88px]">
+          <Link href="/work" className="font-semibold underline">
+            {workPage.backLink}
+          </Link>
 
-            <dl className="mt-8 grid max-w-3xl gap-x-8 gap-y-4 border-y border-line py-6 text-sm sm:grid-cols-2 lg:grid-cols-4">
-              {meta.map((item) => (
-                <div key={item.label}>
-                  <dt className="text-muted">{item.label}</dt>
-                  <dd className="mt-1 text-cream">{item.value}</dd>
+          <Reveal
+            as="dl"
+            className="on-dark mt-7 grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-4 border-l-[6px] border-marker bg-camera px-[26px] py-[22px] text-white"
+          >
+            {facts.map((fact) => (
+              <div key={fact.label}>
+                <dt className="font-mono text-xs text-camera-muted">{fact.label}</dt>
+                <dd className="mt-0.5">{fact.value}</dd>
+              </div>
+            ))}
+          </Reveal>
+
+          <p className="mt-5">
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                {project.linkLabel ?? `Open ${project.title}`}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ) : (
+              <span className="text-muted-deep">{workPage.noLink}</span>
+            )}
+          </p>
+
+          <Reveal fade className="mt-6">
+            <Cover project={project} wide priority />
+          </Reveal>
+
+          <div className="mt-14 flex flex-col gap-14 min-[900px]:flex-row min-[900px]:items-start">
+            <div className="min-w-0 min-[900px]:flex-[1_1_620px]">
+              {sections.map((section, sectionIndex) => (
+                <div key={section.heading} className={sectionIndex > 0 ? "mt-10" : undefined}>
+                  <SectionHeading
+                    size="md"
+                    timecode={timecodeAt(start + sectionIndex * 80)}
+                    timecodeLabel={section.heading}
+                    title={section.heading}
+                    explainer={section.explainer}
+                  />
+                  <Reveal fade>
+                    <SectionBody section={section} />
+                  </Reveal>
                 </div>
               ))}
-            </dl>
-
-            <div className="mt-8">
-              {project.link ? (
-                <Button asChild>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.linkLabel ?? `Open ${project.title}`}
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </Button>
-              ) : (
-                <p className="max-w-prose text-muted">
-                  There&apos;s no public link for this one.{" "}
-                  <a href="#contact" className="link">
-                    Ask me about it
-                  </a>
-                  .
-                </p>
-              )}
             </div>
-          </header>
-        </Reveal>
-
-        <ProjectCover
-          cover={project.cover}
-          title={project.title}
-          size="hero"
-          priority
-          className="mt-12"
-        />
-
-        <div className="mt-16 max-w-prose space-y-12">
-          {project.sections?.map((section) => (
-            <Reveal key={section.heading}>
-              <section>
-                <h2 className="text-[1.5rem] md:text-[1.875rem]">
-                  {section.heading}
-                </h2>
-                {section.body && <p className="mt-4 text-lg">{section.body}</p>}
-                {section.items && (
-                  <ul className="mt-4 list-disc space-y-2 pl-5 text-lg marker:text-mist">
-                    {section.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            </Reveal>
-          ))}
+            <aside className="flex min-w-0 flex-col gap-[22px] min-[900px]:flex-[1_1_300px]">
+              {project.asides.map((quip, asideIndex) => (
+                <Reveal key={quip.line} delay={stagger(asideIndex)}>
+                  <TalkingHead quip={quip} />
+                </Reveal>
+              ))}
+            </aside>
+          </div>
         </div>
+      </section>
 
-        {project.slug === "simplify" && (
-          <p className="mt-12">
-            <Link href="/work/simplifyaudit" className="link">
-              Read the SimplifyAudit case study
-            </Link>
-          </p>
-        )}
-      </article>
+      <ComingUpNext
+        next={
+          next
+            ? {
+                label: `Coming up next: Episode 2, Part ${index + 2}`,
+                title: next.title,
+                href: `/work/${next.slug}`,
+                blurb: next.teaser,
+              }
+            : comingUpNext.work
+        }
+      />
     </main>
   );
 }

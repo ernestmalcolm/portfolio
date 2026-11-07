@@ -1,108 +1,108 @@
 # Design System: Ernest Mwinchumu Portfolio
 
-## Direction: navy, coral and the receipt
+## Direction: the documentary
 
-Dark navy with coral accents, an Aceternity style spotlight and dot grid behind each page's opening, and content that eases in as you scroll. The one bold idea is the **career receipt**: a white fiscal receipt on the navy, because Ernest's product issues them for about 4,000 Tanzanian businesses.
+The whole site is a mockumentary about Ernest's work, and every page is an episode. The look borrows documentary camera language: a REC header with a live clock, a viewfinder, talking heads, stage directions like `[looks at camera]`, episode title cards, "Previously on", "Coming up next" and end credits. It also borrows office objects: manila folders, a receipt, a whiteboard, a cork board, sticky notes and a visitor sign-in sheet.
 
-The logo is always `<EM/>`: coral brackets, cream letters, IBM Plex Mono. It's used in the nav, the footer, the favicon and the share image.
+The content stays professional. The jokes live in captions, stage directions and extras. The show is named once, in the end credits. Beyond that, the references are hidden: ten props around the site nod to moments fans know, each drawn from scratch with captions in our own words or short lines. No logos, stills, character likenesses or character names, and nothing traced.
 
-Audience: hiring managers and leaders at banks, telcos and institutions, plus consulting clients. Credible first, then charming.
+| Page | Route | Episode |
+|---|---|---|
+| Home | `/` | Ep 1 Pilot |
+| Work | `/work` | Ep 2 The Work Files |
+| Case study | `/work/[slug]` | Part of Ep 2 |
+| About | `/about` | Ep 3 Personnel File |
+| Writing | `/writing` | Ep 4 Memos |
+| Post | `/writing/[slug]` | A memo |
+| Contact | `#reception` on every page | Ep 5 Reception |
 
 ## Tokens
 
-| Token | Value | Role | Contrast on navy |
-|---|---|---|---|
-| `navy` | `#0B1F3A` | Page background | n/a |
-| `navy-light` | `#12264A` | Row hover, inputs | n/a |
-| `navy-dark` | `#07152A` | Footer | n/a |
-| `cream` | `#F5F1E8` | Body text, headings | 14.6:1 |
-| `mist` | `#C5CEDB` | Secondary text, nav links | 10.4:1 |
-| `muted` | `#98A4B8` | Meta text, dates | 6.6:1 |
-| `coral` | `#FF6B5E` | Links, primary button, focus ring, accents | 5.9:1 (navy text on it 5.9:1) |
-| `coral-light` | `#FF8A80` | Hover state | 7.2:1 |
-| `line` | `#2E4670` | Hairlines between rows | decorative |
-| `field` | `#5B7096` | Input borders | 3.0:1 or more |
+| Token | Hex | Use |
+|---|---|---|
+| `ink` | `#1E2329` | Main text |
+| `camera` | `#121417` | Header, episode cards, dark panels |
+| `credits` | `#0B0C0E` | End credits |
+| `strip` | `#2B2F35` | "Previously on" strip |
+| `wall` | `#D9D6CB` | Page background |
+| `panel` | `#E4E1D6` | Alternate sections, viewfinder |
+| `panel-dark` | `#CFCBBE` | Hero surround, jump-link bar |
+| `cubicle` | `#4F5B66` | Dark-grey sections |
+| `muted` / `muted-deep` | `#4A4F55` / `#3B434C` | Secondary text |
+| `marker` | `#FFD84D` | Notes and labels on dark only |
+| `sticky` | `#FFE98A` | Sticky notes |
+| `pen` | `#2244B8` | Links, handwritten notes, buttons, focus rings |
+| `stamp` | `#B8323A` | VERIFIED and ON HOLD stamps, form errors |
+| `rec` | `#E0393B` | The REC dot only (blinks; solid with reduced motion) |
+| `manila` | `#E3C88A` (tab `#D9BC78`, edge `#C9A962`) | Work folders |
+| `cork` | `#B98E5E` (frame `#7A5A38`) | Break room |
 
-The receipt is a white slip and keeps its own palette: `receipt` `#FFFFFF`, `receipt-ink` `#222831`, `receipt-slate` `#30475E`, `receipt-muted` `#5F6873`, `receipt-red` `#C8333F`, and `stamp` `#E5484D` for the VERIFIED stamp.
-
-The primary button uses navy text on coral, because white on coral fails AA.
+Text links are pen blue and semibold, with a soft underline (1.5px, set 0.24em below the text, 40% strength) that firms up on hover. On light paper a yellow marker swipe slides in under the link on hover. Text meets 4.5:1. Yellow text only appears on dark backgrounds. Focus rings are pen blue, and yellow inside dark panels (`.on-dark`).
 
 ## Type
 
-IBM Plex, self hosted with `next/font/google`.
+Self-hosted from `app/fonts` with `next/font/local` (latin subsets), so a build never depends on Google Fonts. IBM Plex Sans is the variable version: one file covers 100 to 700, plus an italic file.
 
-| Role | Face | Size (mobile / desktop) |
+| Font | Class | Role |
 |---|---|---|
-| Hero name | Plex Sans Condensed 700, cream to coral gradient | 56 / 112px |
-| h1 | Plex Sans Condensed 700 | 40 / 64px |
-| h2 | Plex Sans Condensed 700 | 30 / 40px |
-| h3 | Plex Sans 600 | 20px |
-| Body | Plex Sans 400, leading 1.6 | 17px |
-| Logo, dates, receipt | Plex Mono | 13 to 18px |
+| IBM Plex Sans | `font-sans` | Body and UI |
+| IBM Plex Sans Condensed 700 | `font-condensed` | Headings, names, episode titles |
+| IBM Plex Mono | `font-mono` | Timecodes, labels, the receipt, the REC header |
+| Reenie Beanie | `font-hand` | Handwriting: notes under headings, whiteboard, sticky notes |
 
-Body text is capped at `65ch`.
+## Shape
 
-## Backgrounds
+Paper and the receipt have no radius. Buttons are 4px. Folders are 4px with a 6px tab. The whiteboard is 6px with a 14px grey frame.
 
-- `SiteBackdrop` (`components/site-backdrop.tsx`): one fixed layer behind every page, so the texture carries all the way down. A dot grid fading at the edges (`.site-dots`), a coral glow that trails the cursor on a spring (drifting on its own on touch screens), and a blue glow on the right drifting slowly (`.glow-drift`). With reduced motion both stay still.
-- `PageBackdrop` (`components/page-backdrop.tsx`): the Aceternity coral `Spotlight` (`components/aceternity/spotlight.tsx`) over each page's opening, with a second, blue spotlight on the home hero.
-- The hero name and the About headline use `.text-gradient` (cream to coral).
-- The header (navy at 80%) and footer (navy-dark at 80%) blur what's behind them.
+## Components
+
+Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (the show frame), `content/projects.ts` (work files), `content/about.ts` (the personnel file) and `content/writing/` (memos).
+
+- `CameraHeader`: sticky black bar with `<EM/>`, the live REC clock (`RecClock`: Dar es Salaam time, ticking every second, with a hard-blinking red dot), "CAM B" and the episode guide. The guide underlines the episode in view: on home it follows the sections (scroll-spy), and on every page Reception takes over at the bottom. The current page gets `aria-current="page"`, the section in view `aria-current="location"`. On mobile the guide is one row that scrolls sideways, keeps the active episode in view and fades at the right edge while there is more to swipe. A 2px yellow `RuntimeBar` along the bottom shows how far down the page you are.
+- `EpisodeCard`: black title card with a mono label, a condensed title, an optional white tagline and an optional handwritten yellow explainer.
+- `PreviouslyOn`: thin strip under the header on every page except home.
+- `Timecode` and `SectionHeading`: mono label, condensed heading and a handwritten explainer. Every section has one, so visitors always know where they are.
+- `HandNote` and `StickyNote`: Reenie Beanie notes, slightly rotated. Decorative notes are hidden from screen readers.
+- `Viewfinder` and `InterviewFrame`: the home hero frame with corner brackets and ceiling tiles, and the portrait with its lower third caption. On home, Snap zoom punches in 1.55x on the face.
+- `TalkingHead`: 48px portrait crop, a quoted line and an optional stage direction.
+- `Receipt`: the career receipt. Roles with outlines on home, promotion history on About.
+- `WorkFolder`: manila folder holding a white sheet with the real cover, meta, blurb, outcome and an ON HOLD stamp where needed.
+- `ConsultingCabinet`: on Work, under Consulting. Locked manila files stamped CONFIDENTIAL stand for the client work that stays private; one open file shows a public engagement with its live site cover, a link to the client's team page, and three stills from the build.
+- `CurrentlyFilming`, `InterviewQA`, `BranchRules`, `WhiteboardAgenda`, `DeletedScenes`, `Corkboard` and `ComingUpNext`: the home, About and closing sections.
+- `Reception`: contact details, a sticky note and the visitor sign-in sheet, which posts to `/api/contact`.
+- `EndCredits`: the credits list, the one inspiration line and the copyright line.
+- `Prop` (`components/props/`): ten hidden props, each an original inline SVG inside a focusable button. The caption shows on hover, focus or tap, and each plays one short animation (under 0.6s, never looping). They sit absolutely in existing whitespace, so they never move the layout: the bobblehead (home photo), the stapler in jelly (home work files), the pretzel with a live countdown to 26 April (home currently filming), the World's Best Boss mug (home meeting), the letterhead box (home reception), the trophy (About, intern to Tech Lead), the kitchen wall notice and watercolour, the crossword (About, branch rules), the gift-wrapped folder (last work folder) and the beet (404). Their copy is in `content/props.ts`. Found props are counted in localStorage and shown in the end credits as "Props department".
 
 ## Motion
 
-- `Reveal` (`components/reveal.tsx`): content fades and lifts 28px the first time it enters the viewport, then stays. Rows stagger by about 50ms.
-- The receipt has two modes. On the home hero it prints top to bottom once, when it first comes into view. On `/about` it starts printed, and **Print another** reprints it with a random joke line item (`receiptJokes` in `content/about.ts`). The print animation there runs only on click.
-- The spotlight fades in once on page load. The coral glow follows the cursor, the blue one drifts.
-- Mobile menu: slides open with the links staggered in, and the menu icon rotates into the close icon. With reduced motion it only fades.
-- Hover: rows get a faint `navy-light` tint, and the primary button's glow brightens.
-- With `prefers-reduced-motion` or no JavaScript, everything is simply shown, and Print another swaps the line without animating.
+One library per job:
 
-## Project covers
+| Library | Job |
+|---|---|
+| `motion` (`motion/react`) | All component animation |
+| `react-rough-notation` | Four hand-drawn marks: the yellow highlight on the home whiteboard, the underline on the first folder's "Outcome", the box around the About receipt's VERIFIED stamp, and the underline under "Let me explain myself." |
+| `next-view-transitions` | A 120ms cut through black between pages, from the episode guide and Coming up next cards. The camera header stays put |
+| `qrcode.react` | The LinkedIn QR on every receipt, next to a visible "LinkedIn" link |
 
-Each project can set `cover` (for example `/images/work/simplify.png`). `ProjectCover` shows it with `next/image`, 8px radius and no hover zoom: small on the right of Selected work rows on desktop (above the text on mobile), and large at the top of each case study. Until the file exists under `public/`, a clearly marked placeholder shows the expected path.
+How things move:
 
-## Layout
+- `Reveal` (`components/motion/reveal.tsx`) wraps section blocks and cards. Every element is rechecked on each scroll frame and resize through one shared listener (`lib/scroll-frame.ts`), measured against the strip below the sticky header: anything fully visible is always shown, and anything partly on screen is never left hidden. They rise 16px in when entering from below, drop in from -16px when scrolling back up (`useScrollDirection`), and dim to 0.4 with an 8px drift while leaving. This replays on every pass. Long reading blocks (case study text, the memo) use a single soft fade.
+- Inside a `Reveal`, handwritten explainers write in left to right (`WriteIn`), and stage directions land 0.4s after their line.
+- Set pieces replay only after fully leaving the screen: episode title cards fade up from black, the receipt prints and its stamp lands, the clapper on Currently filming snaps shut, scene bridge arrows draw, and the rough-notation marks redraw.
+- Props play one short animation each on hover, focus or tap (a nod, a wobble, steam, a ribbon untying). With reduced motion they show their caption and stay still.
+- Snap zoom springs to 1.55x with a tiny shake. Work folder sheets slide up 10px on hover or focus, sticky notes lift 3px, and outtakes cut rather than slide.
+- Limits: 16px max distance, 0.35 to 0.6s, ease out `[0.22, 1, 0.36, 1]`, 0.06s stagger capped at four items. Only opacity, transform and clip-path animate.
+- The server HTML always shows everything; elements only park off screen after hydration.
+- `MotionConfig reducedMotion="user"`: with reduced motion everything is simply shown, marks appear without drawing, and the REC dot stops blinking.
 
-- Container `max-w-5xl`, left aligned.
-- Work, experience, skills, beliefs and writing are rows: a hairline, then meta in an 11rem left column and content on the right. Stacked on mobile.
-- Radius: receipt 0, inputs 4px, buttons full pill, images 8px.
+## Responsive
 
-## The career receipt
+Rotated elements never overlap text at 320px. Wide rows (receipt beside text, the folders grid) stack below 900px. The camera header stays one short sticky bar on phones, with the episode guide scrolling sideways.
 
-```
-┌────────────────────────────────────┐
-│          ERNEST MWINCHUMU          │
-│        Dar es Salaam, Tanzania     │
-│ ---------------------------------- │
-│             No. EM-2022            │
-│ ---------------------------------- │
-│  Tech Lead                         │
-│  Research and Product Lead         │
-│  Tech Consultancy                  │
-│ ---------------------------------- │
-│  Metaphors you didn't ask for Free │   (/about only)
-│  The Office quotes       Unlimited │   (/about only)
-│ ================================== │
-│  Total                    1 Ernest │
-│  VAT (Very Average Thinking)    0% │
-│  Paid with  Patience (Man Utd fan) │   (/about only)
-│   [QR → LinkedIn]     [VERIFIED]   │   (QR: /about only)
-│  Thank you for reading.            │
-│  Powered by Dunder Mifflin         │
-└╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲┘
-```
+Phones (below 640px) get a tighter cut, so home stays under 9,000px at 390px wide:
 
-Real text in a `dl`, so it's readable by screen readers and search engines. It sums up who Ernest is now: roles and personality, no history and no Simplify figures. The home page shows the short version.
-
-## Pages
-
-- `/`: hero with the short receipt beside the name, the short version, selected work with covers, where I'm heading, latest writing
-- `/work`: Simplitech Limited, Personal products, Consulting
-- `/about`: bio and photo, how I work, the interactive receipt, experience, education, skills (four rows), where I'm heading (beliefs live in the writing post), beyond work
-- `/work/[slug]`, `/writing`, `/writing/[slug]`
-- Contact lives in the footer of every page (`#contact`)
-
-## Quality floor
-
-Responsive to 320px, visible coral focus ring, AA contrast, no layout shift from motion (opacity, transform and clip-path only), reduced motion respected.
+- Sections use 56px of vertical padding instead of 88 to 96.
+- Hero: text, then the 240px photo with Snap zoom beside the caption, then the sticky note at 80% size.
+- Home shows the first 2 work files and the first 2 deleted scenes, with "See all files" and "See all scenes" after them; Currently filming shows its first 2 scenes; the personnel teaser shows one answer and skips the house rules (they're on About).
+- Folders on home skip the blurb and quote, the home receipt skips the role outlines, and the short version keeps its first paragraph. The Reception sticky note is hidden.
+- Desktop shows everything.

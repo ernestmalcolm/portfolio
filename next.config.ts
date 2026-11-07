@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
       { source: "/work/finsol-verified-portal", destination: "/work", permanent: true },
       {
         source: "/writing/notes-from-the-build",
-        destination: "/writing/intern-to-tech-lead-and-whats-next",
+        destination: "/writing/what-i-believe-about-digital-in-tanzania",
+        permanent: true,
+      },
+      {
+        source: "/writing/intern-to-tech-lead-and-whats-next",
+        destination: "/writing/what-i-believe-about-digital-in-tanzania",
         permanent: true,
       },
     ];

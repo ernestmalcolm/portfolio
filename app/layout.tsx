@@ -1,34 +1,51 @@
 import { ConsoleMessage } from "@/components/console-message";
-import { SiteFooter } from "@/components/sections/site-footer";
-import { SiteBackdrop } from "@/components/site-backdrop";
-import { SiteHeader } from "@/components/site-header";
+import { CameraHeader } from "@/components/doc/camera-header";
+import { EndCredits } from "@/components/doc/end-credits";
+import { Reception } from "@/components/doc/reception";
+import { MotionProvider } from "@/components/motion/providers";
 import { siteConfig, siteUrl } from "@/lib/site-config";
 
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed } from "next/font/google";
+import localFont from "next/font/local";
+import { ViewTransitions } from "next-view-transitions";
 
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+// Fonts are self-hosted from app/fonts, so a build never depends on Google Fonts being reachable
+const plexSans = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-sans.woff2", weight: "100 700", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-italic.woff2", weight: "100 700", style: "italic" },
+  ],
   variable: "--font-plex-sans",
   display: "swap",
+  fallback: ["system-ui", "Arial", "sans-serif"],
 });
 
-const plexCondensed = IBM_Plex_Sans_Condensed({
-  subsets: ["latin"],
-  weight: ["700"],
+const plexCondensed = localFont({
+  src: "./fonts/ibm-plex-sans-condensed-700.woff2",
+  weight: "700",
   variable: "--font-plex-condensed",
   display: "swap",
+  fallback: ["Arial Narrow", "Arial", "sans-serif"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "600"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-600.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-plex-mono",
   display: "swap",
+  fallback: ["ui-monospace", "Menlo", "monospace"],
+});
+
+const reenie = localFont({
+  src: "./fonts/reenie-beanie-400.woff2",
+  weight: "400",
+  variable: "--font-reenie",
+  display: "swap",
+  fallback: ["cursive"],
 });
 
 const defaultTitle = `${siteConfig.name}, ${siteConfig.title}`;
@@ -76,12 +93,7 @@ function PersonJsonLd() {
     sameAs: [siteConfig.social.linkedin],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }
 
 export default function RootLayout({
@@ -90,27 +102,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable}`}
-    >
-      {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
-      <body className="flex min-h-screen flex-col" suppressHydrationWarning>
-        <noscript>
-          <style>{".reveal,.receipt-print{opacity:1!important;transform:none!important;clip-path:none!important}"}</style>
-        </noscript>
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <PersonJsonLd />
-        <SiteBackdrop />
-        <ConsoleMessage />
-        <SiteHeader />
-        <div id="main" className="relative isolate flex-1 overflow-x-clip">
-          {children}
-        </div>
-        <SiteFooter />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${plexSans.variable} ${plexCondensed.variable} ${plexMono.variable} ${reenie.variable}`}
+      >
+        {/* Extensions like Grammarly add attributes to <body> before React hydrates */}
+        <body className="flex min-h-screen flex-col" suppressHydrationWarning>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <PersonJsonLd />
+          <ConsoleMessage />
+          <MotionProvider>
+            <CameraHeader />
+            <div id="main" className="flex-1 overflow-x-clip">
+              {children}
+            </div>
+            <Reception />
+            <EndCredits />
+          </MotionProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
