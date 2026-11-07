@@ -8,11 +8,10 @@ export type WritingPost = {
 
 export const writingPosts: WritingPost[] = [
   {
-    slug: "intern-to-tech-lead-and-whats-next",
-    title: "From intern to Tech Lead, and what comes next",
+    slug: "what-i-believe-about-digital-in-tanzania",
+    title: "What I believe about digital in Tanzania, and what comes next",
     date: "2026-11-05",
-    excerpt:
-      "How I got here, what I believe about digital in Tanzania, and what I hope you take away from this site.",
+    excerpt: "Where digital in Tanzania falls short, where I'm heading, and how I got here.",
     published: true,
   },
 ];
@@ -22,9 +21,7 @@ export function getWritingPost(slug: string) {
 }
 
 export function getPublishedPosts() {
-  return writingPosts
-    .filter((post) => post.published)
-    .sort((a, b) => b.date.localeCompare(a.date));
+  return writingPosts.filter((post) => post.published).sort((a, b) => b.date.localeCompare(a.date));
 }
 
 /** Copy around the memos */
@@ -40,7 +37,7 @@ export const memoPage = {
     label: "Outbox",
     body: "More memos are being drafted. Some of them will even be sent.",
   },
-  quip: { line: "\"I write slower than I read. And I read very slowly.\"", direction: "[long pause]" },
+  quip: { line: '"I write slower than I read. And I read very slowly."', direction: "[long pause]" },
   signature: "Ernest",
   cc: "cc: the intern desk",
 };

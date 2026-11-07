@@ -2,9 +2,11 @@
 
 import { useSyncExternalStore } from "react";
 
+import { onScrollFrame } from "@/lib/scroll-frame";
+
 export type ScrollDirection = "down" | "up";
 
-// One shared scroll listener for every component that asks
+// Shared by every component that asks, on the site's one scroll listener
 let direction: ScrollDirection = "down";
 let lastY = 0;
 const listeners = new Set<() => void>();
@@ -20,15 +22,17 @@ function onScroll() {
   }
 }
 
+let stop: (() => void) | null = null;
+
 function subscribe(listener: () => void) {
   if (listeners.size === 0) {
     lastY = window.scrollY;
-    window.addEventListener("scroll", onScroll, { passive: true });
+    stop = onScrollFrame(onScroll);
   }
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
-    if (listeners.size === 0) window.removeEventListener("scroll", onScroll);
+    if (listeners.size === 0) stop?.();
   };
 }
 

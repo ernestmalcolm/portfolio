@@ -151,7 +151,7 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-8 sm:mt-12">
+          <p className="mt-6 sm:mt-12">
             <Link href={pilot.workLink.href} className="font-semibold underline">
               <span className="sm:hidden">{pilot.workLink.mobileLabel}</span>
               <span className="hidden sm:inline">{pilot.workLink.label}</span>
@@ -162,7 +162,7 @@ export default function HomePage() {
       </section>
 
       {/* Ep 3: personnel file teaser */}
-      <section aria-labelledby="pers-title">
+      <section id="personnel" aria-labelledby="pers-title">
         <EpisodeCard as="h2" id="pers-title" {...episodeCards.homePersonnel} className="py-7 sm:py-10" />
         <div className="container-page pb-14 sm:pb-[88px] pt-12 sm:pt-[72px]">
           <div className="flex flex-col gap-8 sm:gap-14 min-[900px]:flex-row min-[900px]:items-start">
@@ -234,7 +234,7 @@ export default function HomePage() {
         aria-labelledby="deleted-title"
         className="container-page flex flex-col gap-10 pb-14 pt-14 sm:gap-12 sm:pt-24 min-[900px]:flex-row min-[900px]:items-start"
       >
-        <div className="min-w-0 min-[900px]:flex-[1_1_360px]">
+        <div id="memos" className="min-w-0 min-[900px]:flex-[1_1_360px]">
           <SectionHeading
             timecode={pilot.latestMemo.timecode}
             timecodeLabel={pilot.latestMemo.timecodeLabel}
@@ -250,7 +250,7 @@ export default function HomePage() {
               <p className="font-mono text-[13px] text-muted">
                 <time dateTime={latestPost.date}>{formatDate(latestPost.date)}</time>
               </p>
-              <h3 className="mt-1.5 text-[21px] font-semibold leading-[1.3]">
+              <h3 className="mt-1.5 text-[19px] font-semibold leading-[1.3] sm:text-[21px]">
                 <Link href={`/writing/${latestPost.slug}`} className="text-ink underline hover:text-pen">
                   {latestPost.title}
                 </Link>

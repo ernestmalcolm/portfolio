@@ -58,7 +58,7 @@ Paper and the receipt have no radius. Buttons are 4px. Folders are 4px with a 6p
 
 Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (the show frame), `content/projects.ts` (work files), `content/about.ts` (the personnel file) and `content/writing/` (memos).
 
-- `CameraHeader`: sticky black bar with `<EM/>`, the live REC clock (`RecClock`: Dar es Salaam time, ticking every second, with a hard-blinking red dot), "CAM B" and the episode guide. The current episode gets `aria-current="page"` and a yellow underline. On mobile the guide is one row that scrolls sideways. A 2px yellow `RuntimeBar` along the bottom shows how far down the page you are.
+- `CameraHeader`: sticky black bar with `<EM/>`, the live REC clock (`RecClock`: Dar es Salaam time, ticking every second, with a hard-blinking red dot), "CAM B" and the episode guide. The guide underlines the episode in view: on home it follows the sections (scroll-spy), and on every page Reception takes over at the bottom. The current page gets `aria-current="page"`, the section in view `aria-current="location"`. On mobile the guide is one row that scrolls sideways, keeps the active episode in view and fades at the right edge while there is more to swipe. A 2px yellow `RuntimeBar` along the bottom shows how far down the page you are.
 - `EpisodeCard`: black title card with a mono label, a condensed title, an optional white tagline and an optional handwritten yellow explainer.
 - `PreviouslyOn`: thin strip under the header on every page except home.
 - `Timecode` and `SectionHeading`: mono label, condensed heading and a handwritten explainer. Every section has one, so visitors always know where they are.
@@ -84,7 +84,7 @@ One library per job:
 
 How things move:
 
-- `Reveal` (`components/motion/reveal.tsx`) wraps section blocks and cards. They rise 16px in when entering from below, drop in from -16px when scrolling back up (`useScrollDirection`), and dim to 0.4 with an 8px drift while leaving. This replays on every pass. Long reading blocks (case study text, the memo) use a single soft fade.
+- `Reveal` (`components/motion/reveal.tsx`) wraps section blocks and cards. Every element is rechecked on each scroll frame and resize through one shared listener (`lib/scroll-frame.ts`), measured against the strip below the sticky header: anything fully visible is always shown, and anything partly on screen is never left hidden. They rise 16px in when entering from below, drop in from -16px when scrolling back up (`useScrollDirection`), and dim to 0.4 with an 8px drift while leaving. This replays on every pass. Long reading blocks (case study text, the memo) use a single soft fade.
 - Inside a `Reveal`, handwritten explainers write in left to right (`WriteIn`), and stage directions land 0.4s after their line.
 - Set pieces replay only after fully leaving the screen: episode title cards fade up from black, the receipt prints and its stamp lands, the clapper on Currently filming snaps shut, scene bridge arrows draw, and the rough-notation marks redraw.
 - Snap zoom springs to 1.55x with a tiny shake. Work folder sheets slide up 10px on hover or focus, sticky notes lift 3px, and outtakes cut rather than slide.

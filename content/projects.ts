@@ -63,8 +63,7 @@ export const workPage = {
       timecode: "00:04:30",
       title: "Simplitech Limited",
       explainer: "My main job, since 2022.",
-      intro:
-        "My main engagement since 2022. I lead Simplify across product, design, tech and partner integrations.",
+      intro: "My main engagement since 2022. I lead Simplify across product, design, tech and partner integrations.",
     },
     personal: {
       timecode: "00:09:52",
@@ -85,7 +84,7 @@ export const consulting = {
   explainer: "How I help other businesses.",
   body: "I help businesses get their product and digital side right: discovery to work out what's actually needed, websites that sell the experience, and product requirements a team can deliver from. Work so far includes a fintech's company website and product discovery, a hospitality business and a media brand.",
   quip: {
-    line: "\"I can't name the clients.\"",
+    line: '"I can\'t name the clients."',
     direction: "[looks at camera] It's called discretion. Also manners.",
   } satisfies Quip,
   cta: "Email me about a project",
@@ -113,7 +112,7 @@ export const projects: Project[] = [
     blurb:
       "Fiscal receipts and invoicing for businesses across Tanzania. I lead product, design and tech across web, mobile, API and WhatsApp.",
     outcome: "One product across four channels, so businesses issue receipts wherever they already work.",
-    quip: { line: "\"I don't have favourites.\"", direction: "[glances at Simplify]" },
+    quip: { line: '"I don\'t have favourites."', direction: "[glances at Simplify]" },
     link: "https://www.simplify.co.tz",
     linkLabel: "Open Simplify",
     cover: "/images/work/simplify.png",
@@ -137,14 +136,17 @@ export const projects: Project[] = [
           { term: "Design", detail: "UI/UX and prototypes for new features before development" },
           { term: "Tech", detail: "Frontend and mobile, code review, direction for backend and remote developers" },
           { term: "Delivery", detail: "Testing and UAT before release, weekly stakeholder reports" },
-          { term: "Partners", detail: "Integrations with the tax authority, banks, payment providers and client systems" },
+          {
+            term: "Partners",
+            detail: "Integrations with the tax authority, banks, payment providers and client systems",
+          },
           { term: "Business", detail: "Commercial and pricing input, operating plans" },
         ],
       },
       {
         heading: "The first mobile app",
         explainer: "The project that changed my role.",
-        body: "In 2024 I led an external consultant through building Simplitech's first mobile app, then took it over and ran it full time. It's where the job stopped being \"write the code\" and became \"decide what's worth building, and make sure it gets built right\".",
+        body: 'In 2024 I led an external consultant through building Simplitech\'s first mobile app, then took it over and ran it full time. It\'s where the job stopped being "write the code" and became "decide what\'s worth building, and make sure it gets built right".',
       },
       {
         heading: "Every channel, one product",
@@ -179,8 +181,8 @@ export const projects: Project[] = [
     outcomeDetail:
       "One product across web, mobile, API and WhatsApp, so businesses can issue compliant receipts wherever they already work, and partners can plug in without changing their own systems.",
     asides: [
-      { line: "\"Four channels. One product. Zero favourites.\"", direction: "[long pause]" },
-      { line: "\"The API is my favourite channel.\"", direction: "[looks at camera] I said zero favourites." },
+      { line: '"Four channels. One product. Zero favourites."', direction: "[long pause]" },
+      { line: '"The API is my favourite channel."', direction: "[looks at camera] I said zero favourites." },
     ],
     teaser: "Fiscal receipts and invoicing, across four channels.",
   },
@@ -194,12 +196,12 @@ export const projects: Project[] = [
     years: "2025 to present",
     meta: "Research and Product Lead, 2025 to present",
     selected: 2,
-    blurb:
-      "AI agents covering the full audit lifecycle for audit firms, with a human approving every key decision.",
+    blurb: "AI agents covering the full audit lifecycle for audit firms, with a human approving every key decision.",
     outcome:
       "In research and build: an agent suite tested on real audit work, with a clear line where the human decides.",
-    quip: { line: "\"The AI does the prep. The auditor keeps the judgment. Everyone keeps their weekend.\"" },
-    link: null,
+    quip: { line: '"The AI does the prep. The auditor keeps the judgment. Everyone keeps their weekend."' },
+    link: "https://simplifyaudit.vercel.app/",
+    linkLabel: "Open SimplifyAudit",
     cover: "/images/work/simplifyaudit.png",
     tagline: "AI agents for audit firms, with a human approving every key decision.",
     extraFact: { label: "Status", value: "In research and build" },
@@ -228,8 +230,11 @@ export const projects: Project[] = [
     outcomeDetail:
       "In research and build at Simplitech: an agent suite tested on real audit work, with a clear line between what the agent prepares and what the auditor decides.",
     asides: [
-      { line: "\"The AI does the prep. The auditor keeps the judgment.\"", direction: "[long pause] Everyone keeps their weekend." },
-      { line: "\"Every key decision still has a human signature on it.\"", direction: "[looks at camera]" },
+      {
+        line: '"The AI does the prep. The auditor keeps the judgment."',
+        direction: "[long pause] Everyone keeps their weekend.",
+      },
+      { line: '"Every key decision still has a human signature on it."', direction: "[looks at camera]" },
     ],
     teaser: "AI agents for audit firms. A human approves every key decision.",
   },
@@ -248,7 +253,7 @@ export const projects: Project[] = [
     blurb:
       "Financial data platform for Tanzanian banks: sector overview, bank comparisons, financial statements and macro indicators.",
     outcome: "A working platform that makes Tanzanian bank data comparable at a glance.",
-    quip: { line: "\"He had the data. I had the opinions.\"", direction: "[long pause]" },
+    quip: { line: '"He had the data. I had the opinions."', direction: "[long pause]" },
     link: "https://finsightstz.vercel.app/",
     linkLabel: "Open FinSights",
     cover: "/images/work/finsights.png",
@@ -293,10 +298,11 @@ export const projects: Project[] = [
         body: "Next.js, React, Supabase, Tailwind. Claude API for the planned insight layer.",
       },
     ],
-    outcomeDetail: "A working platform that makes Tanzanian bank data comparable at a glance, built for institutions first.",
+    outcomeDetail:
+      "A working platform that makes Tanzanian bank data comparable at a glance, built for institutions first.",
     asides: [
-      { line: "\"He had the data. I had the opinions.\"", direction: "[long pause]" },
-      { line: "\"Spreadsheets are where good data goes to hide.\"", direction: "[looks at camera]" },
+      { line: '"He had the data. I had the opinions."', direction: "[long pause]" },
+      { line: '"Spreadsheets are where good data goes to hide."', direction: "[looks at camera]" },
     ],
     teaser: "Tanzanian bank data, comparable at a glance.",
   },
@@ -313,8 +319,9 @@ export const projects: Project[] = [
     selected: 4,
     blurb: "A garage for your cars: service history, what they cost you, and reminders before anything is due.",
     outcome: "Version 0.1 built and working. Paused, not abandoned.",
-    quip: { line: "\"It's on hold. Like most car services.\"", direction: "[looks at camera]" },
-    link: null,
+    quip: { line: '"It\'s on hold. Like most car services."', direction: "[looks at camera]" },
+    link: "https://motocare-mvp.vercel.app/",
+    linkLabel: "Open MotoCare",
     cover: "/images/work/motocare.png",
     tagline: "A garage for your cars, in your pocket.",
     extraFact: { label: "Status", value: "On hold" },
@@ -348,8 +355,8 @@ export const projects: Project[] = [
     ],
     outcomeDetail: "Version 0.1 is built and working as an MVP. Paused, not abandoned.",
     asides: [
-      { line: "\"It's on hold. Like most car services.\"", direction: "[looks at camera]" },
-      { line: "\"Version 0.2 is waiting for a free weekend.\"", direction: "[long pause]" },
+      { line: '"It\'s on hold. Like most car services."', direction: "[looks at camera]" },
+      { line: '"Version 0.2 is waiting for a free weekend."', direction: "[long pause]" },
     ],
     teaser: "A garage for your cars. Currently on hold. It's fine.",
   },
@@ -364,7 +371,7 @@ export const projects: Project[] = [
     meta: "Design and build, 2024",
     blurb: "An Eisenhower style task app: separate what matters from what just feels urgent.",
     outcome: "Live, and used daily by at least one person. Me.",
-    quip: { line: "\"It judges you a little. That's a feature.\"" },
+    quip: { line: '"It judges you a little. That\'s a feature."' },
     link: "https://emtodo.vercel.app/",
     linkLabel: "Open EM To Do",
     linkOnFolder: true,
@@ -385,8 +392,11 @@ export const projects: Project[] = [
     ],
     outcomeDetail: "Live, and used daily by at least one person. Me.",
     asides: [
-      { line: "\"It judges you a little. That's a feature.\"" },
-      { line: "\"Urgent and important are different things. I built an app to remind myself.\"", direction: "[looks at camera]" },
+      { line: '"It judges you a little. That\'s a feature."' },
+      {
+        line: '"Urgent and important are different things. I built an app to remind myself."',
+        direction: "[looks at camera]",
+      },
     ],
     teaser: "A task app that judges you a little.",
   },
@@ -397,9 +407,7 @@ export function getProject(slug: string) {
 }
 
 export function getSelectedProjects() {
-  return projects
-    .filter((p) => p.selected)
-    .sort((a, b) => (a.selected ?? 0) - (b.selected ?? 0));
+  return projects.filter((p) => p.selected).sort((a, b) => (a.selected ?? 0) - (b.selected ?? 0));
 }
 
 export function getProjectsByGroup(group: ProjectGroup) {
