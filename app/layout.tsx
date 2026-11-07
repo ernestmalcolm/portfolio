@@ -6,38 +6,46 @@ import { MotionProvider } from "@/components/motion/providers";
 import { siteConfig, siteUrl } from "@/lib/site-config";
 
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Condensed, Reenie_Beanie } from "next/font/google";
+import localFont from "next/font/local";
 import { ViewTransitions } from "next-view-transitions";
 
 import "./globals.css";
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+// Fonts are self-hosted from app/fonts, so a build never depends on Google Fonts being reachable
+const plexSans = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-sans.woff2", weight: "100 700", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-italic.woff2", weight: "100 700", style: "italic" },
+  ],
   variable: "--font-plex-sans",
   display: "swap",
+  fallback: ["system-ui", "Arial", "sans-serif"],
 });
 
-const plexCondensed = IBM_Plex_Sans_Condensed({
-  subsets: ["latin"],
-  weight: ["700"],
+const plexCondensed = localFont({
+  src: "./fonts/ibm-plex-sans-condensed-700.woff2",
+  weight: "700",
   variable: "--font-plex-condensed",
   display: "swap",
+  fallback: ["Arial Narrow", "Arial", "sans-serif"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "600"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-600.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-plex-mono",
   display: "swap",
+  fallback: ["ui-monospace", "Menlo", "monospace"],
 });
 
-const reenie = Reenie_Beanie({
-  subsets: ["latin"],
-  weight: ["400"],
+const reenie = localFont({
+  src: "./fonts/reenie-beanie-400.woff2",
+  weight: "400",
   variable: "--font-reenie",
   display: "swap",
+  fallback: ["cursive"],
 });
 
 const defaultTitle = `${siteConfig.name}, ${siteConfig.title}`;

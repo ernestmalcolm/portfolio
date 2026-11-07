@@ -37,11 +37,11 @@ The content stays professional. The jokes live in captions, stage directions and
 | `manila` | `#E3C88A` (tab `#D9BC78`, edge `#C9A962`) | Work folders |
 | `cork` | `#B98E5E` (frame `#7A5A38`) | Break room |
 
-Text meets 4.5:1. Yellow text only appears on dark backgrounds. Focus rings are pen blue, and yellow inside dark panels (`.on-dark`).
+Text links are pen blue and semibold, with a soft underline (1.5px, set 0.24em below the text, 40% strength) that firms up on hover. On light paper a yellow marker swipe slides in under the link on hover. Text meets 4.5:1. Yellow text only appears on dark backgrounds. Focus rings are pen blue, and yellow inside dark panels (`.on-dark`).
 
 ## Type
 
-All self-hosted with `next/font/google`.
+Self-hosted from `app/fonts` with `next/font/local` (latin subsets), so a build never depends on Google Fonts. IBM Plex Sans is the variable version: one file covers 100 to 700, plus an italic file.
 
 | Font | Class | Role |
 |---|---|---|
