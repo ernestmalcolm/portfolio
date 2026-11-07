@@ -67,7 +67,7 @@ export function EpisodeCard({ label, title, id, tagline, explainer, as: Tag = "h
         )}
         {explainer && (
           <WriteIn delay={0.2}>
-            <HandNote color="text-marker" size={32} className="mx-auto mt-3 max-w-[60rem]">
+            <HandNote color="text-marker" size={32} className="mx-auto mt-2 max-w-[60rem] max-sm:!text-[27px]">
               {explainer}
             </HandNote>
           </WriteIn>

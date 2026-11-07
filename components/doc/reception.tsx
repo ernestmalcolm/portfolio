@@ -89,10 +89,10 @@ export function Reception() {
         explainer={reception.explainer}
         className="py-10"
       />
-      <div className="container-page flex flex-col gap-14 pb-[88px] pt-[72px] min-[900px]:flex-row">
+      <div className="container-page flex flex-col gap-8 pb-14 sm:gap-14 sm:pb-[88px] pt-12 sm:pt-[72px] min-[900px]:flex-row">
         <Reveal className="min-w-0 min-[900px]:flex-[1_1_340px]">
           <p className="text-muted-deep">{reception.intro}</p>
-          <dl className="mt-7 grid grid-cols-[90px_minmax(0,1fr)] gap-x-4 gap-y-2.5 text-base">
+          <dl className="mt-5 grid grid-cols-[72px_minmax(0,1fr)] gap-x-3 gap-y-2.5 text-[15px] sm:mt-7 sm:grid-cols-[90px_minmax(0,1fr)] sm:gap-x-4 sm:text-base">
             <dt className="pt-[3px] font-mono text-[13px] text-muted">Email</dt>
             <dd className="break-words">
               <a href={`mailto:${siteConfig.email}`} className="underline">
@@ -113,7 +113,7 @@ export function Reception() {
               </a>
             </dd>
           </dl>
-          <StickyNote className="mt-7 w-[210px]">{reception.stickyNote}</StickyNote>
+          <StickyNote className="mt-7 hidden w-[210px] sm:block">{reception.stickyNote}</StickyNote>
         </Reveal>
 
         <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_480px]">
@@ -121,7 +121,7 @@ export function Reception() {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
             aria-labelledby="reception-form-title"
-            className="rounded bg-white px-6 pb-9 pt-8 shadow-[0_10px_26px_rgba(18,20,23,0.1)] sm:px-8"
+            className="rounded bg-white px-6 pb-7 pt-6 sm:pb-9 sm:pt-8 shadow-[0_10px_26px_rgba(18,20,23,0.1)] sm:px-8"
           >
             <p id="reception-form-title" className="font-condensed text-[22px] font-bold">
               {reception.formTitle}

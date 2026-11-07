@@ -9,6 +9,7 @@ import { TalkingHead } from "@/components/doc/talking-head";
 import { Mark } from "@/components/motion/mark";
 import { ease } from "@/lib/motion";
 import { type Project, workPage } from "@/content/projects";
+import { cn } from "@/lib/utils";
 
 /** Manila folder holding a project's sheet: cover, title, meta, blurb and outcome */
 type WorkFolderProps = {
@@ -16,6 +17,8 @@ type WorkFolderProps = {
   headingLevel?: "h2" | "h3";
   /** Underlines the "Outcome" label in pen (the first folder on home) */
   markOutcome?: boolean;
+  /** Phones skip the blurb and the quote, so the outcome carries it (home) */
+  compact?: boolean;
 };
 
 const sheetShadow = {
@@ -23,7 +26,7 @@ const sheetShadow = {
   lifted: "0 10px 22px rgba(18,20,23,0.24)",
 };
 
-export function WorkFolder({ project, headingLevel = "h3", markOutcome = false }: WorkFolderProps) {
+export function WorkFolder({ project, headingLevel = "h3", markOutcome = false, compact = false }: WorkFolderProps) {
   const Heading = headingLevel;
   const [hovered, setHovered] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
@@ -53,7 +56,7 @@ export function WorkFolder({ project, headingLevel = "h3", markOutcome = false }
             <Cover project={project} />
             <Heading className="mt-[18px] font-condensed text-[28px] font-bold leading-[1.1]">{project.title}</Heading>
             <p className="mt-1 font-mono text-[13px] text-muted">{project.meta}</p>
-            <p className="mt-3 text-muted-deep">{project.blurb}</p>
+            <p className={cn("mt-3 text-muted-deep", compact && "hidden sm:block")}>{project.blurb}</p>
             <p className="mt-3 border-t border-dashed border-[#C9CDC6] pt-2.5 text-[15px] text-ink">
               {markOutcome ? (
                 <Mark type="underline" color="#2244B8" padding={1} strokeWidth={1.5}>
@@ -84,7 +87,7 @@ export function WorkFolder({ project, headingLevel = "h3", markOutcome = false }
           )}
         </div>
       </div>
-      <TalkingHead quip={project.quip} className="mt-3.5" />
+      <TalkingHead quip={project.quip} className={cn("mt-3.5", compact && "hidden sm:flex")} />
     </article>
   );
 }

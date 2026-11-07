@@ -11,7 +11,7 @@ export default function NotFound() {
     <main>
       <EpisodeCard label={notFound.label} title={notFound.title} explainer={notFound.explainer} />
       <section aria-label="Page not found" className="bg-panel">
-        <Reveal className="container-page py-[88px]">
+        <Reveal className="container-page py-14 sm:py-[88px]">
           <p className="max-w-[36rem] text-lg text-muted-deep">{notFound.body}</p>
           <StageDirection className="mt-2.5 block">{notFound.direction}</StageDirection>
           <Link

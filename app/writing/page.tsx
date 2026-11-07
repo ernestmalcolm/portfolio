@@ -26,7 +26,7 @@ export default function WritingPage() {
       <EpisodeCard {...episodeCards.writing} />
 
       <section aria-label={memoPage.pileLabel} className="bg-panel">
-        <div className="container-page py-[88px]">
+        <div className="container-page py-14 sm:py-[88px]">
           <Timecode code={memoPage.pileTimecode} label={memoPage.pileLabel} />
           <ul className="mt-[18px] flex max-w-[860px] flex-col gap-[22px]">
             {posts.map((post, index) => (

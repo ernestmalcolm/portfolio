@@ -15,10 +15,10 @@ export function ComingUpNext({ next }: { next: ComingUp }) {
     </>
   );
   const className =
-    "on-dark flex flex-wrap items-center justify-between gap-x-7 gap-y-2 rounded bg-camera px-8 py-[26px] text-white no-underline hover:bg-strip hover:text-white";
+    "on-dark flex flex-wrap items-center justify-between gap-x-7 gap-y-2 rounded bg-camera px-6 py-5 text-white sm:px-8 sm:py-[26px] no-underline hover:bg-strip hover:text-white";
 
   return (
-    <Reveal as="section" aria-label="Coming up next" className="container-page pb-[88px] pt-[88px]">
+    <Reveal as="section" aria-label="Coming up next" className="container-page pb-14 sm:pb-[88px] pt-10 sm:pt-[88px]">
       {next.href.startsWith("#") ? (
         <a href={next.href} className={className}>
           {inner}

@@ -40,9 +40,9 @@ export default function HomePage() {
   return (
     <main>
       {/* Ep 1: the viewfinder */}
-      <section aria-labelledby="pilot-title" className="bg-panel-dark px-4 pb-[72px] pt-12 sm:px-8">
-        <Viewfinder className="px-6 pb-[72px] pt-16 sm:px-16">
-          <div className="flex flex-col gap-9 min-[900px]:flex-row min-[900px]:flex-wrap min-[900px]:items-center min-[900px]:justify-between">
+      <section aria-labelledby="pilot-title" className="bg-panel-dark px-4 pb-10 pt-6 sm:px-8 sm:pb-[72px] sm:pt-12">
+        <Viewfinder className="px-6 pb-12 pt-[52px] sm:px-16 sm:pb-[72px] sm:pt-16">
+          <div className="flex flex-col gap-7 sm:gap-9 min-[900px]:flex-row min-[900px]:flex-wrap min-[900px]:items-center min-[900px]:justify-between">
             <div className="min-w-0 min-[900px]:flex-[1_1_400px]">
               <p className="font-mono text-[13px] text-muted">{pilot.label}</p>
               <h1
@@ -54,7 +54,7 @@ export default function HomePage() {
               <p className="mt-[18px] font-mono text-[15px] text-muted">
                 {siteConfig.title} in {siteConfig.location}.
               </p>
-              <p className="mt-3.5 max-w-[34rem] text-[22px] leading-[1.45]">{siteConfig.tagline}</p>
+              <p className="mt-3.5 max-w-[34rem] text-[19px] leading-[1.45] sm:text-[22px]">{siteConfig.tagline}</p>
               <div className="mt-[30px] flex flex-wrap items-center gap-5">
                 <a
                   href={`mailto:${siteConfig.email}`}
@@ -70,7 +70,7 @@ export default function HomePage() {
             <StickyNote
               label={pilot.stickyLabel}
               rotate={3}
-              className="w-[200px] self-start px-[18px] pb-[22px] pt-[18px] text-[27px] leading-[1.08] shadow-[0_8px_16px_rgba(18,20,23,0.16)] min-[900px]:mt-6"
+              className="order-3 w-[240px] self-start px-3.5 pb-[18px] pt-3.5 text-[22px] leading-[1.08] shadow-[0_8px_16px_rgba(18,20,23,0.16)] sm:order-none sm:w-[200px] sm:px-[18px] sm:pb-[22px] sm:pt-[18px] sm:text-[27px] min-[900px]:mt-6"
             >
               {pilot.sticky}
             </StickyNote>
@@ -78,15 +78,15 @@ export default function HomePage() {
               size="home"
               note={pilot.explainNote}
               priority
-              className="min-[900px]:w-[300px] min-[900px]:shrink-0"
+              className="order-2 sm:order-none min-[900px]:w-[300px] min-[900px]:shrink-0"
             />
           </div>
         </Viewfinder>
       </section>
 
       {/* The short version, with the receipt */}
-      <section aria-labelledby="short-title" className="container-page py-24">
-        <div className="flex flex-col gap-10 min-[900px]:flex-row min-[900px]:items-start min-[900px]:justify-between">
+      <section aria-labelledby="short-title" className="container-page py-14 sm:py-24">
+        <div className="flex flex-col gap-8 sm:gap-10 min-[900px]:flex-row min-[900px]:items-start min-[900px]:justify-between">
           <div className="min-w-0 min-[900px]:flex-[1_1_460px]">
             <SectionHeading
               id="short-title"
@@ -97,7 +97,11 @@ export default function HomePage() {
             />
             <Reveal>
               {shortVersion.paragraphs.map((paragraph, index) => (
-                <p key={paragraph} className={`${index === 0 ? "mt-5" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
+                // On phones the second paragraph repeats the hero line, so it waits for wider screens
+                <p
+                  key={paragraph}
+                  className={`${index === 0 ? "mt-5" : "mt-3.5 hidden sm:block"} max-w-[36rem] text-muted-deep`}
+                >
                   {paragraph}
                 </p>
               ))}
@@ -133,18 +137,24 @@ export default function HomePage() {
 
       {/* Ep 2: the work files */}
       <section id="work" aria-labelledby="work-title" className="bg-panel">
-        <EpisodeCard as="h2" id="work-title" {...episodeCards.homeWork} className="py-10" />
-        <div className="container-page pb-[88px] pt-[72px]">
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,500px),1fr))] gap-x-11 gap-y-16">
+        <EpisodeCard as="h2" id="work-title" {...episodeCards.homeWork} className="py-7 sm:py-10" />
+        <div className="container-page pb-14 sm:pb-[88px] pt-12 sm:pt-[72px]">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,500px),1fr))] gap-x-11 gap-y-10 sm:gap-y-16">
             {selected.map((project, index) => (
-              <Reveal key={project.slug} delay={stagger(index % 2)}>
-                <WorkFolder project={project} markOutcome={index === 0} />
+              // On phones the first two files make the point; the link below has the rest
+              <Reveal
+                key={project.slug}
+                delay={stagger(index % 2)}
+                className={index > 1 ? "hidden sm:block" : undefined}
+              >
+                <WorkFolder project={project} markOutcome={index === 0} compact />
               </Reveal>
             ))}
           </div>
-          <p className="mt-12">
+          <p className="mt-8 sm:mt-12">
             <Link href={pilot.workLink.href} className="font-semibold underline">
-              {pilot.workLink.label}
+              <span className="sm:hidden">{pilot.workLink.mobileLabel}</span>
+              <span className="hidden sm:inline">{pilot.workLink.label}</span>
             </Link>
           </p>
           <SceneBridge>{homeBridges.work}</SceneBridge>
@@ -153,11 +163,11 @@ export default function HomePage() {
 
       {/* Ep 3: personnel file teaser */}
       <section aria-labelledby="pers-title">
-        <EpisodeCard as="h2" id="pers-title" {...episodeCards.homePersonnel} className="py-10" />
-        <div className="container-page pb-[88px] pt-[72px]">
-          <div className="flex flex-col gap-14 min-[900px]:flex-row min-[900px]:items-start">
+        <EpisodeCard as="h2" id="pers-title" {...episodeCards.homePersonnel} className="py-7 sm:py-10" />
+        <div className="container-page pb-14 sm:pb-[88px] pt-12 sm:pt-[72px]">
+          <div className="flex flex-col gap-8 sm:gap-14 min-[900px]:flex-row min-[900px]:items-start">
             <Reveal className="min-w-0 min-[900px]:flex-[1_1_520px]">
-              <InterviewQA answers={homeInterview} />
+              <InterviewQA answers={homeInterview} mobileLimit={1} />
               <p className="mt-[18px] flex flex-wrap gap-x-[22px] gap-y-2">
                 {pilot.personnelLinks.map((link) => (
                   <Link key={link.href} href={link.href} className="font-semibold underline">
@@ -166,7 +176,8 @@ export default function HomePage() {
                 ))}
               </p>
             </Reveal>
-            <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_460px]">
+            {/* The full rules are on About; phones get the interview and the links */}
+            <Reveal delay={stagger(1)} className="hidden min-w-0 sm:block min-[900px]:flex-[1_1_460px]">
               <BranchRules title={branchRules.homeTitle} rules={branchRules.home} footer={branchRules.homeFooter} />
             </Reveal>
           </div>
@@ -176,9 +187,9 @@ export default function HomePage() {
 
       {/* Special episode: The Meeting */}
       <section id="meeting" aria-labelledby="meeting-title" className="bg-cubicle">
-        <EpisodeCard as="h2" id="meeting-title" {...episodeCards.meeting} className="py-10" />
-        <div className="container-page pb-24 pt-20">
-          <div className="flex flex-col gap-12 min-[900px]:flex-row min-[900px]:items-start">
+        <EpisodeCard as="h2" id="meeting-title" {...episodeCards.meeting} className="py-7 sm:py-10" />
+        <div className="container-page pb-14 sm:pb-24 pt-14 sm:pt-20">
+          <div className="flex flex-col gap-8 sm:gap-12 min-[900px]:flex-row min-[900px]:items-start">
             <Reveal className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
               <p className="font-mono text-[13px] text-cubicle-muted">{theMeeting.setting}</p>
               <p className="mt-3.5 max-w-[26rem] text-xl leading-normal">{theMeeting.homeLine}</p>
@@ -198,7 +209,7 @@ export default function HomePage() {
 
       {/* Currently filming */}
       <section aria-labelledby="now-title" className="bg-panel">
-        <div className="container-page flex flex-col gap-12 pt-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-8 pt-14 sm:gap-12 sm:pt-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 min-[900px]:flex-[1_1_300px]">
             <SectionHeading
               id="now-title"
@@ -210,10 +221,10 @@ export default function HomePage() {
             <p className="mt-3.5 font-mono text-[13px] text-muted">{currentlyFilming.updated}</p>
           </div>
           <Reveal className="min-w-0 min-[900px]:flex-[1_1_640px]">
-            <CurrentlyFilming />
+            <CurrentlyFilming mobileLimit={2} />
           </Reveal>
         </div>
-        <div className="container-page pb-[88px]">
+        <div className="container-page pb-14 sm:pb-[88px]">
           <SceneBridge className="mt-8">{homeBridges.currentlyFilming}</SceneBridge>
         </div>
       </section>
@@ -221,7 +232,7 @@ export default function HomePage() {
       {/* Latest memo and deleted scenes */}
       <section
         aria-labelledby="deleted-title"
-        className="container-page flex flex-col gap-12 pb-14 pt-24 min-[900px]:flex-row min-[900px]:items-start"
+        className="container-page flex flex-col gap-10 pb-14 pt-14 sm:gap-12 sm:pt-24 min-[900px]:flex-row min-[900px]:items-start"
       >
         <div className="min-w-0 min-[900px]:flex-[1_1_360px]">
           <SectionHeading
@@ -232,7 +243,10 @@ export default function HomePage() {
             size="sm"
           />
           {latestPost && (
-            <Reveal as="article" className="mt-4 bg-white px-6 py-[22px] shadow-[0_8px_20px_rgba(18,20,23,0.08)]">
+            <Reveal
+              as="article"
+              className="mt-4 bg-white px-6 py-4 shadow-[0_8px_20px_rgba(18,20,23,0.08)] sm:py-[22px]"
+            >
               <p className="font-mono text-[13px] text-muted">
                 <time dateTime={latestPost.date}>{formatDate(latestPost.date)}</time>
               </p>
@@ -241,7 +255,7 @@ export default function HomePage() {
                   {latestPost.title}
                 </Link>
               </h3>
-              <p className="mt-2 text-muted-deep">{latestPost.excerpt}</p>
+              <p className="mt-2 hidden text-muted-deep sm:block">{latestPost.excerpt}</p>
             </Reveal>
           )}
         </div>
@@ -253,7 +267,7 @@ export default function HomePage() {
             title={deletedScenes.title}
             explainer={deletedScenes.explainer}
           />
-          <DeletedScenes />
+          <DeletedScenes mobileLimit={2} />
         </div>
       </section>
 

@@ -156,7 +156,7 @@ export const pilot = {
     link: { label: "Watch Episode 3: Personnel File", href: "/about" },
     receiptNote: "My roles, itemised. Tax included.",
   },
-  workLink: { label: "See every file, including consulting", href: "/work" },
+  workLink: { label: "See every file, including consulting", mobileLabel: "See all files", href: "/work" },
   personnelLinks: [
     { label: "Watch the full interview", href: "/about#interview" },
     { label: "Leadership", href: "/about#leadership" },
@@ -209,6 +209,7 @@ export const deletedScenes = {
     { runtime: "Runtime 6 weeks", scene: "Ernest reads a book. Page 4.", reason: "Still filming." },
   ],
   button: "Play another outtake",
+  seeAll: "See all scenes",
   /** The site's one and only "That's what she said" lives here */
   outtakes: [
     "Outtake: 1x Bug fix. Price: 3 new bugs.",

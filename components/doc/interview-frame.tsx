@@ -23,7 +23,7 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
   const home = size === "home";
 
   return (
-    <figure className={cn("m-0 w-full", home ? "max-w-[300px]" : "max-w-[260px]", className)}>
+    <figure className={cn("relative m-0 w-full", home ? "max-w-[240px] sm:max-w-[300px]" : "max-w-[260px]", className)}>
       {note &&
         (home ? (
           <HandNote decorative arrow="down" size={32} rotate={-3} as="div" className="mb-1.5 ml-3.5 leading-[1.3]">
@@ -56,10 +56,16 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
         <figcaption
           className={cn(
             "absolute left-0 border-l-[5px] border-marker bg-camera/[0.88] py-2 pl-3.5 pr-3 text-white",
-            home ? "bottom-[18px] right-7" : "bottom-4 right-6",
+            home ? "bottom-[18px] right-0 pr-[78px] sm:right-7 sm:pr-3" : "bottom-4 right-6",
           )}
         >
-          <span className={cn("block font-condensed font-bold", home ? "text-[19px]" : "text-lg", "leading-[1.15]")}>
+          <span
+            className={cn(
+              "block font-condensed font-bold",
+              home ? "text-base sm:text-[19px]" : "text-lg",
+              "leading-[1.15]",
+            )}
+          >
             {siteConfig.name}
           </span>
           <span className="block text-[13px] text-[#E3E6EA]">{siteConfig.title}</span>
@@ -70,7 +76,11 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
           type="button"
           aria-pressed={zoomed}
           onClick={() => setZoomed((z) => !z)}
-          className="mt-2.5 min-h-[44px] rounded border border-muted bg-transparent px-3.5 font-mono text-[13px] text-ink hover:bg-white/50"
+          className={cn(
+            // On phones it sits in the lower third, beside the caption
+            "absolute bottom-[21px] right-1.5 min-h-[44px] rounded border border-white/70 px-1.5 font-mono text-[11px] text-white hover:bg-white/10 focus-visible:outline-marker",
+            "sm:static sm:mt-2.5 sm:border-muted sm:bg-transparent sm:px-3.5 sm:text-[13px] sm:text-ink sm:hover:bg-white/50 sm:focus-visible:outline-pen",
+          )}
         >
           {zoomed ? "Pull back out" : "Snap zoom"}
         </button>

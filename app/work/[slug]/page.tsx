@@ -92,7 +92,7 @@ export default async function CaseStudyPage({ params }: Props) {
       <EpisodeCard label={`Episode 2, Part ${index + 1}`} title={project.title} explainer={project.tagline} />
 
       <section aria-label={`${project.title} case study`} className="bg-panel">
-        <div className="container-page py-[88px]">
+        <div className="container-page py-14 sm:py-[88px]">
           <Link href="/work" className="font-semibold underline">
             {workPage.backLink}
           </Link>

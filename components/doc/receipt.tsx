@@ -77,7 +77,7 @@ export function Receipt({ items, subtitle, paidWith, rotate = 1, boxStamp = fals
       variants={print}
       aria-label="Career receipt"
       className={cn(
-        "m-0 min-w-0 bg-white px-[26px] pb-8 pt-[26px] font-mono text-sm leading-[1.7] text-ink shadow-[0_12px_30px_rgba(18,20,23,0.15)]",
+        "m-0 min-w-0 bg-white px-5 pb-7 pt-[22px] font-mono sm:px-[26px] sm:pb-8 sm:pt-[26px] text-sm leading-[1.55] text-ink sm:leading-[1.7] shadow-[0_12px_30px_rgba(18,20,23,0.15)]",
         className,
       )}
       style={{ rotate }}
@@ -96,7 +96,9 @@ export function Receipt({ items, subtitle, paidWith, rotate = 1, boxStamp = fals
           ) : (
             <li key={item.label} className="mb-2.5">
               <span className="block font-semibold">{item.label}</span>
-              {item.detail && <span className="block text-[12.5px] leading-normal text-muted">{item.detail}</span>}
+              {item.detail && (
+                <span className="hidden text-[12.5px] leading-normal text-muted sm:block">{item.detail}</span>
+              )}
             </li>
           ),
         )}
@@ -152,7 +154,7 @@ export function Receipt({ items, subtitle, paidWith, rotate = 1, boxStamp = fals
           verified
         )}
       </p>
-      <p className="mt-[18px] text-center text-muted">Keep this receipt for your records.</p>
+      <p className="mt-[18px] hidden text-center text-muted sm:block">Keep this receipt for your records.</p>
       <p className={cn("mt-3 border-t pt-2.5 text-center text-xs text-muted", dashed)}>
         Printed on 100% recycled meeting notes.
       </p>

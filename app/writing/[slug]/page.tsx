@@ -44,7 +44,7 @@ export default async function WritingPostPage({ params }: Props) {
       <PreviouslyOn>{previouslyOn.post}</PreviouslyOn>
 
       <section aria-label="Memo" className="bg-panel">
-        <div className="container-page pb-[88px] pt-14">
+        <div className="container-page pb-14 sm:pb-[88px] pt-14">
           <Link href="/writing" className="font-semibold underline">
             {memoPage.backLink}
           </Link>

@@ -31,7 +31,7 @@ export default function WorkPage() {
         const headingId = `group-${group}`;
         return (
           <section key={group} aria-labelledby={headingId} className={cn(index % 2 === 0 && "bg-panel")}>
-            <div className="container-page py-[88px]">
+            <div className="container-page py-14 sm:py-[88px]">
               <SectionHeading
                 id={headingId}
                 timecode={copy.timecode}
@@ -62,7 +62,7 @@ export default function WorkPage() {
       })}
 
       <section aria-labelledby="consulting-title" className="bg-panel">
-        <div className="container-page flex flex-col gap-12 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-12 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
             <SectionHeading
               id="consulting-title"

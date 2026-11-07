@@ -26,7 +26,7 @@ export function SceneBridge({
     <Reveal
       as="p"
       className={cn(
-        "mt-12 flex items-end gap-1.5 font-hand text-[28px] leading-[1.1] sm:justify-end sm:text-[30px]",
+        "mt-6 flex items-end gap-1.5 font-hand text-[28px] leading-[1.1] sm:mt-12 sm:justify-end sm:text-[30px]",
         dark ? "text-marker" : "text-pen",
         className,
       )}

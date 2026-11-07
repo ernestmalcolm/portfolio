@@ -5,6 +5,7 @@ import * as React from "react";
 
 import { useRevealPhase } from "@/components/motion/reveal";
 import { currentlyFilming } from "@/content/show";
+import { cn } from "@/lib/utils";
 
 // The clapper bar snaps shut on its left hinge
 const clap: Variants = {
@@ -14,7 +15,8 @@ const clap: Variants = {
 };
 
 /** Dark slate with a clapperboard stripe and the current scenes */
-export function CurrentlyFilming() {
+/** With `mobileLimit`, phones show only the first scenes; the rest have their own sections below */
+export function CurrentlyFilming({ mobileLimit }: { mobileLimit?: number }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const phase = useRevealPhase(ref, { piece: true });
 
@@ -28,14 +30,22 @@ export function CurrentlyFilming() {
         className="h-[26px] origin-bottom-left rounded-t bg-[repeating-linear-gradient(-45deg,#F2F1EC_0_18px,#121417_18px_36px)]"
       />
       <ul>
-        {currentlyFilming.scenes.map((scene) => (
-          <li key={scene.scene} className="flex flex-wrap gap-x-6 gap-y-1 border-t border-strip px-[26px] py-[18px]">
-            <span className="shrink-0 basis-[150px] font-mono text-[13px] text-marker">{scene.scene}</span>
+        {currentlyFilming.scenes.map((scene, index) => (
+          <li
+            key={scene.scene}
+            className={cn(
+              "flex flex-wrap gap-x-6 gap-y-1 border-t border-strip px-5 py-3.5 sm:px-[26px] sm:py-[18px]",
+              mobileLimit !== undefined && index >= mobileLimit && "hidden sm:flex",
+            )}
+          >
+            <span className="shrink-0 basis-full font-mono sm:basis-[150px] text-[13px] text-marker">
+              {scene.scene}
+            </span>
             <span className="min-w-0 flex-[1_1_360px] text-base">{scene.body}</span>
           </li>
         ))}
       </ul>
-      <p className="border-t border-strip px-[26px] pb-[18px] pt-3.5 font-mono text-xs text-camera-muted">
+      <p className="border-t border-strip px-5 pb-3.5 pt-3 font-mono sm:px-[26px] sm:pb-[18px] sm:pt-3.5 text-xs text-camera-muted">
         {currentlyFilming.footer}
       </p>
     </div>

@@ -53,7 +53,7 @@ export default function AboutPage() {
 
       {/* The interview */}
       <section id="interview" aria-labelledby="interview-title" className="bg-panel">
-        <div className="container-page flex flex-col gap-14 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-14 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 min-[900px]:flex-[1_1_620px]">
             <SectionHeading
               id="interview-title"
@@ -74,7 +74,7 @@ export default function AboutPage() {
 
       {/* Intern to Tech Lead */}
       <section id="growth" aria-labelledby="growth-title">
-        <div className="container-page flex flex-col gap-16 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-16 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
             <SectionHeading
               id="growth-title"
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
       {/* How I work */}
       <section id="rules" aria-labelledby="rules-title" className="on-dark bg-cubicle">
-        <div className="container-page flex flex-col gap-12 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-12 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 text-white min-[900px]:flex-[1_1_320px]">
             <SectionHeading
               id="rules-title"
@@ -132,7 +132,7 @@ export default function AboutPage() {
 
       {/* Leadership and strategy */}
       <section aria-label="Leadership and strategy" className="bg-panel">
-        <div className="container-page flex flex-col gap-12 py-[88px] min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-12 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div id="leadership" className="min-w-0 min-[900px]:flex-[1_1_520px]">
             <SectionHeading
               timecode={leadership.timecode}
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
       {/* Employment record */}
       <section id="record" aria-labelledby="record-title" className="bg-panel">
-        <div className="container-page py-[88px]">
+        <div className="container-page py-14 sm:py-[88px]">
           <SectionHeading
             id="record-title"
             timecode={employmentRecord.timecode}
@@ -229,7 +229,7 @@ export default function AboutPage() {
       {/* Special episode: The Meeting */}
       <section id="meeting" aria-labelledby="about-meeting-title" className="bg-cubicle">
         <EpisodeCard as="h2" id="about-meeting-title" {...episodeCards.meeting} className="py-10" />
-        <div className="container-page flex flex-col gap-12 pb-24 pt-20 min-[900px]:flex-row min-[900px]:items-start">
+        <div className="container-page flex flex-col gap-12 pb-14 sm:pb-24 pt-14 sm:pt-20 min-[900px]:flex-row min-[900px]:items-start">
           <Reveal className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
             <p className="font-mono text-[13px] text-cubicle-muted">{theMeeting.setting}</p>
             {theMeeting.aboutParagraphs.map((paragraph) => (
@@ -249,7 +249,7 @@ export default function AboutPage() {
 
       {/* The break room */}
       <section id="breakroom" aria-labelledby="breakroom-title">
-        <div className="container-page pb-0 pt-24">
+        <div className="container-page pb-0 pt-14 sm:pt-24">
           <SectionHeading
             id="breakroom-title"
             timecode={breakRoom.timecode}

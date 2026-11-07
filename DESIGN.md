@@ -94,4 +94,12 @@ How things move:
 
 ## Responsive
 
-Rotated elements never overlap text at 320px. Wide rows (receipt beside text, the folders grid) stack below 900px. On mobile the home hero stacks as text, then sticky note, then photo.
+Rotated elements never overlap text at 320px. Wide rows (receipt beside text, the folders grid) stack below 900px. The camera header stays one short sticky bar on phones, with the episode guide scrolling sideways.
+
+Phones (below 640px) get a tighter cut, so home stays under 9,000px at 390px wide:
+
+- Sections use 56px of vertical padding instead of 88 to 96.
+- Hero: text, then the 240px photo with Snap zoom beside the caption, then the sticky note at 80% size.
+- Home shows the first 2 work files and the first 2 deleted scenes, with "See all files" and "See all scenes" after them; Currently filming shows its first 2 scenes; the personnel teaser shows one answer and skips the house rules (they're on About).
+- Folders on home skip the blurb and quote, the home receipt skips the role outlines, and the short version keeps its first paragraph. The Reception sticky note is hidden.
+- Desktop shows everything.
