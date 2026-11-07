@@ -67,6 +67,7 @@ Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (
 - `TalkingHead`: 48px portrait crop, a quoted line and an optional stage direction.
 - `Receipt`: the career receipt. Roles with outlines on home, promotion history on About.
 - `WorkFolder`: manila folder holding a white sheet with the real cover, meta, blurb, outcome and an ON HOLD stamp where needed.
+- `ConsultingCabinet`: on Work, under Consulting. Locked manila files stamped CONFIDENTIAL stand for the client work that stays private; one open file shows a public engagement with its live site cover, a link to the client's team page, and three stills from the build.
 - `CurrentlyFilming`, `InterviewQA`, `BranchRules`, `WhiteboardAgenda`, `DeletedScenes`, `Corkboard` and `ComingUpNext`: the home, About and closing sections.
 - `Reception`: contact details, a sticky note and the visitor sign-in sheet, which posts to `/api/contact`.
 - `EndCredits`: the credits list, the one inspiration line and the copyright line.

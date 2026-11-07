@@ -82,9 +82,9 @@ export const consulting = {
   timecode: "00:14:05",
   title: "Consulting",
   explainer: "How I help other businesses.",
-  body: "I help businesses get their product and digital side right: discovery to work out what's actually needed, websites that sell the experience, and product requirements a team can deliver from. Work so far includes a fintech's company website and product discovery, a hospitality business and a media brand.",
+  body: "I help businesses get their product and digital side right: discovery to work out what's actually needed, websites that sell the experience, and product requirements a team can deliver from. Most of that work stays private. One file is public, below.",
   quip: {
-    line: '"I can\'t name the clients."',
+    line: '"I can\'t name most of the clients."',
     direction: "[looks at camera] It's called discretion. Also manners.",
   } satisfies Quip,
   cta: "Email me about a project",
@@ -95,6 +95,33 @@ export const consulting = {
     "Design and build in one pair of hands, so nothing gets lost in handover",
     "Thinking about the business, not just the screens",
   ],
+  cabinet: {
+    label: "The consulting cabinet",
+    note: "Most of these files stay in the locked drawer. This one is public.",
+    locked: ["Hospitality", "Media brand"],
+    lockedStamp: "CONFIDENTIAL",
+  },
+  featured: {
+    tab: "Consulting client",
+    title: "FinSol (T) Ltd",
+    meta: "Tech Consultant, 2026 to present",
+    blurb:
+      "The company website for a Dar es Salaam firm in strategic advisory, financial structuring and commodity brokerage, built for investors looking at African projects.",
+    outcome:
+      "A live site that walks investors through five services, the commodities FinSol trades and the seven markets it covers.",
+    cover: "/images/work/finsol.jpg",
+    links: [
+      { label: "Open finsol.africa", href: "https://www.finsol.africa/" },
+      { label: "Find me on their team page", href: "https://www.finsol.africa/about" },
+    ],
+    stillsLabel: "Stills from the set",
+    stills: [
+      { src: "/images/work/finsol-services.png", caption: "Services" },
+      { src: "/images/work/finsol-commodities.jpg", caption: "Commodities" },
+      { src: "/images/work/finsol-markets.png", caption: "Seven markets" },
+    ],
+    quip: { line: '"They said I could show this one."', direction: "[holds up the file]" } satisfies Quip,
+  },
 };
 
 export const projects: Project[] = [

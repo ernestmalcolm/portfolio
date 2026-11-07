@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ComingUpNext } from "@/components/doc/coming-up-next";
+import { ConsultingCabinet } from "@/components/doc/consulting-cabinet";
 import { EpisodeCard } from "@/components/doc/episode-card";
 import { PreviouslyOn } from "@/components/doc/previously-on";
 import { SectionHeading } from "@/components/doc/section-heading";
@@ -74,34 +75,37 @@ export default function WorkPage() {
       })}
 
       <section aria-labelledby="consulting-title" className="bg-panel">
-        <div className="container-page flex flex-col gap-12 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
-          <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
-            <SectionHeading
-              id="consulting-title"
-              timecode={consulting.timecode}
-              timecodeLabel={consulting.title}
-              title={consulting.title}
-              explainer={consulting.explainer}
-            />
-            <Reveal>
-              <p className="mt-2.5 max-w-[40rem] text-muted-deep">{consulting.body}</p>
-              <TalkingHead quip={consulting.quip} className="mt-[22px]" />
-              <a href={`mailto:${siteConfig.email}`} className="mt-[22px] inline-block font-semibold underline">
-                {consulting.cta}
-              </a>
+        <div className="container-page py-14 sm:py-[88px]">
+          <div className="flex flex-col gap-12 min-[900px]:flex-row min-[900px]:items-start">
+            <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
+              <SectionHeading
+                id="consulting-title"
+                timecode={consulting.timecode}
+                timecodeLabel={consulting.title}
+                title={consulting.title}
+                explainer={consulting.explainer}
+              />
+              <Reveal>
+                <p className="mt-2.5 max-w-[40rem] text-muted-deep">{consulting.body}</p>
+                <TalkingHead quip={consulting.quip} className="mt-[22px]" />
+                <a href={`mailto:${siteConfig.email}`} className="mt-[22px] inline-block font-semibold underline">
+                  {consulting.cta}
+                </a>
+              </Reveal>
+            </div>
+            <Reveal
+              delay={stagger(1)}
+              className="min-w-0 border-t-[10px] border-cubicle bg-white px-6 pb-[34px] pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-[34px] min-[900px]:flex-[1_1_400px]"
+            >
+              <h3 className="font-condensed text-2xl font-bold">{consulting.pointsTitle}</h3>
+              <ul className="mt-3.5 list-disc space-y-2 pl-[22px] text-muted-deep">
+                {consulting.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
             </Reveal>
           </div>
-          <Reveal
-            delay={stagger(1)}
-            className="min-w-0 border-t-[10px] border-cubicle bg-white px-6 pb-[34px] pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-[34px] min-[900px]:flex-[1_1_400px]"
-          >
-            <h3 className="font-condensed text-2xl font-bold">{consulting.pointsTitle}</h3>
-            <ul className="mt-3.5 list-disc space-y-2 pl-[22px] text-muted-deep">
-              {consulting.points.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-          </Reveal>
+          <ConsultingCabinet />
         </div>
       </section>
 
