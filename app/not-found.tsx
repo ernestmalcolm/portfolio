@@ -22,7 +22,7 @@ export default function NotFound() {
             {notFound.link.label}
           </Link>
           {/* Prop: a beet, level with the button */}
-          <Beet className="absolute bottom-14 right-8 h-12 w-12 sm:bottom-[88px] sm:h-20 sm:w-20" />
+          <Beet className="absolute bottom-14 right-8 h-12 w-12 sm:bottom-[88px] sm:h-20 sm:w-20 lg:h-24 lg:w-24" />
         </Reveal>
       </section>
       <ComingUpNext next={comingUpNext.notFound} />

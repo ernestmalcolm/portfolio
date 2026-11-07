@@ -95,7 +95,7 @@ export function Reception() {
         />
         {/* Prop, home only: a box of letterhead in the corner of the reception card */}
         {isHome && (
-          <PaperBox className="absolute right-3 top-3 h-12 w-12 sm:right-[5%] sm:top-1/2 sm:h-16 sm:w-16 sm:-translate-y-1/2" />
+          <PaperBox className="absolute right-3 top-3 h-12 w-12 sm:right-[5%] sm:top-1/2 sm:h-16 sm:w-16 sm:-translate-y-1/2 lg:h-20 lg:w-20" />
         )}
       </div>
       <div className="container-page flex flex-col gap-8 pb-14 sm:gap-14 sm:pb-[88px] pt-12 sm:pt-[72px] min-[900px]:flex-row">

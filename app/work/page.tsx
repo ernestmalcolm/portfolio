@@ -60,7 +60,7 @@ export default function WorkPage() {
                         project={project}
                         prop={
                           last ? (
-                            <GiftFolder className="absolute -top-2 right-6 h-11 w-11 sm:h-12 sm:w-12" />
+                            <GiftFolder className="absolute -top-2 right-6 h-11 w-11 sm:h-12 sm:w-12 lg:-top-3 lg:h-14 lg:w-14" />
                           ) : undefined
                         }
                       />

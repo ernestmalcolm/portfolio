@@ -115,7 +115,7 @@ export default function AboutPage() {
             {/* Prop: the kitchen wall. Beside the title on phones, in the space below on desktop */}
             <KitchenWall
               captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
-              className="absolute right-0 top-[calc(100%+2px)] h-11 w-[83px] min-[380px]:top-5 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-[100px] min-[900px]:w-[188px]"
+              className="absolute right-0 top-[calc(100%+2px)] h-11 w-[83px] min-[380px]:top-5 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-[124px] min-[900px]:w-[232px]"
             />
             <SectionHeading
               id="rules-title"

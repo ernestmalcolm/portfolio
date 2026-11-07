@@ -201,7 +201,7 @@ export default function HomePage() {
               {/* On the conference table: top right on phones, the empty space below on desktop */}
               <BossMug
                 captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
-                className="absolute right-0 top-0 h-11 w-11 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+56px)] min-[900px]:h-28 min-[900px]:w-28"
+                className="absolute right-0 top-0 h-11 w-11 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+56px)] min-[900px]:h-36 min-[900px]:w-36"
               />
             </Reveal>
             <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_620px]">
@@ -233,7 +233,7 @@ export default function HomePage() {
               {/* Beside the date on phones; in the empty space below it on desktop */}
               <Pretzel
                 captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
-                className="absolute right-0 top-0 h-12 w-12 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-20 min-[900px]:w-20"
+                className="absolute right-0 top-0 h-12 w-12 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-24 min-[900px]:w-24"
               />
             </p>
           </div>

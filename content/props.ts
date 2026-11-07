@@ -19,7 +19,7 @@ export const propIds = [
 export type PropId = (typeof propIds)[number];
 
 export const props: Record<PropId, { label: string; caption: string }> = {
-  bobblehead: { label: "Bobblehead of Ernest", caption: "Identity theft is not a joke." },
+  bobblehead: { label: "Office bobblehead", caption: "Identity theft is not a joke." },
   stapler: { label: "Stapler set in jelly", caption: "Someone's been in my files." },
   // {days} is filled in live, counting down to the next 26 April
   pretzel: { label: "A pretzel", caption: "Days until Pretzel Day: {days}. Not that I'm counting." },
