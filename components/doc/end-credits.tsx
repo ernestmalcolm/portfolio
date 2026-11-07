@@ -1,3 +1,4 @@
+import { PropsCredit, PropsReward } from "@/components/props/props-counter";
 import { credits, creditsLines } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
 
@@ -16,7 +17,9 @@ export function EndCredits() {
             <dd className="text-left text-white">{credit.name}</dd>
           </div>
         ))}
+        <PropsCredit />
       </dl>
+      <PropsReward />
       <p className="mt-8 font-condensed text-[24px] sm:mt-12 sm:text-[26px] font-bold leading-tight text-white">
         {creditsLines.inspiredBy}
       </p>

@@ -230,7 +230,7 @@ export const theMeeting = {
   signature: "Ernest",
   agendaTitle: "Agenda: where I'm heading",
   agenda: [
-    "Raise the bar for digital in Tanzania and East Africa.",
+    "Raise the bar for digital products and services in Tanzania and East Africa.",
     "Products that understand the businesses and people they're built for.",
     "Lead digital work where the reach is real: finance, telecoms, payments, public systems.",
     "Advise. Then boards, especially youth and innovation.",

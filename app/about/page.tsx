@@ -13,6 +13,7 @@ import { SectionHeading } from "@/components/doc/section-heading";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { WhiteboardAgenda } from "@/components/doc/whiteboard-agenda";
 import { Reveal } from "@/components/motion/reveal";
+import { Crossword, KitchenWall, Trophy } from "@/components/props/office-props";
 import { stagger } from "@/lib/motion";
 import {
   branchRules,
@@ -76,13 +77,17 @@ export default function AboutPage() {
       <section id="growth" aria-labelledby="growth-title">
         <div className="container-page flex flex-col gap-16 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
           <div className="min-w-0 min-[900px]:flex-[1_1_520px]">
-            <SectionHeading
-              id="growth-title"
-              timecode={growth.timecode}
-              timecodeLabel={growth.timecodeLabel}
-              title={growth.title}
-              explainer={growth.explainer}
-            />
+            <div className="relative">
+              <SectionHeading
+                id="growth-title"
+                timecode={growth.timecode}
+                timecodeLabel={growth.timecodeLabel}
+                title={growth.title}
+                explainer={growth.explainer}
+              />
+              {/* Prop: the trophy sits beside the handwritten note, under the end of the title */}
+              <Trophy className="absolute -bottom-2.5 right-0 h-11 w-11 sm:h-14 sm:w-14" />
+            </div>
             <Reveal>
               {growth.paragraphs.map((paragraph, index) => (
                 <p key={paragraph} className={`${index === 0 ? "mt-[18px]" : "mt-3.5"} max-w-[36rem] text-muted-deep`}>
@@ -106,7 +111,12 @@ export default function AboutPage() {
       {/* How I work */}
       <section id="rules" aria-labelledby="rules-title" className="on-dark bg-cubicle">
         <div className="container-page flex flex-col gap-12 py-14 sm:py-[88px] min-[900px]:flex-row min-[900px]:items-start">
-          <div className="min-w-0 text-white min-[900px]:flex-[1_1_320px]">
+          <div className="relative min-w-0 text-white min-[900px]:flex-[1_1_320px]">
+            {/* Prop: the kitchen wall. Beside the title on phones, in the space below on desktop */}
+            <KitchenWall
+              captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
+              className="absolute right-0 top-[calc(100%+2px)] h-11 w-[83px] min-[380px]:top-5 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-[100px] min-[900px]:w-[188px]"
+            />
             <SectionHeading
               id="rules-title"
               dark
@@ -125,6 +135,7 @@ export default function AboutPage() {
               title={branchRules.sheetTitle}
               rules={branchRules.about}
               footer={branchRules.aboutFooter}
+              prop={<Crossword className="absolute right-4 top-4 h-12 w-12 sm:right-6 sm:top-5 sm:h-14 sm:w-14" />}
             />
           </Reveal>
         </div>

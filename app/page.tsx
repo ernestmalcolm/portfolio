@@ -16,6 +16,7 @@ import { Viewfinder } from "@/components/doc/viewfinder";
 import { WhiteboardAgenda } from "@/components/doc/whiteboard-agenda";
 import { WorkFolder } from "@/components/doc/work-folder";
 import { Reveal } from "@/components/motion/reveal";
+import { BossMug, JellyStapler, Pretzel } from "@/components/props/office-props";
 import { stagger } from "@/lib/motion";
 import { branchRules, homeInterview, receiptRoles } from "@/content/about";
 import { getSelectedProjects } from "@/content/projects";
@@ -151,11 +152,15 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 sm:mt-12">
+          <p className="relative mt-6 sm:mt-12">
             <Link href={pilot.workLink.href} className="font-semibold underline">
               <span className="sm:hidden">{pilot.workLink.mobileLabel}</span>
               <span className="hidden sm:inline">{pilot.workLink.label}</span>
             </Link>
+            <JellyStapler
+              captionPosition="above-end"
+              className="absolute right-0 top-1/2 h-12 w-12 -translate-y-1/2 sm:h-16 sm:w-16"
+            />
           </p>
           <SceneBridge>{homeBridges.work}</SceneBridge>
         </div>
@@ -190,9 +195,14 @@ export default function HomePage() {
         <EpisodeCard as="h2" id="meeting-title" {...episodeCards.meeting} className="py-7 sm:py-10" />
         <div className="container-page pb-14 sm:pb-24 pt-14 sm:pt-20">
           <div className="flex flex-col gap-8 sm:gap-12 min-[900px]:flex-row min-[900px]:items-start">
-            <Reveal className="min-w-0 text-white min-[900px]:flex-[1_1_340px]">
+            <Reveal className="on-dark relative min-w-0 text-white min-[900px]:flex-[1_1_340px]">
               <p className="font-mono text-[13px] text-cubicle-muted">{theMeeting.setting}</p>
               <p className="mt-3.5 max-w-[26rem] text-xl leading-normal">{theMeeting.homeLine}</p>
+              {/* On the conference table: top right on phones, the empty space below on desktop */}
+              <BossMug
+                captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
+                className="absolute right-0 top-0 h-11 w-11 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+56px)] min-[900px]:h-28 min-[900px]:w-28"
+              />
             </Reveal>
             <Reveal delay={stagger(1)} className="min-w-0 min-[900px]:flex-[1_1_620px]">
               <WhiteboardAgenda highlight>
@@ -218,7 +228,14 @@ export default function HomePage() {
               title={currentlyFilming.title}
               explainer={currentlyFilming.explainer}
             />
-            <p className="mt-3.5 font-mono text-[13px] text-muted">{currentlyFilming.updated}</p>
+            <p className="relative mt-3.5 font-mono text-[13px] text-muted">
+              {currentlyFilming.updated}
+              {/* Beside the date on phones; in the empty space below it on desktop */}
+              <Pretzel
+                captionClassName="right-0 top-[calc(100%+6px)] min-[900px]:left-0 min-[900px]:right-auto"
+                className="absolute right-0 top-0 h-12 w-12 min-[900px]:left-0 min-[900px]:right-auto min-[900px]:top-[calc(100%+40px)] min-[900px]:h-20 min-[900px]:w-20"
+              />
+            </p>
           </div>
           <Reveal className="min-w-0 min-[900px]:flex-[1_1_640px]">
             <CurrentlyFilming mobileLimit={2} />

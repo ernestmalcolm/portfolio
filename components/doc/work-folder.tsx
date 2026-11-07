@@ -19,6 +19,8 @@ type WorkFolderProps = {
   markOutcome?: boolean;
   /** Phones skip the blurb and the quote, so the outcome carries it (home) */
   compact?: boolean;
+  /** A hidden prop resting on the folder's top edge, right of the tab */
+  prop?: React.ReactNode;
 };
 
 const sheetShadow = {
@@ -26,7 +28,13 @@ const sheetShadow = {
   lifted: "0 10px 22px rgba(18,20,23,0.24)",
 };
 
-export function WorkFolder({ project, headingLevel = "h3", markOutcome = false, compact = false }: WorkFolderProps) {
+export function WorkFolder({
+  project,
+  headingLevel = "h3",
+  markOutcome = false,
+  compact = false,
+  prop,
+}: WorkFolderProps) {
   const Heading = headingLevel;
   const [hovered, setHovered] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
@@ -44,6 +52,7 @@ export function WorkFolder({ project, headingLevel = "h3", markOutcome = false, 
         <div className="absolute left-7 top-0 h-[34px] rounded-t-[6px] bg-manila-tab px-[18px] pt-1.5 font-mono text-[13px] text-[#3E3420]">
           {project.tab}
         </div>
+        {prop}
         <div className="relative rounded-folder bg-manila p-4 shadow-[0_2px_0_theme(colors.manila.edge)] sm:px-[22px] sm:pb-[26px] sm:pt-[22px]">
           {/* Hover or focus slides the sheet up out of the folder */}
           <motion.div

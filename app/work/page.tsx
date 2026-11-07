@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/doc/section-heading";
 import { TalkingHead } from "@/components/doc/talking-head";
 import { WorkFolder } from "@/components/doc/work-folder";
 import { Reveal } from "@/components/motion/reveal";
+import { GiftFolder } from "@/components/props/office-props";
 import { stagger } from "@/lib/motion";
 import { consulting, getProjectsByGroup, type ProjectGroup, workPage } from "@/content/projects";
 import { comingUpNext, episodeCards, previouslyOn } from "@/content/show";
@@ -50,11 +51,22 @@ export default function WorkPage() {
                     : "grid-cols-[repeat(auto-fit,minmax(min(100%,360px),1fr))] gap-x-9 gap-y-14",
                 )}
               >
-                {getProjectsByGroup(group).map((project, projectIndex) => (
-                  <Reveal key={project.slug} delay={stagger(projectIndex)}>
-                    <WorkFolder project={project} />
-                  </Reveal>
-                ))}
+                {getProjectsByGroup(group).map((project, projectIndex, groupProjects) => {
+                  // Prop: a gift-wrapped folder resting on the very last folder of the index
+                  const last = group === groups[groups.length - 1] && projectIndex === groupProjects.length - 1;
+                  return (
+                    <Reveal key={project.slug} delay={stagger(projectIndex)}>
+                      <WorkFolder
+                        project={project}
+                        prop={
+                          last ? (
+                            <GiftFolder className="absolute -top-2 right-6 h-11 w-11 sm:h-12 sm:w-12" />
+                          ) : undefined
+                        }
+                      />
+                    </Reveal>
+                  );
+                })}
               </div>
             </div>
           </section>

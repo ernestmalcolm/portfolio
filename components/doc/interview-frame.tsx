@@ -6,6 +6,7 @@ import * as React from "react";
 
 import { HandNote } from "@/components/doc/hand-note";
 import { Mark } from "@/components/motion/mark";
+import { Bobblehead } from "@/components/props/office-props";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
@@ -36,40 +37,46 @@ export function InterviewFrame({ size = "home", note, priority = false, classNam
             {note}
           </HandNote>
         ))}
-      <div className={cn("relative overflow-hidden bg-[#3A3F45]", home ? "aspect-[300/340]" : "aspect-[260/300]")}>
-        {/* Snap zoom: a spring punch-in on the face, with a tiny camera shake going in */}
-        <motion.div
-          initial={false}
-          animate={zoomed ? { scale: 1.55, x: [0, -2, 2, 0] } : { scale: 1, x: 0 }}
-          transition={{ scale: { type: "spring", stiffness: 420, damping: 30 }, x: { duration: 0.12 } }}
-          className="absolute inset-0 origin-[48%_22%]"
-        >
-          <Image
-            src={siteConfig.photo}
-            alt="Ernest Mwinchumu, seated, in a navy blazer"
-            fill
-            priority={priority}
-            sizes={home ? "300px" : "260px"}
-            className="object-cover object-[50%_14%]"
-          />
-        </motion.div>
-        <figcaption
-          className={cn(
-            "absolute left-0 border-l-[5px] border-marker bg-camera/[0.88] py-2 pl-3.5 pr-3 text-white",
-            home ? "bottom-[18px] right-0 pr-[78px] sm:right-7 sm:pr-3" : "bottom-4 right-6",
-          )}
-        >
-          <span
+      <div className="relative">
+        {/* Prop: the bobblehead sits in the photo's top right corner on phones, just off it on wider screens */}
+        {home && (
+          <Bobblehead className="absolute right-1.5 top-1.5 h-12 w-12 rounded-full bg-[rgba(217,214,203,0.88)] sm:-right-[62px] sm:top-2 sm:h-14 sm:w-14 sm:rounded sm:bg-transparent" />
+        )}
+        <div className={cn("relative overflow-hidden bg-[#3A3F45]", home ? "aspect-[300/340]" : "aspect-[260/300]")}>
+          {/* Snap zoom: a spring punch-in on the face, with a tiny camera shake going in */}
+          <motion.div
+            initial={false}
+            animate={zoomed ? { scale: 1.55, x: [0, -2, 2, 0] } : { scale: 1, x: 0 }}
+            transition={{ scale: { type: "spring", stiffness: 420, damping: 30 }, x: { duration: 0.12 } }}
+            className="absolute inset-0 origin-[48%_22%]"
+          >
+            <Image
+              src={siteConfig.photo}
+              alt="Ernest Mwinchumu, seated, in a navy blazer"
+              fill
+              priority={priority}
+              sizes={home ? "300px" : "260px"}
+              className="object-cover object-[50%_14%]"
+            />
+          </motion.div>
+          <figcaption
             className={cn(
-              "block font-condensed font-bold",
-              home ? "text-base sm:text-[19px]" : "text-lg",
-              "leading-[1.15]",
+              "absolute left-0 border-l-[5px] border-marker bg-camera/[0.88] py-2 pl-3.5 pr-3 text-white",
+              home ? "bottom-[18px] right-0 pr-[78px] sm:right-7 sm:pr-3" : "bottom-4 right-6",
             )}
           >
-            {siteConfig.name}
-          </span>
-          <span className="block text-[13px] text-[#E3E6EA]">{siteConfig.title}</span>
-        </figcaption>
+            <span
+              className={cn(
+                "block font-condensed font-bold",
+                home ? "text-base sm:text-[19px]" : "text-lg",
+                "leading-[1.15]",
+              )}
+            >
+              {siteConfig.name}
+            </span>
+            <span className="block text-[13px] text-[#E3E6EA]">{siteConfig.title}</span>
+          </figcaption>
+        </div>
       </div>
       {home && (
         <button

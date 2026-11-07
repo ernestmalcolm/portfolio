@@ -4,7 +4,7 @@
 
 The whole site is a mockumentary about Ernest's work, and every page is an episode. The look borrows documentary camera language: a REC header with a live clock, a viewfinder, talking heads, stage directions like `[looks at camera]`, episode title cards, "Previously on", "Coming up next" and end credits. It also borrows office objects: manila folders, a receipt, a whiteboard, a cork board, sticky notes and a visitor sign-in sheet.
 
-The content stays professional. The jokes live in captions, stage directions and extras. The inspiration is credited once, in the end credits, and nothing else from the show is used: no name in the branding, no logo, characters, building, music or famous props, and only one quote on the whole site.
+The content stays professional. The jokes live in captions, stage directions and extras. The show is named once, in the end credits. Beyond that, the references are hidden: ten props around the site nod to moments fans know, each drawn from scratch with captions in our own words or short lines. No logos, stills, character likenesses or character names, and nothing traced.
 
 | Page | Route | Episode |
 |---|---|---|
@@ -70,6 +70,7 @@ Shared pieces live in `components/doc/`. Their copy lives in `content/show.ts` (
 - `CurrentlyFilming`, `InterviewQA`, `BranchRules`, `WhiteboardAgenda`, `DeletedScenes`, `Corkboard` and `ComingUpNext`: the home, About and closing sections.
 - `Reception`: contact details, a sticky note and the visitor sign-in sheet, which posts to `/api/contact`.
 - `EndCredits`: the credits list, the one inspiration line and the copyright line.
+- `Prop` (`components/props/`): ten hidden props, each an original inline SVG inside a focusable button. The caption shows on hover, focus or tap, and each plays one short animation (under 0.6s, never looping). They sit absolutely in existing whitespace, so they never move the layout: the bobblehead (home photo), the stapler in jelly (home work files), the pretzel with a live countdown to 26 April (home currently filming), the World's Best Boss mug (home meeting), the letterhead box (home reception), the trophy (About, intern to Tech Lead), the kitchen wall notice and watercolour, the crossword (About, branch rules), the gift-wrapped folder (last work folder) and the beet (404). Their copy is in `content/props.ts`. Found props are counted in localStorage and shown in the end credits as "Props department".
 
 ## Motion
 
@@ -87,6 +88,7 @@ How things move:
 - `Reveal` (`components/motion/reveal.tsx`) wraps section blocks and cards. Every element is rechecked on each scroll frame and resize through one shared listener (`lib/scroll-frame.ts`), measured against the strip below the sticky header: anything fully visible is always shown, and anything partly on screen is never left hidden. They rise 16px in when entering from below, drop in from -16px when scrolling back up (`useScrollDirection`), and dim to 0.4 with an 8px drift while leaving. This replays on every pass. Long reading blocks (case study text, the memo) use a single soft fade.
 - Inside a `Reveal`, handwritten explainers write in left to right (`WriteIn`), and stage directions land 0.4s after their line.
 - Set pieces replay only after fully leaving the screen: episode title cards fade up from black, the receipt prints and its stamp lands, the clapper on Currently filming snaps shut, scene bridge arrows draw, and the rough-notation marks redraw.
+- Props play one short animation each on hover, focus or tap (a nod, a wobble, steam, a ribbon untying). With reduced motion they show their caption and stay still.
 - Snap zoom springs to 1.55x with a tiny shake. Work folder sheets slide up 10px on hover or focus, sticky notes lift 3px, and outtakes cut rather than slide.
 - Limits: 16px max distance, 0.35 to 0.6s, ease out `[0.22, 1, 0.36, 1]`, 0.06s stagger capped at four items. Only opacity, transform and clip-path animate.
 - The server HTML always shows everything; elements only park off screen after hydration.

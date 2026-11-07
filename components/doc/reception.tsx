@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,6 +9,7 @@ import { z } from "zod";
 import { EpisodeCard } from "@/components/doc/episode-card";
 import { StickyNote } from "@/components/doc/sticky-note";
 import { Reveal } from "@/components/motion/reveal";
+import { PaperBox } from "@/components/props/office-props";
 import { stagger } from "@/lib/motion";
 import { reception } from "@/content/show";
 import { siteConfig } from "@/lib/site-config";
@@ -25,6 +27,7 @@ const fieldClass =
 
 /** Contact, on every page: episode card, details, sticky note and the sign-in sheet */
 export function Reception() {
+  const isHome = usePathname() === "/";
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
@@ -81,14 +84,20 @@ export function Reception() {
 
   return (
     <section id="reception" aria-labelledby="reception-title" className="bg-panel">
-      <EpisodeCard
-        as="h2"
-        id="reception-title"
-        label={reception.episode}
-        title={reception.title}
-        explainer={reception.explainer}
-        className="py-10"
-      />
+      <div className="on-dark relative">
+        <EpisodeCard
+          as="h2"
+          id="reception-title"
+          label={reception.episode}
+          title={reception.title}
+          explainer={reception.explainer}
+          className="py-10"
+        />
+        {/* Prop, home only: a box of letterhead in the corner of the reception card */}
+        {isHome && (
+          <PaperBox className="absolute right-3 top-3 h-12 w-12 sm:right-[5%] sm:top-1/2 sm:h-16 sm:w-16 sm:-translate-y-1/2" />
+        )}
+      </div>
       <div className="container-page flex flex-col gap-8 pb-14 sm:gap-14 sm:pb-[88px] pt-12 sm:pt-[72px] min-[900px]:flex-row">
         <Reveal className="min-w-0 min-[900px]:flex-[1_1_340px]">
           <p className="text-muted-deep">{reception.intro}</p>

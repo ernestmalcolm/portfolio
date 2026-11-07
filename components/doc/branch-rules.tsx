@@ -6,16 +6,18 @@ type BranchRulesProps = {
   footer: string;
   /** The home version sits on a light wall and gets the grey top bar */
   variant?: "home" | "about";
+  /** A hidden prop pinned in the sheet's top right corner */
+  prop?: React.ReactNode;
   className?: string;
 };
 
 /** White laminated sheet of house rules */
-export function BranchRules({ title, rules, footer, variant = "home", className }: BranchRulesProps) {
+export function BranchRules({ title, rules, footer, variant = "home", prop, className }: BranchRulesProps) {
   const home = variant === "home";
   return (
     <div
       className={cn(
-        "min-w-0 bg-white",
+        "relative min-w-0 bg-white",
         home
           ? "border-t-[10px] border-cubicle px-6 pb-9 pt-8 shadow-[0_12px_30px_rgba(18,20,23,0.12)] sm:px-9"
           : "px-6 pb-10 pt-9 shadow-[0_16px_36px_rgba(0,0,0,0.25)] sm:px-10",
@@ -23,6 +25,7 @@ export function BranchRules({ title, rules, footer, variant = "home", className 
       )}
     >
       <p className="font-condensed text-2xl font-bold">{title}</p>
+      {prop}
       <ol className={cn("list-decimal space-y-2 pl-6 text-muted-deep", home ? "mt-3.5" : "mt-4 space-y-2.5")}>
         {rules.map((rule) => (
           <li key={rule}>{rule}</li>
